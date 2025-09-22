@@ -1,16 +1,16 @@
 {
   "summary": {
-    "passed": 11,
-    "failed": 3,
+    "passed": 12,
+    "failed": 2,
     "total": 14,
-    "success_rate": 78.57142857142857
+    "success_rate": 85.71428571428571
   },
   "results": [
     {
       "test": "Root Endpoint",
       "success": true,
       "message": "API is running",
-      "timestamp": "2025-09-22T07:15:45.026671",
+      "timestamp": "2025-09-22T07:17:20.512878",
       "response_data": {
         "message": "HayvanPazarı API v1.0.0",
         "status": "running"
@@ -20,27 +20,27 @@
       "test": "User Registration",
       "success": true,
       "message": "User registered successfully",
-      "timestamp": "2025-09-22T07:15:45.313798",
+      "timestamp": "2025-09-22T07:17:20.825646",
       "response_data": {
-        "user_id": "62f28882-97cf-4960-b643-34cd988135f7",
-        "email": "test_4a6316d0@example.com"
+        "user_id": "e4a6dab9-32da-40e0-ae14-2ecd70b0b2cb",
+        "email": "test_b923aef0@example.com"
       }
     },
     {
       "test": "User Login",
       "success": true,
       "message": "Login successful",
-      "timestamp": "2025-09-22T07:15:45.599208",
+      "timestamp": "2025-09-22T07:17:21.195270",
       "response_data": {
-        "user_id": "62f28882-97cf-4960-b643-34cd988135f7",
-        "email": "test_4a6316d0@example.com"
+        "user_id": "e4a6dab9-32da-40e0-ae14-2ecd70b0b2cb",
+        "email": "test_b923aef0@example.com"
       }
     },
     {
       "test": "SMS Verification",
       "success": true,
       "message": "SMS verified successfully",
-      "timestamp": "2025-09-22T07:15:45.651323",
+      "timestamp": "2025-09-22T07:17:21.257444",
       "response_data": {
         "message": "Phone verified successfully"
       }
@@ -49,10 +49,10 @@
       "test": "Get Current User",
       "success": true,
       "message": "User data retrieved successfully",
-      "timestamp": "2025-09-22T07:15:45.705616",
+      "timestamp": "2025-09-22T07:17:21.309508",
       "response_data": {
-        "user_id": "62f28882-97cf-4960-b643-34cd988135f7",
-        "email": "test_4a6316d0@example.com",
+        "user_id": "e4a6dab9-32da-40e0-ae14-2ecd70b0b2cb",
+        "email": "test_b923aef0@example.com",
         "is_phone_verified": true
       }
     },
@@ -60,7 +60,7 @@
       "test": "Get Categories",
       "success": true,
       "message": "Retrieved 5 categories",
-      "timestamp": "2025-09-22T07:15:45.757772",
+      "timestamp": "2025-09-22T07:17:21.367460",
       "response_data": {
         "categories_count": 5,
         "sample_category": "Sığır"
@@ -70,9 +70,9 @@
       "test": "Create Listing",
       "success": true,
       "message": "Listing created successfully",
-      "timestamp": "2025-09-22T07:15:45.923942",
+      "timestamp": "2025-09-22T07:17:21.424100",
       "response_data": {
-        "listing_id": "17b09fe3-9059-4217-849a-377d73f04a05",
+        "listing_id": "e6b8983e-b1b3-4d21-86ff-b535dd066acd",
         "title": "Sağlıklı Holstein İnek",
         "price": 15000.0
       }
@@ -81,7 +81,7 @@
       "test": "Get Listings (No Filter)",
       "success": true,
       "message": "Retrieved 0 listings",
-      "timestamp": "2025-09-22T07:15:45.974939",
+      "timestamp": "2025-09-22T07:17:21.484379",
       "response_data": {
         "listings_count": 0
       }
@@ -90,7 +90,7 @@
       "test": "Get Listings (Category Filter)",
       "success": true,
       "message": "Retrieved 0 cattle listings",
-      "timestamp": "2025-09-22T07:15:46.027869",
+      "timestamp": "2025-09-22T07:17:21.537599",
       "response_data": {
         "filtered_count": 0
       }
@@ -99,13 +99,13 @@
       "test": "Get Listing Detail",
       "success": false,
       "message": "Failed with status No response: No response",
-      "timestamp": "2025-09-22T07:15:46.081178"
+      "timestamp": "2025-09-22T07:17:21.592955"
     },
     {
       "test": "Update Listing",
       "success": true,
       "message": "Listing updated successfully",
-      "timestamp": "2025-09-22T07:15:46.134159",
+      "timestamp": "2025-09-22T07:17:21.656824",
       "response_data": {
         "message": "Listing updated successfully"
       }
@@ -113,20 +113,34 @@
     {
       "test": "Send Message",
       "success": false,
-      "message": "Failed with status No response: No response",
-      "timestamp": "2025-09-22T07:15:46.472863"
+      "message": "Invalid response format",
+      "timestamp": "2025-09-22T07:17:22.301396",
+      "response_data": {
+        "_id": "80c88137-466c-47ec-8ea9-428fe2d086a3",
+        "listing_id": "e6b8983e-b1b3-4d21-86ff-b535dd066acd",
+        "sender_id": "2eee3657-12d1-47a7-809d-05275fe17637",
+        "receiver_id": "e4a6dab9-32da-40e0-ae14-2ecd70b0b2cb",
+        "message": "Merhaba, bu inek hala satılık mı?",
+        "message_type": "text",
+        "offer_amount": null,
+        "is_read": false,
+        "created_at": "2025-09-22T07:17:22.290439"
+      }
     },
     {
       "test": "Get Conversations",
-      "success": false,
-      "message": "Failed with status No response: No response",
-      "timestamp": "2025-09-22T07:15:46.533936"
+      "success": true,
+      "message": "Retrieved 1 conversations",
+      "timestamp": "2025-09-22T07:17:22.358662",
+      "response_data": {
+        "conversations_count": 1
+      }
     },
     {
       "test": "Update Profile",
       "success": true,
       "message": "Profile updated successfully",
-      "timestamp": "2025-09-22T07:15:46.586833",
+      "timestamp": "2025-09-22T07:17:22.413840",
       "response_data": {
         "message": "Profile updated successfully"
       }
@@ -135,11 +149,11 @@
       "test": "Delete Listing",
       "success": true,
       "message": "Listing deleted successfully",
-      "timestamp": "2025-09-22T07:15:46.640350",
+      "timestamp": "2025-09-22T07:17:22.468559",
       "response_data": {
         "message": "Listing deleted successfully"
       }
     }
   ],
-  "timestamp": "2025-09-22T07:15:46.642277"
+  "timestamp": "2025-09-22T07:17:22.470229"
 }
