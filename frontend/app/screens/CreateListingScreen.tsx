@@ -150,31 +150,50 @@ const CreateListingScreen: React.FC<Props> = ({ navigation, route }) => {
   };
 
   const handleSubmit = async () => {
+    console.log('🚀 Form submit başladı!');
+    console.log('📋 Form data:', {
+      title: formData.title,
+      description: formData.description,
+      category: formData.category,
+      price: formData.price,
+      location: formData.location,
+      images_count: formData.images.length,
+      token: token ? 'Var' : 'Yok'
+    });
+
     // Validation
     if (!formData.title.trim()) {
+      console.log('❌ Validation failed: title');
       Alert.alert('Hata', 'İlan başlığı gereklidir');
       return;
     }
     if (!formData.description.trim()) {
+      console.log('❌ Validation failed: description');
       Alert.alert('Hata', 'Açıklama gereklidir');
       return;
     }
     if (!formData.category) {
+      console.log('❌ Validation failed: category');
       Alert.alert('Hata', 'Kategori seçilmelidir');
       return;
     }
     if (!formData.price || parseFloat(formData.price) <= 0) {
+      console.log('❌ Validation failed: price');
       Alert.alert('Hata', 'Geçerli bir fiyat girilmelidir');
       return;
     }
     if (!formData.location.city || !formData.location.district) {
+      console.log('❌ Validation failed: location');
       Alert.alert('Hata', 'Şehir ve ilçe bilgisi gereklidir');
       return;
     }
     if (formData.images.length === 0) {
+      console.log('❌ Validation failed: images');
       Alert.alert('Hata', 'En az 1 fotoğraf eklemelisiniz');
       return;
     }
+
+    console.log('✅ Tüm validasyonlar geçti!');
 
     setIsLoading(true);
     try {
