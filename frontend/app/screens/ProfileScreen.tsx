@@ -64,11 +64,12 @@ const ProfileScreen: React.FC<Props> = ({ navigation }) => {
     try {
       const formData = new FormData();
       
-      Object.keys(data).forEach(key => {
-        if (data[key]) {
-          formData.append(key, data[key]);
-        }
-      });
+      // Add basic fields
+      if (data.first_name) formData.append('first_name', data.first_name);
+      if (data.last_name) formData.append('last_name', data.last_name);
+      if (data.city) formData.append('city', data.city);
+      if (data.district) formData.append('district', data.district);
+      if (data.profile_image) formData.append('profile_image', data.profile_image);
 
       const response = await fetch(`${API_BASE_URL}/api/users/profile`, {
         method: 'PUT',
@@ -79,11 +80,30 @@ const ProfileScreen: React.FC<Props> = ({ navigation }) => {
       });
 
       if (response.ok) {
-        updateUser(data);
+        // Update user context with new data
+        const updatedUserData: any = {
+          first_name: data.first_name,
+          last_name: data.last_name,
+        };
+        
+        // Update location if provided
+        if (data.city || data.district) {
+          updatedUserData.location = {
+            city: data.city || user.location?.city,
+            district: data.district || user.location?.district,
+          };
+        }
+        
+        if (data.profile_image) {
+          updatedUserData.profile_image = data.profile_image;
+        }
+        
+        updateUser(updatedUserData);
         Alert.alert('Başarılı', 'Profil güncellendi');
         setIsEditing(false);
       } else {
-        Alert.alert('Hata', 'Profil güncellenirken bir hata oluştu');
+        const errorData = await response.json();
+        Alert.alert('Hata', errorData.detail || 'Profil güncellenirken bir hata oluştu');
       }
     } catch (error) {
       console.error('Error updating profile:', error);
