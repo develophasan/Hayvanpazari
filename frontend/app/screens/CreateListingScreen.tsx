@@ -630,6 +630,102 @@ const CreateListingScreen: React.FC<Props> = ({ navigation, route }) => {
           </ScrollView>
         </SafeAreaView>
       </Modal>
+
+      {/* Gender Selection Modal */}
+      <Modal
+        visible={showGenderModal}
+        animationType="slide"
+        presentationStyle="pageSheet"
+      >
+        <SafeAreaView style={styles.modalContainer}>
+          <View style={styles.modalHeader}>
+            <Text style={styles.modalTitle}>Cinsiyet Seçin</Text>
+            <TouchableOpacity onPress={() => setShowGenderModal(false)}>
+              <Text style={styles.doneButton}>Kapat</Text>
+            </TouchableOpacity>
+          </View>
+          <ScrollView style={styles.modalContent}>
+            <TouchableOpacity
+              style={styles.modalOption}
+              onPress={() => {
+                updateAnimalDetails('gender', 'male');
+                setShowGenderModal(false);
+              }}
+            >
+              <Text style={styles.modalOptionText}>Erkek</Text>
+              {formData.animal_details.gender === 'male' && (
+                <Ionicons name="checkmark" size={20} color="#007AFF" />
+              )}
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.modalOption}
+              onPress={() => {
+                updateAnimalDetails('gender', 'female');
+                setShowGenderModal(false);
+              }}
+            >
+              <Text style={styles.modalOptionText}>Dişi</Text>
+              {formData.animal_details.gender === 'female' && (
+                <Ionicons name="checkmark" size={20} color="#007AFF" />
+              )}
+            </TouchableOpacity>
+          </ScrollView>
+        </SafeAreaView>
+      </Modal>
+
+      {/* Purpose Selection Modal */}
+      <Modal
+        visible={showPurposeModal}
+        animationType="slide"
+        presentationStyle="pageSheet"
+      >
+        <SafeAreaView style={styles.modalContainer}>
+          <View style={styles.modalHeader}>
+            <Text style={styles.modalTitle}>Amaç Seçin</Text>
+            <TouchableOpacity onPress={() => setShowPurposeModal(false)}>
+              <Text style={styles.doneButton}>Kapat</Text>
+            </TouchableOpacity>
+          </View>
+          <ScrollView style={styles.modalContent}>
+            <TouchableOpacity
+              style={styles.modalOption}
+              onPress={() => {
+                updateAnimalDetails('purpose', 'meat');
+                setShowPurposeModal(false);
+              }}
+            >
+              <Text style={styles.modalOptionText}>Et</Text>
+              {formData.animal_details.purpose === 'meat' && (
+                <Ionicons name="checkmark" size={20} color="#007AFF" />
+              )}
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.modalOption}
+              onPress={() => {
+                updateAnimalDetails('purpose', 'dairy');
+                setShowPurposeModal(false);
+              }}
+            >
+              <Text style={styles.modalOptionText}>Süt</Text>
+              {formData.animal_details.purpose === 'dairy' && (
+                <Ionicons name="checkmark" size={20} color="#007AFF" />
+              )}
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.modalOption}
+              onPress={() => {
+                updateAnimalDetails('purpose', 'breeding');
+                setShowPurposeModal(false);
+              }}
+            >
+              <Text style={styles.modalOptionText}>Damızlık</Text>
+              {formData.animal_details.purpose === 'breeding' && (
+                <Ionicons name="checkmark" size={20} color="#007AFF" />
+              )}
+            </TouchableOpacity>
+          </ScrollView>
+        </SafeAreaView>
+      </Modal>
     </SafeAreaView>
   );
 };
