@@ -268,16 +268,15 @@ metadata:
 test_plan:
   current_focus:
     - "Authentication Screens"
-    - "Home Screen"
-    - "Search and Listings"
-    - "Create Listing"
-    - "Messaging System"
-  stuck_tasks: []
-  test_all: true
-  test_priority: "high_first"
+  stuck_tasks:
+    - "Authentication Screens"
+  test_all: false
+  test_priority: "stuck_first"
 
 agent_communication:
   - agent: "main"
     message: "Backend testing completed with 85.7% success rate (12/14 tests). Frontend login screen confirmed working. All major features implemented and ready for comprehensive frontend testing. Core functionality: authentication, listings CRUD, messaging, profile management all working on backend."
   - agent: "main"
     message: "User requested comprehensive frontend testing. All screens implemented: Authentication (Login/Register/SMS), Home Screen, Search & Listings, Create Listing, Messaging, Profile. Ready for full UI/UX testing with mobile dimensions 390x844."
+  - agent: "testing"
+    message: "CRITICAL BLOCKER FOUND: ExpoSecureStore.default.getValueWithKeyAsync is not a function error preventing all authentication. Frontend UI is excellent (mobile responsive, forms work, navigation ready) but authentication system completely broken. Backend APIs working but frontend cannot authenticate due to SecureStore web compatibility issue. All other screens cannot be tested until authentication is fixed. This is a high-priority stuck task requiring immediate attention."
