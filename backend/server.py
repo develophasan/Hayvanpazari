@@ -371,8 +371,9 @@ async def get_current_user(user_id: str = Depends(verify_token)):
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
     
-    # Remove password from response
+    # Remove password and MongoDB _id from response
     user.pop("password", None)
+    user.pop("_id", None)
     return user
 
 # User Profile Routes
