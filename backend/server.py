@@ -599,6 +599,9 @@ async def get_messages(other_user_id: str, listing_id: str, user_id: str = Depen
         {"$set": {"is_read": True}}
     )
     
+    # Remove MongoDB _id field from each message
+    for message in messages:
+        message.pop("_id", None)
     return [Message(**message) for message in messages]
 
 # Initialize database on startup
