@@ -141,8 +141,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const logout = async () => {
     try {
-      await SecureStore.deleteItemAsync('auth_token');
-      await SecureStore.deleteItemAsync('user_data');
+      await storage.removeItem('auth_token');
+      await storage.removeItem('user_data');
       setToken(null);
       setUser(null);
     } catch (error) {
