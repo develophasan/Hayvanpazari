@@ -255,12 +255,18 @@ const ProfileScreen: React.FC<Props> = ({ navigation }) => {
             <View style={styles.infoContent}>
               <Text style={styles.infoLabel}>Şehir</Text>
               {isEditing ? (
-                <View style={styles.pickerContainer}>
-                  <Text style={styles.pickerValue}>
+                <TouchableOpacity 
+                  style={styles.pickerContainer}
+                  onPress={() => setShowCityModal(true)}
+                >
+                  <Text style={[
+                    styles.pickerValue,
+                    !editData.city && styles.placeholderText
+                  ]}>
                     {editData.city || 'Şehir seçin'}
                   </Text>
-                  {/* Note: In a real app, you'd use a proper picker */}
-                </View>
+                  <Ionicons name="chevron-down" size={16} color="#666" />
+                </TouchableOpacity>
               ) : (
                 <Text style={styles.infoValue}>
                   {user.location?.city || 'Belirtilmemiş'}
@@ -274,12 +280,25 @@ const ProfileScreen: React.FC<Props> = ({ navigation }) => {
             <View style={styles.infoContent}>
               <Text style={styles.infoLabel}>İlçe</Text>
               {isEditing ? (
-                <TextInput
-                  style={styles.infoInput}
-                  value={editData.district}
-                  onChangeText={(text) => setEditData(prev => ({ ...prev, district: text }))}
-                  placeholder="İlçenizi girin"
-                />
+                <TouchableOpacity 
+                  style={styles.pickerContainer}
+                  onPress={() => {
+                    if (!editData.city) {
+                      Alert.alert('Uyarı', 'Önce şehir seçiniz');
+                      return;
+                    }
+                    setAvailableDistricts(getDistrictsByCity(editData.city));
+                    setShowDistrictModal(true);
+                  }}
+                >
+                  <Text style={[
+                    styles.pickerValue,
+                    !editData.district && styles.placeholderText
+                  ]}>
+                    {editData.district || 'İlçe seçin'}
+                  </Text>
+                  <Ionicons name="chevron-down" size={16} color="#666" />
+                </TouchableOpacity>
               ) : (
                 <Text style={styles.infoValue}>
                   {user.location?.district || 'Belirtilmemiş'}
