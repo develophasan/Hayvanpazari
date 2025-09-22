@@ -1,16 +1,16 @@
 {
   "summary": {
-    "passed": 3,
-    "failed": 11,
+    "passed": 8,
+    "failed": 6,
     "total": 14,
-    "success_rate": 21.428571428571427
+    "success_rate": 57.14285714285714
   },
   "results": [
     {
       "test": "Root Endpoint",
       "success": true,
       "message": "API is running",
-      "timestamp": "2025-09-22T07:13:47.813990",
+      "timestamp": "2025-09-22T07:14:20.353769",
       "response_data": {
         "message": "HayvanPazarı API v1.0.0",
         "status": "running"
@@ -18,33 +18,44 @@
     },
     {
       "test": "User Registration",
-      "success": false,
-      "message": "Failed with status No response: No response",
-      "timestamp": "2025-09-22T07:13:48.112214"
+      "success": true,
+      "message": "User registered successfully",
+      "timestamp": "2025-09-22T07:14:20.645895",
+      "response_data": {
+        "user_id": "99f8b43c-526d-4c63-807d-b88df073574a",
+        "email": "test_ad703090@example.com"
+      }
     },
     {
       "test": "User Login",
-      "success": false,
-      "message": "Failed with status No response: No response",
-      "timestamp": "2025-09-22T07:13:48.403402"
+      "success": true,
+      "message": "Login successful",
+      "timestamp": "2025-09-22T07:14:20.934226",
+      "response_data": {
+        "user_id": "99f8b43c-526d-4c63-807d-b88df073574a",
+        "email": "test_ad703090@example.com"
+      }
     },
     {
       "test": "SMS Verification",
-      "success": false,
-      "message": "Failed with status No response: No response",
-      "timestamp": "2025-09-22T07:13:48.464452"
+      "success": true,
+      "message": "SMS verified successfully",
+      "timestamp": "2025-09-22T07:14:20.995873",
+      "response_data": {
+        "message": "Phone verified successfully"
+      }
     },
     {
       "test": "Get Current User",
       "success": false,
       "message": "Failed with status No response: No response",
-      "timestamp": "2025-09-22T07:13:48.519786"
+      "timestamp": "2025-09-22T07:14:21.049575"
     },
     {
       "test": "Get Categories",
       "success": true,
       "message": "Retrieved 5 categories",
-      "timestamp": "2025-09-22T07:13:48.574882",
+      "timestamp": "2025-09-22T07:14:21.097172",
       "response_data": {
         "categories_count": 5,
         "sample_category": "Sığır"
@@ -54,13 +65,13 @@
       "test": "Create Listing",
       "success": false,
       "message": "Failed with status No response: No response",
-      "timestamp": "2025-09-22T07:13:48.624942"
+      "timestamp": "2025-09-22T07:14:21.147202"
     },
     {
       "test": "Get Listings (No Filter)",
       "success": true,
       "message": "Retrieved 0 listings",
-      "timestamp": "2025-09-22T07:13:48.680400",
+      "timestamp": "2025-09-22T07:14:21.200356",
       "response_data": {
         "listings_count": 0
       }
@@ -69,7 +80,7 @@
       "test": "Get Listings (Category Filter)",
       "success": true,
       "message": "Retrieved 0 cattle listings",
-      "timestamp": "2025-09-22T07:13:48.732428",
+      "timestamp": "2025-09-22T07:14:21.252435",
       "response_data": {
         "filtered_count": 0
       }
@@ -78,38 +89,44 @@
       "test": "Get Listing Detail",
       "success": false,
       "message": "No listing ID available for testing",
-      "timestamp": "2025-09-22T07:13:48.735786"
+      "timestamp": "2025-09-22T07:14:21.254984"
     },
     {
       "test": "Update Listing",
       "success": false,
       "message": "No listing ID available for testing",
-      "timestamp": "2025-09-22T07:13:48.735808"
+      "timestamp": "2025-09-22T07:14:21.255001"
     },
     {
       "test": "Send Message",
       "success": false,
       "message": "No listing ID available for testing",
-      "timestamp": "2025-09-22T07:13:48.735817"
+      "timestamp": "2025-09-22T07:14:21.255009"
     },
     {
       "test": "Get Conversations",
-      "success": false,
-      "message": "Failed with status No response: No response",
-      "timestamp": "2025-09-22T07:13:48.787331"
+      "success": true,
+      "message": "Retrieved 0 conversations",
+      "timestamp": "2025-09-22T07:14:21.307894",
+      "response_data": {
+        "conversations_count": 0
+      }
     },
     {
       "test": "Update Profile",
-      "success": false,
-      "message": "Failed with status No response: No response",
-      "timestamp": "2025-09-22T07:13:48.835789"
+      "success": true,
+      "message": "Profile updated successfully",
+      "timestamp": "2025-09-22T07:14:21.356865",
+      "response_data": {
+        "message": "Profile updated successfully"
+      }
     },
     {
       "test": "Delete Listing",
       "success": false,
       "message": "No listing ID available for testing",
-      "timestamp": "2025-09-22T07:13:48.837357"
+      "timestamp": "2025-09-22T07:14:21.358244"
     }
   ],
-  "timestamp": "2025-09-22T07:13:48.837537"
+  "timestamp": "2025-09-22T07:14:21.358407"
 }
