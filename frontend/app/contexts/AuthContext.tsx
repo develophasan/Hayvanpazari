@@ -61,15 +61,22 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const loadStoredAuth = async () => {
     try {
+      console.log('🔍 Loading stored auth...');
       const storedToken = await storage.getItem('auth_token');
       const storedUser = await storage.getItem('user_data');
+
+      console.log('📥 Stored token:', storedToken ? 'Var' : 'Yok');
+      console.log('📥 Stored user:', storedUser ? 'Var' : 'Yok');
 
       if (storedToken && storedUser) {
         setToken(storedToken);
         setUser(JSON.parse(storedUser));
+        console.log('✅ Auth restored from storage');
+      } else {
+        console.log('ℹ️ No stored auth found');
       }
     } catch (error) {
-      console.error('Error loading stored auth:', error);
+      console.error('❌ Error loading stored auth:', error);
     } finally {
       setIsLoading(false);
     }
