@@ -449,6 +449,9 @@ async def get_listings(
         query["$text"] = {"$search": search}
     
     listings = await db.listings.find(query).sort("created_at", -1).skip(skip).limit(limit).to_list(limit)
+    # Remove MongoDB _id field from each listing
+    for listing in listings:
+        listing.pop("_id", None)
     return [Listing(**listing) for listing in listings]
 
 @api_router.get("/listings/{listing_id}", response_model=Listing)
