@@ -1,0 +1,115 @@
+{
+  "summary": {
+    "passed": 3,
+    "failed": 11,
+    "total": 14,
+    "success_rate": 21.428571428571427
+  },
+  "results": [
+    {
+      "test": "Root Endpoint",
+      "success": true,
+      "message": "API is running",
+      "timestamp": "2025-09-22T07:13:47.813990",
+      "response_data": {
+        "message": "HayvanPazarı API v1.0.0",
+        "status": "running"
+      }
+    },
+    {
+      "test": "User Registration",
+      "success": false,
+      "message": "Failed with status No response: No response",
+      "timestamp": "2025-09-22T07:13:48.112214"
+    },
+    {
+      "test": "User Login",
+      "success": false,
+      "message": "Failed with status No response: No response",
+      "timestamp": "2025-09-22T07:13:48.403402"
+    },
+    {
+      "test": "SMS Verification",
+      "success": false,
+      "message": "Failed with status No response: No response",
+      "timestamp": "2025-09-22T07:13:48.464452"
+    },
+    {
+      "test": "Get Current User",
+      "success": false,
+      "message": "Failed with status No response: No response",
+      "timestamp": "2025-09-22T07:13:48.519786"
+    },
+    {
+      "test": "Get Categories",
+      "success": true,
+      "message": "Retrieved 5 categories",
+      "timestamp": "2025-09-22T07:13:48.574882",
+      "response_data": {
+        "categories_count": 5,
+        "sample_category": "Sığır"
+      }
+    },
+    {
+      "test": "Create Listing",
+      "success": false,
+      "message": "Failed with status No response: No response",
+      "timestamp": "2025-09-22T07:13:48.624942"
+    },
+    {
+      "test": "Get Listings (No Filter)",
+      "success": true,
+      "message": "Retrieved 0 listings",
+      "timestamp": "2025-09-22T07:13:48.680400",
+      "response_data": {
+        "listings_count": 0
+      }
+    },
+    {
+      "test": "Get Listings (Category Filter)",
+      "success": true,
+      "message": "Retrieved 0 cattle listings",
+      "timestamp": "2025-09-22T07:13:48.732428",
+      "response_data": {
+        "filtered_count": 0
+      }
+    },
+    {
+      "test": "Get Listing Detail",
+      "success": false,
+      "message": "No listing ID available for testing",
+      "timestamp": "2025-09-22T07:13:48.735786"
+    },
+    {
+      "test": "Update Listing",
+      "success": false,
+      "message": "No listing ID available for testing",
+      "timestamp": "2025-09-22T07:13:48.735808"
+    },
+    {
+      "test": "Send Message",
+      "success": false,
+      "message": "No listing ID available for testing",
+      "timestamp": "2025-09-22T07:13:48.735817"
+    },
+    {
+      "test": "Get Conversations",
+      "success": false,
+      "message": "Failed with status No response: No response",
+      "timestamp": "2025-09-22T07:13:48.787331"
+    },
+    {
+      "test": "Update Profile",
+      "success": false,
+      "message": "Failed with status No response: No response",
+      "timestamp": "2025-09-22T07:13:48.835789"
+    },
+    {
+      "test": "Delete Listing",
+      "success": false,
+      "message": "No listing ID available for testing",
+      "timestamp": "2025-09-22T07:13:48.837357"
+    }
+  ],
+  "timestamp": "2025-09-22T07:13:48.837537"
+}
