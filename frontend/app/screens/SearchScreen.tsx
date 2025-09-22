@@ -48,6 +48,7 @@ interface SearchFilters {
   min_price?: number;
   max_price?: number;
   city?: string;
+  district?: string;
   breed?: string;
   gender?: string;
 }
