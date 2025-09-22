@@ -462,7 +462,7 @@ async def get_listing(listing_id: str):
     
     # Increment view count
     await db.listings.update_one({"id": listing_id}, {"$inc": {"views": 1}})
-    listing["views"] += 1
+    listing["views"] = listing.get("views", 0) + 1
     
     # Remove MongoDB _id field to avoid conflicts
     listing.pop("_id", None)
