@@ -302,6 +302,12 @@ async def register(user_data: UserCreate):
     user_dict = user_data.dict()
     user_dict["password"] = hashed_password
     user_dict["id"] = str(uuid.uuid4())
+    user_dict["user_type"] = UserType.BUYER  # Set default user type
+    user_dict["is_verified"] = False
+    user_dict["is_phone_verified"] = False
+    user_dict["kyc_status"] = "not_verified"
+    user_dict["rating"] = 0.0
+    user_dict["total_reviews"] = 0
     user_dict["created_at"] = datetime.utcnow()
     user_dict["updated_at"] = datetime.utcnow()
     
