@@ -195,6 +195,12 @@ const CreateListingScreen: React.FC<Props> = ({ navigation, route }) => {
 
     console.log('✅ Tüm validasyonlar geçti!');
 
+    if (!token) {
+      console.log('❌ Token yok! Kullanıcı giriş yapmamış');
+      Alert.alert('Giriş Gerekli', 'İlan vermek için giriş yapmanız gerekiyor');
+      return;
+    }
+
     setIsLoading(true);
     try {
       const listingData = {
@@ -207,6 +213,9 @@ const CreateListingScreen: React.FC<Props> = ({ navigation, route }) => {
         }
       };
 
+      console.log('🚀 API çağrısı yapılıyor:', `${API_BASE_URL}/api/listings`);
+      console.log('📤 Gönderilen data:', listingData);
+
       const response = await fetch(`${API_BASE_URL}/api/listings`, {
         method: 'POST',
         headers: {
@@ -216,16 +225,21 @@ const CreateListingScreen: React.FC<Props> = ({ navigation, route }) => {
         body: JSON.stringify(listingData),
       });
 
+      console.log('📥 Response status:', response.status);
+      
       if (response.ok) {
+        const responseData = await response.json();
+        console.log('✅ İlan başarıyla oluşturuldu:', responseData);
         Alert.alert('Başarılı', 'İlan oluşturuldu!', [
           { text: 'Tamam', onPress: () => navigation.goBack() }
         ]);
       } else {
         const errorData = await response.json();
+        console.log('❌ API Error:', errorData);
         Alert.alert('Hata', errorData.detail || 'İlan oluşturulamadı');
       }
     } catch (error) {
-      console.error('Error creating listing:', error);
+      console.error('❌ Network Error:', error);
       Alert.alert('Hata', 'Ağ hatası');
     } finally {
       setIsLoading(false);
