@@ -291,14 +291,12 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Home Screen"
-    - "Search and Listings"
-    - "Create Listing"
-    - "Messaging System"
     - "Profile Management"
-  stuck_tasks: []
+    - "Authentication Screens"
+  stuck_tasks:
+    - "Profile Management"
   test_all: false
-  test_priority: "high_first"
+  test_priority: "stuck_first"
 
 agent_communication:
   - agent: "main"
