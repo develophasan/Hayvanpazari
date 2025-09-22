@@ -346,6 +346,84 @@ const ProfileScreen: React.FC<Props> = ({ navigation }) => {
           </TouchableOpacity>
         </View>
       </ScrollView>
+
+      {/* City Selection Modal */}
+      <Modal
+        visible={showCityModal}
+        animationType="slide"
+        presentationStyle="pageSheet"
+      >
+        <SafeAreaView style={styles.modalContainer}>
+          <View style={styles.modalHeader}>
+            <TouchableOpacity onPress={() => setShowCityModal(false)}>
+              <Text style={styles.modalCancelText}>İptal</Text>
+            </TouchableOpacity>
+            <Text style={styles.modalTitle}>Şehir Seçin</Text>
+            <View style={{ width: 50 }} />
+          </View>
+          <ScrollView style={styles.modalContent}>
+            {CITIES.map((city) => (
+              <TouchableOpacity
+                key={city}
+                style={styles.modalItem}
+                onPress={() => {
+                  setEditData(prev => ({ ...prev, city, district: '' }));
+                  setShowCityModal(false);
+                }}
+              >
+                <Text style={[
+                  styles.modalItemText,
+                  editData.city === city && styles.selectedItemText
+                ]}>
+                  {city}
+                </Text>
+                {editData.city === city && (
+                  <Ionicons name="checkmark" size={20} color="#007AFF" />
+                )}
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
+        </SafeAreaView>
+      </Modal>
+
+      {/* District Selection Modal */}
+      <Modal
+        visible={showDistrictModal}
+        animationType="slide"
+        presentationStyle="pageSheet"
+      >
+        <SafeAreaView style={styles.modalContainer}>
+          <View style={styles.modalHeader}>
+            <TouchableOpacity onPress={() => setShowDistrictModal(false)}>
+              <Text style={styles.modalCancelText}>İptal</Text>
+            </TouchableOpacity>
+            <Text style={styles.modalTitle}>İlçe Seçin</Text>
+            <View style={{ width: 50 }} />
+          </View>
+          <ScrollView style={styles.modalContent}>
+            {availableDistricts.map((district) => (
+              <TouchableOpacity
+                key={district}
+                style={styles.modalItem}
+                onPress={() => {
+                  setEditData(prev => ({ ...prev, district }));
+                  setShowDistrictModal(false);
+                }}
+              >
+                <Text style={[
+                  styles.modalItemText,
+                  editData.district === district && styles.selectedItemText
+                ]}>
+                  {district}
+                </Text>
+                {editData.district === district && (
+                  <Ionicons name="checkmark" size={20} color="#007AFF" />
+                )}
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
+        </SafeAreaView>
+      </Modal>
     </SafeAreaView>
   );
 };
