@@ -88,12 +88,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       const data = await response.json();
 
       if (response.ok) {
+        console.log('Login successful, storing token and user data:', data.user);
         await storage.setItem('auth_token', data.access_token);
         await storage.setItem('user_data', JSON.stringify(data.user));
         
         setToken(data.access_token);
         setUser(data.user);
         
+        console.log('Auth state updated, user:', data.user.first_name);
         return { success: true };
       } else {
         return { success: false, error: data.detail || 'Login failed' };
