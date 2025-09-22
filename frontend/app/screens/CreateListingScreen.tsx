@@ -549,6 +549,106 @@ const CreateListingScreen: React.FC<Props> = ({ navigation, route }) => {
           </ScrollView>
         </SafeAreaView>
       </Modal>
+
+      {/* City Selection Modal */}
+      <Modal
+        visible={showCityModal}
+        animationType="slide"
+        presentationStyle="pageSheet"
+      >
+        <SafeAreaView style={styles.modalContainer}>
+          <View style={styles.modalHeader}>
+            <Text style={styles.modalTitle}>Şehir Seçin</Text>
+            <TouchableOpacity onPress={() => setShowCityModal(false)}>
+              <Text style={styles.doneButton}>Kapat</Text>
+            </TouchableOpacity>
+          </View>
+          <ScrollView style={styles.modalContent}>
+            {CITIES.map((city) => (
+              <TouchableOpacity
+                key={city}
+                style={styles.modalOption}
+                onPress={() => {
+                  updateLocation('city', city);
+                  updateLocation('district', ''); // Reset district when city changes
+                  setShowCityModal(false);
+                }}
+              >
+                <Text style={styles.modalOptionText}>{city}</Text>
+                {formData.location.city === city && (
+                  <Ionicons name="checkmark" size={20} color="#007AFF" />
+                )}
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
+        </SafeAreaView>
+      </Modal>
+
+      {/* District Selection Modal */}
+      <Modal
+        visible={showDistrictModal}
+        animationType="slide"
+        presentationStyle="pageSheet"
+      >
+        <SafeAreaView style={styles.modalContainer}>
+          <View style={styles.modalHeader}>
+            <Text style={styles.modalTitle}>İlçe Seçin</Text>
+            <TouchableOpacity onPress={() => setShowDistrictModal(false)}>
+              <Text style={styles.doneButton}>Kapat</Text>
+            </TouchableOpacity>
+          </View>
+          <ScrollView style={styles.modalContent}>
+            {availableDistricts.map((district) => (
+              <TouchableOpacity
+                key={district}
+                style={styles.modalOption}
+                onPress={() => {
+                  updateLocation('district', district);
+                  setShowDistrictModal(false);
+                }}
+              >
+                <Text style={styles.modalOptionText}>{district}</Text>
+                {formData.location.district === district && (
+                  <Ionicons name="checkmark" size={20} color="#007AFF" />
+                )}
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
+        </SafeAreaView>
+      </Modal>
+
+      {/* Breed Selection Modal */}
+      <Modal
+        visible={showBreedModal}
+        animationType="slide"
+        presentationStyle="pageSheet"
+      >
+        <SafeAreaView style={styles.modalContainer}>
+          <View style={styles.modalHeader}>
+            <Text style={styles.modalTitle}>Irk Seçin</Text>
+            <TouchableOpacity onPress={() => setShowBreedModal(false)}>
+              <Text style={styles.doneButton}>Kapat</Text>
+            </TouchableOpacity>
+          </View>
+          <ScrollView style={styles.modalContent}>
+            {getSelectedCategory()?.breeds.map((breed) => (
+              <TouchableOpacity
+                key={breed}
+                style={styles.modalOption}
+                onPress={() => {
+                  updateAnimalDetails('breed', breed);
+                  setShowBreedModal(false);
+                }}
+              >
+                <Text style={styles.modalOptionText}>{breed}</Text>
+                {formData.animal_details.breed === breed && (
+                  <Ionicons name="checkmark" size={20} color="#007AFF" />
+                )}
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
+        </SafeAreaView>
+      </Modal>
     </SafeAreaView>
   );
 };
