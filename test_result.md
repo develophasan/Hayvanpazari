@@ -297,13 +297,13 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Create Listing"
-    - "Authentication Screens"
+    - "Home Screen"
+    - "Search and Listings"
+    - "Messaging System"
   stuck_tasks:
     - "Profile Management"
-    - "Create Listing"
   test_all: false
-  test_priority: "stuck_first"
+  test_priority: "high_first"
 
 agent_communication:
   - agent: "main"
