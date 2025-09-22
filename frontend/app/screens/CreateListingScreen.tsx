@@ -390,7 +390,20 @@ const CreateListingScreen: React.FC<Props> = ({ navigation, route }) => {
             <View style={styles.row}>
               <View style={styles.halfInputContainer}>
                 <Text style={styles.label}>Cinsiyet</Text>
-                <TouchableOpacity style={styles.categoryButton}>
+                <TouchableOpacity 
+                  style={styles.categoryButton}
+                  onPress={() => {
+                    Alert.alert(
+                      'Cinsiyet Seçin',
+                      '',
+                      [
+                        { text: 'İptal', style: 'cancel' },
+                        { text: 'Erkek', onPress: () => updateAnimalDetails('gender', 'male') },
+                        { text: 'Dişi', onPress: () => updateAnimalDetails('gender', 'female') }
+                      ]
+                    );
+                  }}
+                >
                   <Text style={[
                     styles.categoryButtonText,
                     !formData.animal_details.gender && styles.placeholderText
@@ -405,7 +418,21 @@ const CreateListingScreen: React.FC<Props> = ({ navigation, route }) => {
 
               <View style={styles.halfInputContainer}>
                 <Text style={styles.label}>Amaç</Text>
-                <TouchableOpacity style={styles.categoryButton}>
+                <TouchableOpacity 
+                  style={styles.categoryButton}
+                  onPress={() => {
+                    Alert.alert(
+                      'Hayvan Amacı',
+                      '',
+                      [
+                        { text: 'İptal', style: 'cancel' },
+                        { text: 'Et', onPress: () => updateAnimalDetails('purpose', 'meat') },
+                        { text: 'Süt', onPress: () => updateAnimalDetails('purpose', 'dairy') },
+                        { text: 'Damızlık', onPress: () => updateAnimalDetails('purpose', 'breeding') }
+                      ]
+                    );
+                  }}
+                >
                   <Text style={[
                     styles.categoryButtonText,
                     !formData.animal_details.purpose && styles.placeholderText
