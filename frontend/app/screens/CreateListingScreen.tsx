@@ -94,6 +94,8 @@ const CreateListingScreen: React.FC<Props> = ({ navigation, route }) => {
   const [showCityModal, setShowCityModal] = useState(false);
   const [showDistrictModal, setShowDistrictModal] = useState(false);
   const [showBreedModal, setShowBreedModal] = useState(false);
+  const [showGenderModal, setShowGenderModal] = useState(false);
+  const [showPurposeModal, setShowPurposeModal] = useState(false);
   const [availableDistricts, setAvailableDistricts] = useState<string[]>([]);
 
   useEffect(() => {
