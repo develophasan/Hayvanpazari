@@ -465,22 +465,41 @@ const CreateListingScreen: React.FC<Props> = ({ navigation, route }) => {
             <View style={styles.row}>
               <View style={styles.halfInputContainer}>
                 <Text style={styles.label}>Şehir *</Text>
-                <TextInput
-                  style={styles.input}
-                  value={formData.location.city}
-                  onChangeText={(text) => updateLocation('city', text)}
-                  placeholder="İstanbul"
-                />
+                <TouchableOpacity 
+                  style={styles.categoryButton}
+                  onPress={() => setShowCityModal(true)}
+                >
+                  <Text style={[
+                    styles.categoryButtonText,
+                    !formData.location.city && styles.placeholderText
+                  ]}>
+                    {formData.location.city || 'Şehir seçin'}
+                  </Text>
+                  <Ionicons name="chevron-down" size={20} color="#666" />
+                </TouchableOpacity>
               </View>
 
               <View style={styles.halfInputContainer}>
                 <Text style={styles.label}>İlçe *</Text>
-                <TextInput
-                  style={styles.input}
-                  value={formData.location.district}
-                  onChangeText={(text) => updateLocation('district', text)}
-                  placeholder="Kadıköy"
-                />
+                <TouchableOpacity 
+                  style={styles.categoryButton}
+                  onPress={() => {
+                    if (!formData.location.city) {
+                      Alert.alert('Uyarı', 'Önce şehir seçiniz');
+                      return;
+                    }
+                    setAvailableDistricts(getDistrictsByCity(formData.location.city));
+                    setShowDistrictModal(true);
+                  }}
+                >
+                  <Text style={[
+                    styles.categoryButtonText,
+                    !formData.location.district && styles.placeholderText
+                  ]}>
+                    {formData.location.district || 'İlçe seçin'}
+                  </Text>
+                  <Ionicons name="chevron-down" size={20} color="#666" />
+                </TouchableOpacity>
               </View>
             </View>
           </View>
