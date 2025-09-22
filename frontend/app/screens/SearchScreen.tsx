@@ -116,6 +116,9 @@ const SearchScreen: React.FC<Props> = ({ navigation, route }) => {
       if (filters.city) {
         queryParams.append('city', filters.city);
       }
+      if (filters.district) {
+        queryParams.append('district', filters.district);
+      }
       if (filters.min_price) {
         queryParams.append('min_price', filters.min_price.toString());
       }
