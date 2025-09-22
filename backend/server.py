@@ -546,8 +546,12 @@ async def get_conversations(user_id: str = Depends(verify_token)):
     
     conversations = await db.messages.aggregate(pipeline).to_list(100)
     
-    # Get user details for each conversation
+    # Get user details for each conversation and clean up ObjectIds
     for conv in conversations:
+        # Clean up ObjectIds from the conversation data
+        if "last_message" in conv and "_id" in conv["last_message"]:
+            conv["last_message"].pop("_id", None)
+        
         other_user = await db.users.find_one({"id": conv["_id"]})
         if other_user:
             conv["other_user"] = {
