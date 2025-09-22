@@ -503,6 +503,9 @@ async def get_user_listings(user_id: str, current_user_id: str = Depends(verify_
         query = {"seller_id": user_id}
     
     listings = await db.listings.find(query).sort("created_at", -1).to_list(100)
+    # Remove MongoDB _id field from each listing
+    for listing in listings:
+        listing.pop("_id", None)
     return [Listing(**listing) for listing in listings]
 
 # Messages Routes
