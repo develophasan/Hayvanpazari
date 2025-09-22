@@ -154,7 +154,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     if (user) {
       const updatedUser = { ...user, ...userData };
       setUser(updatedUser);
-      SecureStore.setItemAsync('user_data', JSON.stringify(updatedUser));
+      storage.setItem('user_data', JSON.stringify(updatedUser));
     }
   };
 
