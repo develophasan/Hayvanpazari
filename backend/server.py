@@ -526,8 +526,10 @@ async def send_message(message_data: MessageCreate, user_id: str = Depends(verif
     message_dict["created_at"] = datetime.utcnow()
     
     result = await db.messages.insert_one(message_dict)
-    # Remove MongoDB _id field to avoid conflicts
+    # Remove MongoDB _id field to avoid conflicts  
     message_dict.pop("_id", None)
+    
+    # Ensure the response follows the expected Message model
     return Message(**message_dict)
 
 @api_router.get("/messages/conversations")
