@@ -461,6 +461,8 @@ async def get_listing(listing_id: str):
     await db.listings.update_one({"id": listing_id}, {"$inc": {"views": 1}})
     listing["views"] += 1
     
+    # Remove MongoDB _id field to avoid conflicts
+    listing.pop("_id", None)
     return Listing(**listing)
 
 @api_router.put("/listings/{listing_id}")
