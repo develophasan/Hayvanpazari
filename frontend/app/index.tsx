@@ -4,8 +4,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { Ionicons } from '@expo/vector-icons';
+
+import { AuthProvider, useAuth } from './contexts/AuthContext';
 
 // Import screens
 import LoginScreen from './screens/auth/LoginScreen';
