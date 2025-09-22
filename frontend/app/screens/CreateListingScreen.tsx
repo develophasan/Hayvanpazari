@@ -394,17 +394,7 @@ const CreateListingScreen: React.FC<Props> = ({ navigation, route }) => {
                 <Text style={styles.label}>Cinsiyet</Text>
                 <TouchableOpacity 
                   style={styles.categoryButton}
-                  onPress={() => {
-                    Alert.alert(
-                      'Cinsiyet Seçin',
-                      '',
-                      [
-                        { text: 'İptal', style: 'cancel' },
-                        { text: 'Erkek', onPress: () => updateAnimalDetails('gender', 'male') },
-                        { text: 'Dişi', onPress: () => updateAnimalDetails('gender', 'female') }
-                      ]
-                    );
-                  }}
+                  onPress={() => setShowGenderModal(true)}
                 >
                   <Text style={[
                     styles.categoryButtonText,
@@ -422,18 +412,7 @@ const CreateListingScreen: React.FC<Props> = ({ navigation, route }) => {
                 <Text style={styles.label}>Amaç</Text>
                 <TouchableOpacity 
                   style={styles.categoryButton}
-                  onPress={() => {
-                    Alert.alert(
-                      'Hayvan Amacı',
-                      '',
-                      [
-                        { text: 'İptal', style: 'cancel' },
-                        { text: 'Et', onPress: () => updateAnimalDetails('purpose', 'meat') },
-                        { text: 'Süt', onPress: () => updateAnimalDetails('purpose', 'dairy') },
-                        { text: 'Damızlık', onPress: () => updateAnimalDetails('purpose', 'breeding') }
-                      ]
-                    );
-                  }}
+                  onPress={() => setShowPurposeModal(true)}
                 >
                   <Text style={[
                     styles.categoryButtonText,
