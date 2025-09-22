@@ -36,6 +36,17 @@ const ProfileScreen: React.FC<Props> = ({ navigation }) => {
   const [showCityModal, setShowCityModal] = useState(false);
   const [showDistrictModal, setShowDistrictModal] = useState(false);
   const [availableDistricts, setAvailableDistricts] = useState<string[]>([]);
+  useEffect(() => {
+    // Update editData when user data changes
+    if (user) {
+      setEditData({
+        first_name: user.first_name || '',
+        last_name: user.last_name || '',
+        city: user.location?.city || '',
+        district: user.location?.district || '',
+      });
+    }
+  }, [user]);
 
   const handleImagePicker = async () => {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
