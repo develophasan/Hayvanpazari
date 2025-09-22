@@ -426,6 +426,7 @@ async def create_listing(listing_data: ListingCreate, user_id: str = Depends(ver
 async def get_listings(
     category: Optional[str] = None,
     city: Optional[str] = None,
+    district: Optional[str] = None,
     min_price: Optional[float] = None,
     max_price: Optional[float] = None,
     search: Optional[str] = None,
