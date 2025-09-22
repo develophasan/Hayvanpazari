@@ -438,6 +438,8 @@ async def get_listings(
         query["category"] = category
     if city:
         query["location.city"] = city
+    if district:
+        query["location.district"] = district
     if min_price is not None:
         query["price"] = {"$gte": min_price}
     if max_price is not None:
