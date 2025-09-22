@@ -63,6 +63,17 @@ interface Props {
 
 const CreateListingScreen: React.FC<Props> = ({ navigation, route }) => {
   const { user, token } = useAuth();
+
+  // Authentication check
+  useEffect(() => {
+    console.log('CreateListingScreen - User:', user?.first_name, 'Token:', token ? 'Var' : 'Yok');
+    if (!user || !token) {
+      console.log('❌ Authentication eksik, giriş sayfasına yönlendiriliyor');
+      Alert.alert('Giriş Gerekli', 'İlan vermek için giriş yapmanız gerekiyor', [
+        { text: 'Tamam', onPress: () => navigation.goBack() }
+      ]);
+    }
+  }, [user, token]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [formData, setFormData] = useState<ListingFormData>({
     title: '',
