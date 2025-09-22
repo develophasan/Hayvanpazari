@@ -254,10 +254,12 @@ class HayvanPazariTester:
         
         if response and response.status_code == 200:
             data = response.json()
-            if "id" in data and "title" in data:
-                self.created_listing_id = data["id"]
+            # Check for either "id" or "_id" field
+            listing_id = data.get("id") or data.get("_id")
+            if listing_id and "title" in data:
+                self.created_listing_id = listing_id
                 self.log_result("Create Listing", True, "Listing created successfully", {
-                    "listing_id": data["id"],
+                    "listing_id": listing_id,
                     "title": data["title"],
                     "price": data["price"]
                 })
