@@ -396,11 +396,14 @@ async def update_profile(
     if user_type:
         update_data["user_type"] = user_type
     if city or district:
-        location = {}
-        if city:
-            location["city"] = city
-        if district:
-            location["district"] = district
+        # Get current user to preserve existing location data
+        current_user = await db.users.find_one({"id": user_id})
+        current_location = current_user.get("location", {}) if current_user else {}
+        
+        location = {
+            "city": city if city else current_location.get("city", ""),
+            "district": district if district else current_location.get("district", "")
+        }
         update_data["location"] = location
     if profile_image:
         update_data["profile_image"] = profile_image
