@@ -348,7 +348,10 @@ const CreateListingScreen: React.FC<Props> = ({ navigation, route }) => {
             {getSelectedCategory()?.breeds && (
               <View style={styles.inputContainer}>
                 <Text style={styles.label}>Irk</Text>
-                <TouchableOpacity style={styles.categoryButton}>
+                <TouchableOpacity 
+                  style={styles.categoryButton}
+                  onPress={() => setShowBreedModal(true)}
+                >
                   <Text style={[
                     styles.categoryButtonText,
                     !formData.animal_details.breed && styles.placeholderText
