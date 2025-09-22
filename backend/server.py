@@ -416,7 +416,9 @@ async def create_listing(listing_data: ListingCreate, user_id: str = Depends(ver
     listing_dict["created_at"] = datetime.utcnow()
     listing_dict["updated_at"] = datetime.utcnow()
     
-    await db.listings.insert_one(listing_dict)
+    result = await db.listings.insert_one(listing_dict)
+    # Remove MongoDB's _id field to avoid conflicts
+    listing_dict.pop("_id", None)
     return Listing(**listing_dict)
 
 @api_router.get("/listings", response_model=List[Listing])
