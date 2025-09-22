@@ -145,8 +145,14 @@ function MainStack() {
 function RootNavigator() {
   const { user, isLoading } = useAuth();
 
+  console.log('RootNavigator - User:', user?.first_name, 'Loading:', isLoading);
+
   if (isLoading) {
-    return null; // Could show a loading screen here
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Yükleniyor...</Text>
+      </View>
+    );
   }
 
   return (
