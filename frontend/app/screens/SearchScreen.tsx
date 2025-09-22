@@ -390,7 +390,7 @@ const SearchScreen: React.FC<Props> = ({ navigation, route }) => {
               <Text style={styles.filterSectionTitle}>Şehir</Text>
               <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                 <View style={styles.cityContainer}>
-                  {turkishCities.slice(0, 20).map((city) => (
+                  {CITIES.slice(0, 20).map((city) => (
                     <TouchableOpacity
                       key={city}
                       style={[
@@ -399,7 +399,8 @@ const SearchScreen: React.FC<Props> = ({ navigation, route }) => {
                       ]}
                       onPress={() => setFilters(prev => ({
                         ...prev,
-                        city: prev.city === city ? undefined : city
+                        city: prev.city === city ? undefined : city,
+                        district: prev.city === city ? prev.district : undefined
                       }))}
                     >
                       <Text style={[
@@ -413,6 +414,37 @@ const SearchScreen: React.FC<Props> = ({ navigation, route }) => {
                 </View>
               </ScrollView>
             </View>
+
+            {/* District Filter */}
+            {filters.city && (
+              <View style={styles.filterSection}>
+                <Text style={styles.filterSectionTitle}>İlçe</Text>
+                <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                  <View style={styles.cityContainer}>
+                    {getDistrictsByCity(filters.city).slice(0, 15).map((district) => (
+                      <TouchableOpacity
+                        key={district}
+                        style={[
+                          styles.cityOption,
+                          filters.district === district && styles.cityOptionSelected
+                        ]}
+                        onPress={() => setFilters(prev => ({
+                          ...prev,
+                          district: prev.district === district ? undefined : district
+                        }))}
+                      >
+                        <Text style={[
+                          styles.cityOptionText,
+                          filters.district === district && styles.cityOptionTextSelected
+                        ]}>
+                          {district}
+                        </Text>
+                      </TouchableOpacity>
+                    ))}
+                  </View>
+                </ScrollView>
+              </View>
+            )}
 
             {/* Price Filter */}
             <View style={styles.filterSection}>
