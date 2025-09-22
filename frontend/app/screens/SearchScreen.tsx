@@ -280,7 +280,17 @@ const SearchScreen: React.FC<Props> = ({ navigation, route }) => {
                 <View style={styles.filterTag}>
                   <Text style={styles.filterTagText}>{filters.city}</Text>
                   <TouchableOpacity 
-                    onPress={() => setFilters(prev => ({ ...prev, city: undefined }))}
+                    onPress={() => setFilters(prev => ({ ...prev, city: undefined, district: undefined }))}
+                  >
+                    <Ionicons name="close" size={16} color="#007AFF" />
+                  </TouchableOpacity>
+                </View>
+              )}
+              {filters.district && (
+                <View style={styles.filterTag}>
+                  <Text style={styles.filterTagText}>{filters.district}</Text>
+                  <TouchableOpacity 
+                    onPress={() => setFilters(prev => ({ ...prev, district: undefined }))}
                   >
                     <Ionicons name="close" size={16} color="#007AFF" />
                   </TouchableOpacity>
