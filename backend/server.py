@@ -464,8 +464,17 @@ async def get_listing(listing_id: str):
     await db.listings.update_one({"id": listing_id}, {"$inc": {"views": 1}})
     listing["views"] = listing.get("views", 0) + 1
     
-    # Remove MongoDB _id field to avoid conflicts
+    # Clean up MongoDB fields
     listing.pop("_id", None)
+    
+    # Ensure all required fields exist
+    if "animal_details" not in listing:
+        listing["animal_details"] = {}
+    if "images" not in listing:
+        listing["images"] = []
+    if "videos" not in listing:
+        listing["videos"] = []
+        
     return Listing(**listing)
 
 @api_router.put("/listings/{listing_id}")
