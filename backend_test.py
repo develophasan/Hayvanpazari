@@ -402,9 +402,11 @@ class HayvanPazariTester:
         
         if response and response.status_code == 200:
             data = response.json()
-            if "id" in data and "message" in data:
+            # Check for either "id" or "_id" field
+            message_id = data.get("id") or data.get("_id")
+            if message_id and "message" in data:
                 self.log_result("Send Message", True, "Message sent successfully", {
-                    "message_id": data["id"],
+                    "message_id": message_id,
                     "message": data["message"],
                     "sender_id": data["sender_id"]
                 })
