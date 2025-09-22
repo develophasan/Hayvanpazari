@@ -491,6 +491,9 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   pickerContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     borderBottomWidth: 1,
     borderBottomColor: '#007AFF',
     paddingVertical: 4,
@@ -498,6 +501,10 @@ const styles = StyleSheet.create({
   pickerValue: {
     fontSize: 16,
     color: '#333',
+    flex: 1,
+  },
+  placeholderText: {
+    color: '#999',
   },
   saveButton: {
     backgroundColor: '#007AFF',
