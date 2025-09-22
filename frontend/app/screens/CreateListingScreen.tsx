@@ -848,6 +848,19 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#333',
   },
+  modalOptionText: {
+    fontSize: 16,
+    color: '#333',
+  },
+  modalOption: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingVertical: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#f0f0f0',
+  },
 });
 
 export default CreateListingScreen;
