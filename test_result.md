@@ -294,10 +294,11 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Profile Management"
+    - "Create Listing"
     - "Authentication Screens"
   stuck_tasks:
     - "Profile Management"
+    - "Create Listing"
   test_all: false
   test_priority: "stuck_first"
 
