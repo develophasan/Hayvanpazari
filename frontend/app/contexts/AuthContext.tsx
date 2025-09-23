@@ -2,7 +2,8 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 import Constants from 'expo-constants';
 import storage from '../utils/storage';
 
-const API_BASE_URL = Constants.expoConfig?.extra?.EXPO_PUBLIC_BACKEND_URL || process.env.EXPO_PUBLIC_BACKEND_URL;
+const API_BASE_URL = process.env.EXPO_PUBLIC_BACKEND_URL;
+console.log('🔗 AuthContext API_BASE_URL:', API_BASE_URL);
 
 interface User {
   id: string;
