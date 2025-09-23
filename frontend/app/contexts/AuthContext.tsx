@@ -56,7 +56,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [token, setToken] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  console.log('🔄 AuthProvider rendering, current state:', { user: user?.first_name, isLoading });
+
   useEffect(() => {
+    console.log('🔥 AuthProvider useEffect triggered');
     loadStoredAuth();
   }, []);
 
