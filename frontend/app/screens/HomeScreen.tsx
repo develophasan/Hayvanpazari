@@ -48,6 +48,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
   const [recentListings, setRecentListings] = useState<Listing[]>([]);
   const [refreshing, setRefreshing] = useState(false);
   const { user } = useAuth();
+  const nav = useNavigation();
 
   useEffect(() => {
     loadData();
