@@ -85,6 +85,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const login = async (email: string, password: string): Promise<{ success: boolean; error?: string }> => {
     try {
+      console.log('🔗 Login attempt with API_BASE_URL:', API_BASE_URL);
+      console.log('🔗 Full login URL:', `${API_BASE_URL}/api/auth/login`);
+      
       const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
         method: 'POST',
         headers: {
@@ -93,23 +96,26 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         body: JSON.stringify({ email, password }),
       });
 
+      console.log('📡 Login response status:', response.status);
       const data = await response.json();
+      console.log('📡 Login response data:', data);
 
       if (response.ok) {
-        console.log('Login successful, storing token and user data:', data.user);
+        console.log('✅ Login successful, storing token and user data:', data.user);
         await storage.setItem('auth_token', data.access_token);
         await storage.setItem('user_data', JSON.stringify(data.user));
         
         setToken(data.access_token);
         setUser(data.user);
         
-        console.log('Auth state updated, user:', data.user.first_name);
+        console.log('✅ Auth state updated, user:', data.user.first_name);
         return { success: true };
       } else {
+        console.log('❌ Login failed:', data);
         return { success: false, error: data.detail || 'Login failed' };
       }
     } catch (error) {
-      console.error('Login error:', error);
+      console.error('❌ Login network error:', error);
       return { success: false, error: 'Network error' };
     }
   };
