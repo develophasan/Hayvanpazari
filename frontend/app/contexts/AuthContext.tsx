@@ -68,6 +68,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
       console.log('📥 Stored token:', storedToken ? 'Var' : 'Yok');
       console.log('📥 Stored user:', storedUser ? 'Var' : 'Yok');
+      
+      if (storedToken) {
+        console.log('📥 Token length:', storedToken.length);
+      }
+      if (storedUser) {
+        console.log('📥 User data preview:', storedUser.substring(0, 50));
+      }
 
       if (storedToken && storedUser) {
         setToken(storedToken);
@@ -79,6 +86,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     } catch (error) {
       console.error('❌ Error loading stored auth:', error);
     } finally {
+      console.log('⏰ Setting isLoading to false');
       setIsLoading(false);
     }
   };
