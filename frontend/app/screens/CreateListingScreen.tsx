@@ -199,6 +199,8 @@ const CreateListingScreen: React.FC<Props> = ({ navigation, route }) => {
       Alert.alert('Hata', 'Şehir ve ilçe bilgisi gereklidir');
       return;
     }
+
+    console.log('✅ Validation passed, starting API call...');
     if (formData.images.length === 0) {
       console.log('❌ Validation failed: images');
       Alert.alert('Hata', 'En az 1 fotoğraf eklemelisiniz');
