@@ -530,15 +530,21 @@ const CreateListingScreen: React.FC<Props> = ({ navigation, route }) => {
             </View>
           </View>
 
-          <TouchableOpacity
-            style={styles.submitButton}
-            onPress={handleSubmit}
+          <Pressable
+            style={({ pressed }) => [
+              styles.submitButton,
+              pressed && { opacity: 0.8 }
+            ]}
+            onPress={() => {
+              console.log('🎯 Submit button clicked!');
+              handleSubmit();
+            }}
             disabled={isLoading}
           >
             <Text style={styles.submitButtonText}>
               {isLoading ? 'İlan Oluşturuluyor...' : 'İlanı Yayınla'}
             </Text>
-          </TouchableOpacity>
+          </Pressable>
         </ScrollView>
       </KeyboardAvoidingView>
 
