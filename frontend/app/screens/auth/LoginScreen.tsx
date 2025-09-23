@@ -27,14 +27,19 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
   const { login } = useAuth();
 
   const handleLogin = async () => {
+    console.log('🔥 handleLogin triggered!', { email, password });
+    
     if (!email.trim() || !password.trim()) {
       Alert.alert('Hata', 'Lütfen tüm alanları doldurun');
       return;
     }
 
+    console.log('✅ Starting login process...');
     setIsLoading(true);
     const result = await login(email, password);
     setIsLoading(false);
+
+    console.log('📊 Login result:', result);
 
     if (!result.success) {
       Alert.alert('Giriş Hatası', result.error || 'Giriş yapılamadı');
