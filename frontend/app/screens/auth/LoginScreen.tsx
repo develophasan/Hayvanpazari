@@ -95,11 +95,14 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
               </TouchableOpacity>
             </View>
 
-            {/* Temporary web-compatible button for debugging */}
-            <TouchableOpacity 
-              style={styles.loginButton}
+            {/* Use Pressable for better web compatibility */}
+            <Pressable 
+              style={({ pressed }) => [
+                styles.loginButton,
+                pressed && { opacity: 0.8 }
+              ]}
               onPress={() => {
-                console.log('🎯 BUTTON CLICKED!');
+                console.log('🎯 PRESSABLE CLICKED!');
                 handleLogin();
               }}
               disabled={isLoading}
@@ -109,7 +112,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
               ) : (
                 <Text style={styles.loginButtonText}>Giriş Yap</Text>
               )}
-            </TouchableOpacity>
+            </Pressable>
 
             <TouchableOpacity 
               style={styles.registerLink}
