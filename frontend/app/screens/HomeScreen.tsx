@@ -252,13 +252,19 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
 
         {/* Quick Actions */}
         <View style={styles.quickActions}>
-          <TouchableOpacity 
-            style={styles.quickActionButton}
-            onPress={() => navigation.navigate('CreateListing')}
+          <Pressable 
+            style={({ pressed }) => [
+              styles.quickActionButton,
+              pressed && { opacity: 0.8 }
+            ]}
+            onPress={() => {
+              console.log('🎯 İlan Ver button clicked!');
+              navigation.navigate('CreateListing');
+            }}
           >
             <Ionicons name="add-circle" size={24} color="white" />
             <Text style={styles.quickActionText}>İlan Ver</Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
       </ScrollView>
     </SafeAreaView>
