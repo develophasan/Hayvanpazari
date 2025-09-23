@@ -1,0 +1,62 @@
+<analysis>
+The previous AI engineer initiated the development of HayvanPazarı, a mobile-first animal marketplace, following a comprehensive specification. Work began with the foundational backend (FastAPI, MongoDB) and frontend (React Native, Expo Router). Initial focus was on core authentication and basic CRUD operations for listings and categories. A major hurdle was 's web incompatibility, successfully mitigated by a custom  utility. Backend test failures for listing details and message response formats were promptly addressed. The application gained significant functionality, including a robust Turkey city/district selection system for profiles and listings. However, the development trajectory was repeatedly stalled by a persistent Authentication Integration Failure where users could log in but were not properly redirected, resulting in an  user state. This critical bug prevented authenticated operations like listing creation. Despite multiple attempts and debugging cycles focused on AuthContext, navigation, and storage, the issue remained unresolved. The last user interaction reported a system-level warning about GitHub backup, leading the AI to escalate to a .
+</analysis>
+
+<product_requirements>
+HayvanPazarı is a mobile-first web (PWA) marketplace for livestock, similar to Letgo but specialized for animal husbandry. It enables sellers to post detailed listings (animal features like age, breed, health, certifications, location, transport, pricing) and buyers to find animals through extensive filtering (type, breed, price, age, location). Key features include multiple user roles (Buyer, Seller, Vet, Transporter, Admin), e-mail/password + OTP (mock 1234 for development) login, Seller KYC, detailed seller profiles with trust scores, in-app messaging, offer/counter-offer system, and logistics planning. Initial escrow/payment and AI features are deferred. The UI should be like Letgo, user-friendly, and mobile-responsive. The technical stack includes React Native/Expo for frontend, FastAPI/MongoDB for backend, JWT for authentication, and real-time features via WebSockets.
+</product_requirements>
+
+<key_technical_concepts>
+-   **Frontend:** React Native, Expo Router, , ,  utility (for  abstraction),  (city/district).
+-   **Backend:** FastAPI, MongoDB, JWT (auth),  (password hashing), Python .
+-   **Core Functionality:** User Authentication, Profile Management, Listing Creation/Filtering, Category Management, Real-time Messaging (planned).
+-   **Development:** Mobile-first design, cross-platform compatibility.
+</key_technical_concepts>
+
+<code_architecture>
+The application has a monorepo-like structure with  (FastAPI) and  (Expo/React Native) directories.
+
+
+
+-   :
+    -   **Importance:** Core backend API. Handles user registration, login, profile updates, listing creation/retrieval, category management, and message handling.
+    -   **Changes:** Implemented initial endpoints. Fixed issues in Get Listing Detail, Send Message response formats, and refined profile update logic for location data merging. Added district filtering.
+-   :
+    -   **Importance:** Root file for Expo Router, defining primary navigation (Auth stack and main app tabs) and wrapping with .
+    -   **Changes:** Setup core navigation and integrated  to manage authenticated routes. Contains logic for redirecting based on authentication state, currently a source of issues.
+-   :
+    -   **Importance:** Manages global authentication state, providing user data and JWT tokens.
+    -   **Changes:** Initialized with login/logout. Fixed missing React import. Refactored to use  for cross-platform secure token persistence, addressing 's web incompatibility.
+-   :
+    -   **Importance:** A utility for abstracting local storage. It conditionally uses  for native and  for web platforms.
+    -   **Changes:** Created to resolve  web compatibility issues, ensuring consistent token storage.
+-   :
+    -   **Importance:** Provides structured data for all Turkish provinces and their districts.
+    -   **Changes:** Created to support location-based selections and filters in UI.
+-   :
+    -   **Importance:** Allows users to view and modify their profile details, including name and location.
+    -   **Changes:** Integrated city/district selection using modals. Corrected data passing to  for accurate backend updates.
+-   :
+    -   **Importance:** Enables users to search and apply filters to listings, including location.
+    -   **Changes:** Integrated city/district selection and filtering UI.
+-   :
+    -   **Importance:** A multi-step form for sellers to post new animal listings with comprehensive details.
+    -   **Changes:** Enhanced to include all animal type fields, photo uploads, detailed attributes (age, gender, purpose), and location selection. Replaced  with modal-based selection for gender/purpose for better web compatibility.
+
+</code_architecture>
+
+<pending_tasks>
+-   Resolve the Authentication Integration Failure preventing users from being correctly redirected after login and leading to an  user state, which blocks authenticated actions.
+-   Address the user-reported GitHub backup warning and platform issue, requiring  intervention.
+-   Implement the escrow/payment system.
+-   Replace the mock SMS system with a real one.
+-   Integrate AI features as initially requested.
+</pending_tasks>
+
+<current_work>
+The immediate work involved debugging a persistent Authentication Integration Failure. The user reported that İlan oluşturulmuyor form gönderilmiyor (listing is not created, form is not submitted). Debugging revealed  in frontend logs, confirming that the user's authenticated state was not being correctly maintained or propagated post-login. This meant no authentication token was sent with form submissions, leading to API failures (though no  requests were even seen in backend logs, indicating a frontend blockage). The AI previously attempted fixes in , , and  (for navigation flow), and added authentication checks to . Despite these efforts, the issue resurfaced. Concurrently, the AI had addressed a user bug regarding gender and purpose selection in  by replacing  with web-compatible modals, which was confirmed successful by the testing agent. The most recent activity is a user report about a GitHub backup warning and inability to proceed, suggesting an environment-level problem beyond the application code.
+</current_work>
+
+<optional_next_step>
+Call the  to address the user's reported GitHub backup warning and platform issue.
+</optional_next_step>
