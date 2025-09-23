@@ -94,9 +94,13 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
               </TouchableOpacity>
             </View>
 
+            {/* Temporary web-compatible button for debugging */}
             <TouchableOpacity 
               style={styles.loginButton}
-              onPress={handleLogin}
+              onPress={() => {
+                console.log('🎯 BUTTON CLICKED!');
+                handleLogin();
+              }}
               disabled={isLoading}
             >
               {isLoading ? (
