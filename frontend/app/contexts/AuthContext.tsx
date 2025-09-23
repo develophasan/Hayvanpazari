@@ -58,10 +58,24 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   console.log('🔄 AuthProvider rendering, current state:', { user: user?.first_name, isLoading });
 
+  // Call loadStoredAuth immediately when component mounts
+  const [initialized, setInitialized] = useState(false);
+  
+  if (!initialized) {
+    console.log('🔥 AuthProvider first render - calling loadStoredAuth');
+    setInitialized(true);
+    // Use setTimeout to avoid state update during render
+    setTimeout(() => {
+      loadStoredAuth();
+    }, 0);
+  }
+
   useLayoutEffect(() => {
     console.log('🔥 AuthProvider useLayoutEffect triggered');
-    loadStoredAuth();
-  }, []);
+    if (initialized) {
+      loadStoredAuth();
+    }
+  }, [initialized]);
 
   const loadStoredAuth = async () => {
     try {
