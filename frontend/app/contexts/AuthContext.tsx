@@ -52,30 +52,51 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+  console.log('🚀 AuthProvider constructor called');
+  
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  console.log('🔄 AuthProvider rendering, current state:', { user: user?.first_name, isLoading });
+  console.log('🔄 AuthProvider state:', { user: user?.first_name, isLoading, token: token ? 'exists' : 'none' });
 
-  // Call loadStoredAuth immediately when component mounts
-  const [initialized, setInitialized] = useState(false);
-  
-  if (!initialized) {
-    console.log('🔥 AuthProvider first render - calling loadStoredAuth');
-    setInitialized(true);
-    // Use setTimeout to avoid state update during render
-    setTimeout(() => {
-      loadStoredAuth();
-    }, 0);
-  }
+  // Define loadStoredAuth before using it
+  const loadStoredAuth = async () => {
+    try {
+      console.log('🔍 Loading stored auth...');
+      const storedToken = await storage.getItem('auth_token');
+      const storedUser = await storage.getItem('user_data');
 
-  useLayoutEffect(() => {
-    console.log('🔥 AuthProvider useLayoutEffect triggered');
-    if (initialized) {
-      loadStoredAuth();
+      console.log('📥 Stored token:', storedToken ? 'Var' : 'Yok');
+      console.log('📥 Stored user:', storedUser ? 'Var' : 'Yok');
+      
+      if (storedToken) {
+        console.log('📥 Token length:', storedToken.length);
+      }
+      if (storedUser) {
+        console.log('📥 User data preview:', storedUser.substring(0, 50));
+      }
+
+      if (storedToken && storedUser) {
+        setToken(storedToken);
+        setUser(JSON.parse(storedUser));
+        console.log('✅ Auth restored from storage');
+      } else {
+        console.log('ℹ️ No stored auth found');
+      }
+    } catch (error) {
+      console.error('❌ Error loading stored auth:', error);
+    } finally {
+      console.log('⏰ Setting isLoading to false');
+      setIsLoading(false);
     }
-  }, [initialized]);
+  };
+
+  // Initialize auth on mount
+  React.useEffect(() => {
+    console.log('🔥 useEffect triggered - calling loadStoredAuth');
+    loadStoredAuth();
+  }, []);
 
   const loadStoredAuth = async () => {
     try {
