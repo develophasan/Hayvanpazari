@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, useLayoutEffect, ReactNode } from 'react';
 import Constants from 'expo-constants';
 import storage from '../utils/storage';
 
