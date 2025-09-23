@@ -260,8 +260,13 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
               pressed && { opacity: 0.8 }
             ]}
             onPress={() => {
-              console.log('🎯 İlan Ver button clicked!');
-              navigation.navigate('CreateListing');
+              console.log('🎯 İlan Ver button clicked! Using nav.navigate');
+              try {
+                nav.navigate('CreateListing' as never);
+              } catch (error) {
+                console.log('❌ Navigation error:', error);
+                navigation.navigate('CreateListing');
+              }
             }}
           >
             <Ionicons name="add-circle" size={24} color="white" />
