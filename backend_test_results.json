@@ -1,16 +1,16 @@
 {
   "summary": {
-    "passed": 12,
-    "failed": 2,
+    "passed": 13,
+    "failed": 1,
     "total": 14,
-    "success_rate": 85.71428571428571
+    "success_rate": 92.85714285714286
   },
   "results": [
     {
       "test": "Root Endpoint",
       "success": true,
       "message": "API is running",
-      "timestamp": "2025-09-22T07:17:20.512878",
+      "timestamp": "2025-09-23T19:48:42.166919",
       "response_data": {
         "message": "HayvanPazarı API v1.0.0",
         "status": "running"
@@ -20,27 +20,27 @@
       "test": "User Registration",
       "success": true,
       "message": "User registered successfully",
-      "timestamp": "2025-09-22T07:17:20.825646",
+      "timestamp": "2025-09-23T19:48:42.459022",
       "response_data": {
-        "user_id": "e4a6dab9-32da-40e0-ae14-2ecd70b0b2cb",
-        "email": "test_b923aef0@example.com"
+        "user_id": "d2d38c11-1b71-4509-8672-1edf30e967fe",
+        "email": "test_910ac43e@example.com"
       }
     },
     {
       "test": "User Login",
       "success": true,
       "message": "Login successful",
-      "timestamp": "2025-09-22T07:17:21.195270",
+      "timestamp": "2025-09-23T19:48:42.748002",
       "response_data": {
-        "user_id": "e4a6dab9-32da-40e0-ae14-2ecd70b0b2cb",
-        "email": "test_b923aef0@example.com"
+        "user_id": "d2d38c11-1b71-4509-8672-1edf30e967fe",
+        "email": "test_910ac43e@example.com"
       }
     },
     {
       "test": "SMS Verification",
       "success": true,
       "message": "SMS verified successfully",
-      "timestamp": "2025-09-22T07:17:21.257444",
+      "timestamp": "2025-09-23T19:48:42.814667",
       "response_data": {
         "message": "Phone verified successfully"
       }
@@ -49,10 +49,10 @@
       "test": "Get Current User",
       "success": true,
       "message": "User data retrieved successfully",
-      "timestamp": "2025-09-22T07:17:21.309508",
+      "timestamp": "2025-09-23T19:48:43.057887",
       "response_data": {
-        "user_id": "e4a6dab9-32da-40e0-ae14-2ecd70b0b2cb",
-        "email": "test_b923aef0@example.com",
+        "user_id": "d2d38c11-1b71-4509-8672-1edf30e967fe",
+        "email": "test_910ac43e@example.com",
         "is_phone_verified": true
       }
     },
@@ -60,7 +60,7 @@
       "test": "Get Categories",
       "success": true,
       "message": "Retrieved 5 categories",
-      "timestamp": "2025-09-22T07:17:21.367460",
+      "timestamp": "2025-09-23T19:48:43.107205",
       "response_data": {
         "categories_count": 5,
         "sample_category": "Sığır"
@@ -70,9 +70,9 @@
       "test": "Create Listing",
       "success": true,
       "message": "Listing created successfully",
-      "timestamp": "2025-09-22T07:17:21.424100",
+      "timestamp": "2025-09-23T19:48:43.210530",
       "response_data": {
-        "listing_id": "e6b8983e-b1b3-4d21-86ff-b535dd066acd",
+        "listing_id": "cb31a5cc-53bf-4237-b838-071e279255ea",
         "title": "Sağlıklı Holstein İnek",
         "price": 15000.0
       }
@@ -81,7 +81,7 @@
       "test": "Get Listings (No Filter)",
       "success": true,
       "message": "Retrieved 0 listings",
-      "timestamp": "2025-09-22T07:17:21.484379",
+      "timestamp": "2025-09-23T19:48:43.271463",
       "response_data": {
         "listings_count": 0
       }
@@ -90,7 +90,7 @@
       "test": "Get Listings (Category Filter)",
       "success": true,
       "message": "Retrieved 0 cattle listings",
-      "timestamp": "2025-09-22T07:17:21.537599",
+      "timestamp": "2025-09-23T19:48:43.324671",
       "response_data": {
         "filtered_count": 0
       }
@@ -98,40 +98,75 @@
     {
       "test": "Get Listing Detail",
       "success": false,
-      "message": "Failed with status No response: No response",
-      "timestamp": "2025-09-22T07:17:21.592955"
+      "message": "Invalid response format",
+      "timestamp": "2025-09-23T19:48:43.383162",
+      "response_data": {
+        "_id": "cb31a5cc-53bf-4237-b838-071e279255ea",
+        "title": "Sağlıklı Holstein İnek",
+        "description": "2 yaşında, sağlıklı Holstein inek. Günlük 25 litre süt veriyor.",
+        "category": "cattle",
+        "animal_details": {
+          "breed": "Holstein",
+          "age_months": 24,
+          "weight_kg": 450.0,
+          "gender": "female",
+          "purpose": "dairy",
+          "pregnancy_status": "not_pregnant",
+          "milk_yield": 25.0,
+          "health_status": "healthy",
+          "vaccinations": [
+            "Şap",
+            "Bruseloz"
+          ],
+          "certificates": [
+            "Sağlık Sertifikası"
+          ],
+          "ear_tag": "TR001234567"
+        },
+        "price": 15000.0,
+        "price_type": "negotiable",
+        "images": [],
+        "videos": [],
+        "location": {
+          "city": "İstanbul",
+          "district": "Çatalca",
+          "latitude": 41.1413,
+          "longitude": 28.4622
+        },
+        "seller_id": "d2d38c11-1b71-4509-8672-1edf30e967fe",
+        "status": "active",
+        "views": 1,
+        "favorites": 0,
+        "is_featured": false,
+        "created_at": "2025-09-23T19:48:43.155000",
+        "updated_at": "2025-09-23T19:48:43.155000"
+      }
     },
     {
       "test": "Update Listing",
       "success": true,
       "message": "Listing updated successfully",
-      "timestamp": "2025-09-22T07:17:21.656824",
+      "timestamp": "2025-09-23T19:48:43.438220",
       "response_data": {
         "message": "Listing updated successfully"
       }
     },
     {
       "test": "Send Message",
-      "success": false,
-      "message": "Invalid response format",
-      "timestamp": "2025-09-22T07:17:22.301396",
+      "success": true,
+      "message": "Message sent successfully",
+      "timestamp": "2025-09-23T19:48:43.789696",
       "response_data": {
-        "_id": "80c88137-466c-47ec-8ea9-428fe2d086a3",
-        "listing_id": "e6b8983e-b1b3-4d21-86ff-b535dd066acd",
-        "sender_id": "2eee3657-12d1-47a7-809d-05275fe17637",
-        "receiver_id": "e4a6dab9-32da-40e0-ae14-2ecd70b0b2cb",
+        "message_id": "f1b5ccd1-14ef-453c-8b97-5df56dfcabd9",
         "message": "Merhaba, bu inek hala satılık mı?",
-        "message_type": "text",
-        "offer_amount": null,
-        "is_read": false,
-        "created_at": "2025-09-22T07:17:22.290439"
+        "sender_id": "21f0cbcd-7801-4b40-bd5c-a0be77ca4365"
       }
     },
     {
       "test": "Get Conversations",
       "success": true,
       "message": "Retrieved 1 conversations",
-      "timestamp": "2025-09-22T07:17:22.358662",
+      "timestamp": "2025-09-23T19:48:43.846136",
       "response_data": {
         "conversations_count": 1
       }
@@ -140,7 +175,7 @@
       "test": "Update Profile",
       "success": true,
       "message": "Profile updated successfully",
-      "timestamp": "2025-09-22T07:17:22.413840",
+      "timestamp": "2025-09-23T19:48:43.899806",
       "response_data": {
         "message": "Profile updated successfully"
       }
@@ -149,11 +184,11 @@
       "test": "Delete Listing",
       "success": true,
       "message": "Listing deleted successfully",
-      "timestamp": "2025-09-22T07:17:22.468559",
+      "timestamp": "2025-09-23T19:48:43.953903",
       "response_data": {
         "message": "Listing deleted successfully"
       }
     }
   ],
-  "timestamp": "2025-09-22T07:17:22.470229"
+  "timestamp": "2025-09-23T19:48:43.955587"
 }
