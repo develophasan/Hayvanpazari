@@ -58,8 +58,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   console.log('🔄 AuthProvider rendering, current state:', { user: user?.first_name, isLoading });
 
-  useEffect(() => {
-    console.log('🔥 AuthProvider useEffect triggered');
+  useLayoutEffect(() => {
+    console.log('🔥 AuthProvider useLayoutEffect triggered');
     loadStoredAuth();
   }, []);
 
