@@ -44,9 +44,13 @@ export const Colors = {
 };
 
 export const Typography = {
-  fontFamily: 'System', // React Native default, will be enhanced
+  // Plus Jakarta Sans - primary font from Google Stitch design
+  fontFamily: {
+    primary: 'System', // React Native will use system font as fallback
+    display: 'System',
+  },
   
-  // Font Sizes
+  // Font Sizes (aligned with design system)
   sizes: {
     xs: 12,
     sm: 14,
@@ -58,7 +62,7 @@ export const Typography = {
     '4xl': 36,
   },
   
-  // Font Weights
+  // Font Weights (Plus Jakarta Sans weights)
   weights: {
     normal: '400' as '400',
     medium: '500' as '500',
