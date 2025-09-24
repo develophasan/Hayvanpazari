@@ -5,21 +5,32 @@ export const Colors = {
   // Primary Brand Colors
   primary: '#0561d1',
   primaryHover: '#0451b8',
+  primaryLight: '#3b82f6',
   
   // Background Colors
   backgroundLight: '#f5f7f8',
   backgroundDark: '#0f1823',
   backgroundWhite: '#ffffff',
+  backgroundCard: '#ffffff',
+  
+  // Input & Surface Colors
+  inputLight: '#e5e7eb',
+  inputDark: '#1f2937',
+  surfaceLight: '#f9fafb',
+  surfaceDark: '#111827',
   
   // Text Colors
   textPrimary: '#111827',
   textSecondary: '#6b7280',
-  textDark: '#e5e7eb',
+  textDark: '#f9fafb',
   textWhite: '#ffffff',
+  textMuted: '#6b7280',
+  textMutedDark: '#9ca3af',
   
   // Border & Divider Colors
-  borderLight: '#e5e7eb',
+  borderLight: '#d1d5db',
   borderDark: '#374151',
+  borderTransparent: 'transparent',
   
   // Status Colors
   success: '#10b981',
