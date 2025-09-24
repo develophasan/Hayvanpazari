@@ -532,21 +532,51 @@ const CreateListingScreen: React.FC<Props> = ({ navigation, route }) => {
             </View>
           </View>
 
-          <Pressable
-            style={({ pressed }) => [
-              styles.submitButton,
-              pressed && { opacity: 0.8 }
-            ]}
-            onPress={() => {
-              console.log('🎯 Submit button clicked!');
-              handleSubmit();
-            }}
-            disabled={isLoading}
-          >
-            <Text style={styles.submitButtonText}>
-              {isLoading ? 'İlan Oluşturuluyor...' : 'İlanı Yayınla'}
-            </Text>
-          </Pressable>
+          {/* Web-compatible submit button */}
+          {Platform.OS === 'web' ? (
+            <div
+              onClick={() => {
+                console.log('🎯 Web submit button clicked!');
+                handleSubmit();
+              }}
+              style={{
+                backgroundColor: '#007AFF',
+                borderRadius: 12,
+                height: 50,
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginTop: 24,
+                cursor: 'pointer',
+                display: 'flex',
+                opacity: isLoading ? 0.7 : 1,
+                pointerEvents: isLoading ? 'none' : 'auto'
+              }}
+            >
+              <span style={{
+                color: 'white',
+                fontSize: 16,
+                fontWeight: '600'
+              }}>
+                {isLoading ? 'İlan Oluşturuluyor...' : 'İlanı Yayınla'}
+              </span>
+            </div>
+          ) : (
+            <Pressable
+              style={({ pressed }) => [
+                styles.submitButton,
+                pressed && { opacity: 0.8 }
+              ]}
+              onPress={() => {
+                console.log('🎯 Submit button clicked!');
+                handleSubmit();
+              }}
+              disabled={isLoading}
+            >
+              <Text style={styles.submitButtonText}>
+                {isLoading ? 'İlan Oluşturuluyor...' : 'İlanı Yayınla'}
+              </Text>
+            </Pressable>
+          )}
         </ScrollView>
       </KeyboardAvoidingView>
 
