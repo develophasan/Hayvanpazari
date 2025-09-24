@@ -803,7 +803,7 @@ async def get_notifications(
         notification.pop("_id", None)
     
     print(f"🔔 Retrieved {len(notifications)} notifications for user {user_id}")
-    return [Notification(**notification) for notification in notifications]
+    return notifications
 
 @api_router.put("/notifications/{notification_id}/read")
 async def mark_notification_read(
