@@ -795,6 +795,15 @@ class HayvanPazariTester:
             ("Send Message", self.test_send_message),
             ("Get Conversations", self.test_get_conversations),
             ("Update Profile", self.test_update_profile),
+            # Notification System Tests
+            ("Notification Test", self.test_notification_test_endpoint),
+            ("Get Notifications", self.test_get_notifications),
+            ("Get Unread Count", self.test_get_unread_count),
+            ("Mark All Notifications Read", self.test_mark_all_notifications_read),
+            ("Get Notification Settings", self.test_get_notification_settings),
+            ("Update Notification Settings", self.test_update_notification_settings),
+            ("Message Notification Integration", self.test_message_notification_integration),
+            ("Offer Notification Integration", self.test_offer_notification_integration),
             ("Delete Listing", self.test_delete_listing),
         ]
         
