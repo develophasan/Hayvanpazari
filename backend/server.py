@@ -470,16 +470,17 @@ async def get_listings(
 
 @api_router.get("/listings/{listing_id}", response_model=Listing)
 async def get_listing(listing_id: str):
-    listing = await db.listings.find_one({"id": listing_id})
+    listing = await db.listings.find_one({"_id": listing_id})  # Query by _id, not id
     if not listing:
         raise HTTPException(status_code=404, detail="Listing not found")
     
     # Increment view count
-    await db.listings.update_one({"id": listing_id}, {"$inc": {"views": 1}})
+    await db.listings.update_one({"_id": listing_id}, {"$inc": {"views": 1}})  # Update by _id
     listing["views"] = listing.get("views", 0) + 1
     
-    # Clean up MongoDB fields
-    listing.pop("_id", None)
+    # Set id field from _id for frontend compatibility
+    listing["id"] = str(listing["_id"])
+    listing.pop("_id", None)  # Remove _id
     
     # Ensure all required fields exist
     if "animal_details" not in listing:
