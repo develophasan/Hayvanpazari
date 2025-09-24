@@ -147,87 +147,96 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: Colors.backgroundLight,
   },
   keyboardView: {
     flex: 1,
   },
   content: {
     flex: 1,
-    paddingHorizontal: 24,
+    paddingHorizontal: Spacing.md,
     justifyContent: 'center',
   },
+  
+  // Header - Logo & Brand
   header: {
     alignItems: 'center',
-    marginBottom: 48,
+    marginBottom: Spacing['3xl'],
+  },
+  logoContainer: {
+    marginBottom: Spacing.md,
   },
   title: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    color: '#007AFF',
-    marginBottom: 8,
+    fontSize: Typography.sizes['3xl'],
+    fontWeight: Typography.weights.bold,
+    color: Colors.textPrimary,
+    fontFamily: Typography.fontFamily.display,
   },
-  subtitle: {
-    fontSize: 18,
-    color: '#666',
-  },
+
+  // Form Styles
   form: {
     width: '100%',
+    marginBottom: Spacing.xl,
   },
   inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#e0e0e0',
-    borderRadius: 12,
-    marginBottom: 16,
-    paddingHorizontal: 16,
-    backgroundColor: '#f8f9fa',
-  },
-  inputIcon: {
-    marginRight: 12,
+    position: 'relative',
+    marginBottom: Spacing.md,
   },
   input: {
-    flex: 1,
-    height: 50,
-    fontSize: 16,
-    color: '#333',
+    ...ComponentStyles.input,
+    backgroundColor: Colors.inputLight,
+    borderWidth: 0,
+    fontSize: Typography.sizes.base,
+    color: Colors.textPrimary,
+    fontFamily: Typography.fontFamily.display,
   },
-  eyeIcon: {
-    padding: 4,
+  passwordToggle: {
+    position: 'absolute',
+    right: Spacing.md,
+    top: 16,
+    padding: Spacing.xs,
   },
+  
+  // Forgot Password
+  forgotPasswordContainer: {
+    alignItems: 'flex-end',
+    marginBottom: Spacing.lg,
+  },
+  forgotPasswordText: {
+    fontSize: Typography.sizes.sm,
+    color: Colors.primary,
+    fontFamily: Typography.fontFamily.display,
+  },
+
+  // Login Button
   loginButton: {
-    backgroundColor: '#007AFF',
-    borderRadius: 12,
-    height: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 8,
-    shadowColor: '#007AFF',
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 4.65,
-    elevation: 8,
+    ...ComponentStyles.button.primaryButton,
+    height: ComponentStyles.button.height,
+    marginTop: Spacing.sm,
   },
   loginButtonText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: '600',
+    color: Colors.textWhite,
+    fontSize: Typography.sizes.base,
+    fontWeight: Typography.weights.bold,
+    fontFamily: Typography.fontFamily.display,
+  },
+
+  // Footer
+  footer: {
+    alignItems: 'center',
+    paddingVertical: Spacing.lg,
   },
   registerLink: {
-    alignItems: 'center',
-    marginTop: 24,
+    paddingVertical: Spacing.sm,
   },
   registerLinkText: {
-    fontSize: 14,
-    color: '#666',
+    fontSize: Typography.sizes.sm,
+    color: Colors.textSecondary,
+    fontFamily: Typography.fontFamily.display,
   },
   registerLinkBold: {
-    color: '#007AFF',
-    fontWeight: '600',
+    color: Colors.primary,
+    fontWeight: Typography.weights.medium,
   },
 });
 
