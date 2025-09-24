@@ -1,8 +1,8 @@
 {
   "summary": {
-    "passed": 14,
+    "passed": 22,
     "failed": 0,
-    "total": 14,
+    "total": 22,
     "success_rate": 100.0
   },
   "results": [
@@ -10,7 +10,7 @@
       "test": "Root Endpoint",
       "success": true,
       "message": "API is running",
-      "timestamp": "2025-09-24T20:40:29.127106",
+      "timestamp": "2025-09-24T20:59:42.079637",
       "response_data": {
         "message": "HayvanPazarı API v1.0.0",
         "status": "running"
@@ -20,27 +20,27 @@
       "test": "User Registration",
       "success": true,
       "message": "User registered successfully",
-      "timestamp": "2025-09-24T20:40:29.436162",
+      "timestamp": "2025-09-24T20:59:42.374813",
       "response_data": {
-        "user_id": "3a1b7adc-e155-4fd2-8606-69ee296450a2",
-        "email": "test_1b2e76cb@example.com"
+        "user_id": "731b6861-c35a-41ed-a0bc-785af293831a",
+        "email": "test_fe9a0442@example.com"
       }
     },
     {
       "test": "User Login",
       "success": true,
       "message": "Login successful",
-      "timestamp": "2025-09-24T20:40:29.746348",
+      "timestamp": "2025-09-24T20:59:42.664315",
       "response_data": {
-        "user_id": "3a1b7adc-e155-4fd2-8606-69ee296450a2",
-        "email": "test_1b2e76cb@example.com"
+        "user_id": "731b6861-c35a-41ed-a0bc-785af293831a",
+        "email": "test_fe9a0442@example.com"
       }
     },
     {
       "test": "SMS Verification",
       "success": true,
       "message": "SMS verified successfully",
-      "timestamp": "2025-09-24T20:40:29.810947",
+      "timestamp": "2025-09-24T20:59:44.801838",
       "response_data": {
         "message": "Phone verified successfully"
       }
@@ -49,10 +49,10 @@
       "test": "Get Current User",
       "success": true,
       "message": "User data retrieved successfully",
-      "timestamp": "2025-09-24T20:40:30.007375",
+      "timestamp": "2025-09-24T20:59:45.668300",
       "response_data": {
-        "user_id": "3a1b7adc-e155-4fd2-8606-69ee296450a2",
-        "email": "test_1b2e76cb@example.com",
+        "user_id": "731b6861-c35a-41ed-a0bc-785af293831a",
+        "email": "test_fe9a0442@example.com",
         "is_phone_verified": true
       }
     },
@@ -60,7 +60,7 @@
       "test": "Get Categories",
       "success": true,
       "message": "Retrieved 6 categories",
-      "timestamp": "2025-09-24T20:40:30.064203",
+      "timestamp": "2025-09-24T20:59:45.727991",
       "response_data": {
         "categories_count": 6,
         "sample_category": "Sığır"
@@ -70,9 +70,9 @@
       "test": "Create Listing",
       "success": true,
       "message": "Listing created successfully",
-      "timestamp": "2025-09-24T20:40:30.145497",
+      "timestamp": "2025-09-24T20:59:45.788881",
       "response_data": {
-        "listing_id": "c345036c-70c4-4b51-9cc4-8175bc125be0",
+        "listing_id": "600183b8-79ab-405a-8129-de650e73a277",
         "title": "Sağlıklı Holstein İnek",
         "price": 15000.0
       }
@@ -81,7 +81,7 @@
       "test": "Get Listings (No Filter)",
       "success": true,
       "message": "Retrieved 20 listings",
-      "timestamp": "2025-09-24T20:40:30.202938",
+      "timestamp": "2025-09-24T20:59:45.849831",
       "response_data": {
         "listings_count": 20
       }
@@ -90,7 +90,7 @@
       "test": "Get Listings (Category Filter)",
       "success": true,
       "message": "Retrieved 20 cattle listings",
-      "timestamp": "2025-09-24T20:40:30.531021",
+      "timestamp": "2025-09-24T20:59:45.956900",
       "response_data": {
         "filtered_count": 20
       }
@@ -99,9 +99,9 @@
       "test": "Get Listing Detail",
       "success": true,
       "message": "Listing detail retrieved successfully",
-      "timestamp": "2025-09-24T20:40:30.593406",
+      "timestamp": "2025-09-24T20:59:46.019093",
       "response_data": {
-        "listing_id": "68d4573e7b1c6d660c84ecd8",
+        "listing_id": "68d45bc128e25681084e0706",
         "title": "Sağlıklı Holstein İnek",
         "views": 1
       }
@@ -110,7 +110,7 @@
       "test": "Update Listing",
       "success": true,
       "message": "Listing updated successfully",
-      "timestamp": "2025-09-24T20:40:30.653352",
+      "timestamp": "2025-09-24T20:59:46.194467",
       "response_data": {
         "message": "Listing updated successfully"
       }
@@ -119,18 +119,18 @@
       "test": "Send Message",
       "success": true,
       "message": "Message sent successfully",
-      "timestamp": "2025-09-24T20:40:31.016217",
+      "timestamp": "2025-09-24T20:59:48.952655",
       "response_data": {
-        "message_id": "0bf0517b-6711-41ec-b837-5325c61cce1a",
+        "message_id": "920b90a3-6c88-4094-82ce-1efa1156e2ac",
         "message": "Merhaba, bu inek hala satılık mı?",
-        "sender_id": "920a5698-a17a-4c5c-983b-0ca9188103e7"
+        "sender_id": "14f68ed3-e616-4d75-9466-26ace351946b"
       }
     },
     {
       "test": "Get Conversations",
       "success": true,
       "message": "Retrieved 1 conversations",
-      "timestamp": "2025-09-24T20:40:31.072188",
+      "timestamp": "2025-09-24T20:59:51.178776",
       "response_data": {
         "conversations_count": 1
       }
@@ -139,20 +139,100 @@
       "test": "Update Profile",
       "success": true,
       "message": "Profile updated successfully",
-      "timestamp": "2025-09-24T20:40:31.126687",
+      "timestamp": "2025-09-24T20:59:51.232803",
       "response_data": {
         "message": "Profile updated successfully"
+      }
+    },
+    {
+      "test": "Notification Test",
+      "success": true,
+      "message": "Test notification sent successfully",
+      "timestamp": "2025-09-24T20:59:53.808601",
+      "response_data": {
+        "status": "success",
+        "message": "Test notification sent"
+      }
+    },
+    {
+      "test": "Get Notifications",
+      "success": true,
+      "message": "Retrieved 2 notifications",
+      "timestamp": "2025-09-24T20:59:53.863903",
+      "response_data": {
+        "notifications_count": 2
+      }
+    },
+    {
+      "test": "Get Unread Count",
+      "success": true,
+      "message": "Unread count: 2",
+      "timestamp": "2025-09-24T20:59:53.919373",
+      "response_data": {
+        "unread_count": 2
+      }
+    },
+    {
+      "test": "Mark All Notifications Read",
+      "success": true,
+      "message": "All notifications marked as read",
+      "timestamp": "2025-09-24T20:59:53.999690",
+      "response_data": {
+        "status": "success",
+        "message": "Marked 2 notifications as read"
+      }
+    },
+    {
+      "test": "Get Notification Settings",
+      "success": true,
+      "message": "Notification settings retrieved",
+      "timestamp": "2025-09-24T20:59:54.054300",
+      "response_data": {
+        "email_notifications": true,
+        "push_notifications": true,
+        "sound_enabled": true
+      }
+    },
+    {
+      "test": "Update Notification Settings",
+      "success": true,
+      "message": "Notification settings updated",
+      "timestamp": "2025-09-24T20:59:54.305228",
+      "response_data": {
+        "status": "success",
+        "message": "Notification settings updated"
+      }
+    },
+    {
+      "test": "Message Notification Integration",
+      "success": true,
+      "message": "Message created notification (count: 0 → 1)",
+      "timestamp": "2025-09-24T20:59:55.761146",
+      "response_data": {
+        "initial_count": 0,
+        "final_count": 1
+      }
+    },
+    {
+      "test": "Offer Notification Integration",
+      "success": true,
+      "message": "Offer notification created with high priority",
+      "timestamp": "2025-09-24T20:59:57.160752",
+      "response_data": {
+        "title": "Yeni Teklif",
+        "priority": "high",
+        "type": "message"
       }
     },
     {
       "test": "Delete Listing",
       "success": true,
       "message": "Listing deleted successfully",
-      "timestamp": "2025-09-24T20:40:31.186265",
+      "timestamp": "2025-09-24T20:59:57.222585",
       "response_data": {
         "message": "Listing deleted successfully"
       }
     }
   ],
-  "timestamp": "2025-09-24T20:40:31.187932"
+  "timestamp": "2025-09-24T20:59:57.224184"
 }
