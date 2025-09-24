@@ -462,9 +462,10 @@ async def get_listings(
     if listings:
         print(f"📋 First listing status: {listings[0].get('status')}")  # Debug status field
     
-    # Remove MongoDB _id field from each listing
+    # Set id field from _id for frontend compatibility
     for listing in listings:
-        listing.pop("_id", None)
+        listing["id"] = listing["_id"]  # Copy _id to id
+        listing.pop("_id", None)  # Remove _id
     return [Listing(**listing) for listing in listings]
 
 @api_router.get("/listings/{listing_id}", response_model=Listing)
