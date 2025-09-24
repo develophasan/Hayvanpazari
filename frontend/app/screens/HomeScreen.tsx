@@ -187,96 +187,109 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
           <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
         }
       >
-        {/* Header */}
+        {/* Header - New Design */}
         <View style={styles.header}>
-          <View>
+          <View style={styles.headerLeft}>
             <Text style={styles.greeting}>Merhaba{user?.first_name ? `, ${user.first_name}` : ''}!</Text>
             <Text style={styles.subtitle}>Hayvan pazarında neler var?</Text>
           </View>
-          <TouchableOpacity 
-            style={styles.notificationButton}
-            onPress={() => navigation.navigate('Profile')}
-          >
-            <Ionicons name="person-circle-outline" size={32} color="#007AFF" />
-          </TouchableOpacity>
+          <View style={styles.headerRight}>
+            <TouchableOpacity style={styles.notificationButton}>
+              <Ionicons name="notifications-outline" size={24} color={Colors.textSecondary} />
+            </TouchableOpacity>
+            {Platform.OS === 'web' ? (
+              <View
+                style={styles.addListingButtonWeb}
+                onClick={() => {
+                  console.log('🎯 İlan Ver header button clicked!');
+                  navigation.navigate('CreateListing');
+                }}
+              >
+                <Ionicons name="add" size={20} color={Colors.textWhite} />
+                <Text style={styles.addListingButtonText}>İlan Ver</Text>
+              </View>
+            ) : (
+              <TouchableOpacity
+                style={styles.addListingButton}
+                onPress={() => {
+                  console.log('🎯 İlan Ver header button pressed!');
+                  navigation.navigate('CreateListing');
+                }}
+              >
+                <Ionicons name="add" size={20} color={Colors.textWhite} />
+                <Text style={styles.addListingButtonText}>İlan Ver</Text>
+              </TouchableOpacity>
+            )}
+          </View>
         </View>
 
-        {/* Search Bar */}
-        <TouchableOpacity 
-          style={styles.searchBar}
-          onPress={() => navigateToSearch()}
-        >
-          <Ionicons name="search" size={20} color="#666" />
-          <Text style={styles.searchPlaceholder}>Hangi hayvanı arıyorsun?</Text>
-        </TouchableOpacity>
-
-        {/* Categories */}
+        {/* Categories - Updated Design */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Kategoriler</Text>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            <View style={styles.categoriesContainer}>
-              {categories.map((category) => (
-                <TouchableOpacity
-                  key={category.id}
-                  style={styles.categoryCard}
-                  onPress={() => navigateToSearch(category.id)}
-                >
+          <ScrollView 
+            horizontal 
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.categoriesScrollContainer}
+          >
+            {categories.map((category) => (
+              <TouchableOpacity
+                key={category.id}
+                style={styles.categoryCard}
+                onPress={() => navigateToSearch(category.id)}
+              >
+                <View style={styles.categoryIconContainer}>
                   <Text style={styles.categoryIcon}>{category.icon}</Text>
-                  <Text style={styles.categoryName}>{category.name}</Text>
-                </TouchableOpacity>
-              ))}
-            </View>
+                </View>
+                <Text style={styles.categoryName}>{category.name}</Text>
+                <Text style={styles.categoryCount}>12 ilan</Text>
+              </TouchableOpacity>
+            ))}
           </ScrollView>
         </View>
 
-        {/* Featured Listings */}
+        {/* Featured Listings - Updated Design */}
         {featuredListings.length > 0 && (
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Öne Çıkan İlanlar</Text>
-            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-              <View style={styles.featuredContainer}>
-                {featuredListings.map((listing) => (
-                  <TouchableOpacity
-                    key={listing.id}
-                    style={styles.featuredCard}
-                    onPress={() => navigateToListing(listing)}
-                  >
-                    {listing.images.length > 0 ? (
-                      <Image 
-                        source={{ uri: `data:image/jpeg;base64,${listing.images[0]}` }}
-                        style={styles.featuredImage}
-                      />
-                    ) : (
-                      <View style={styles.noImageContainer}>
-                        <Ionicons name="image-outline" size={40} color="#ccc" />
-                      </View>
-                    )}
-                    <View style={styles.featuredInfo}>
-                      <Text 
-                        style={[styles.featuredTitle, { cursor: 'pointer' }]} 
-                        numberOfLines={2}
-                        onClick={() => {
-                          console.log('🎯 Text element clicked:', listing.id);
-                          navigateToListing(listing);
-                        }}
-                      >
-                        {listing.title}
-                      </Text>
-                      <Text style={styles.featuredPrice}>
-                        {formatPrice(listing.price)}
-                      </Text>
-                      <Text style={styles.featuredLocation}>
-                        {listing.location.city}, {listing.location.district}
-                      </Text>
+            <ScrollView 
+              horizontal 
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={styles.featuredScrollContainer}
+            >
+              {featuredListings.map((listing) => (
+                <TouchableOpacity
+                  key={listing.id}
+                  style={styles.featuredCard}
+                  onPress={() => navigateToListing(listing)}
+                >
+                  {listing.images.length > 0 ? (
+                    <Image 
+                      source={{ uri: `data:image/jpeg;base64,${listing.images[0]}` }}
+                      style={styles.featuredImage}
+                    />
+                  ) : (
+                    <View style={styles.noImageContainer}>
+                      <Ionicons name="image-outline" size={40} color={Colors.textSecondary} />
                     </View>
-                  </TouchableOpacity>
-                ))}
-              </View>
+                  )}
+                  <View style={styles.featuredInfo}>
+                    <Text style={styles.featuredTitle} numberOfLines={2}>
+                      {listing.title}
+                    </Text>
+                    <Text style={styles.featuredPrice}>
+                      {formatPrice(listing.price)}
+                    </Text>
+                    <Text style={styles.featuredLocation}>
+                      {listing.location.city}, {listing.location.district}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              ))}
             </ScrollView>
           </View>
         )}
 
-        {/* Recent Listings */}
+        {/* Recent Listings - Updated Design */}
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>Son İlanlar</Text>
@@ -285,140 +298,90 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
             </TouchableOpacity>
           </View>
           
-          {recentListings.map((listing) => {
-            if (Platform.OS === 'web') {
-              return (
-                <View
-                  key={listing.id}
-                  style={styles.listingCard}
-                  onClick={() => {
-                    console.log('🎯 Web listing card clicked:', listing.id);
-                    navigateToListing(listing);
-                  }}
-                >
-                  {listing.images.length > 0 ? (
-                    <Image 
-                      source={{ uri: `data:image/jpeg;base64,${listing.images[0]}` }}
-                      style={styles.listingImage}
-                    />
-                  ) : (
-                    <View style={styles.listingNoImage}>
-                      <Ionicons name="image-outline" size={24} color="#ccc" />
+          <View style={styles.recentListingsContainer}>
+            {recentListings.map((listing) => {
+              if (Platform.OS === 'web') {
+                return (
+                  <View
+                    key={listing.id}
+                    style={styles.listingCard}
+                    onClick={() => {
+                      console.log('🎯 Web listing card clicked:', listing.id);
+                      navigateToListing(listing);
+                    }}
+                  >
+                    {listing.images.length > 0 ? (
+                      <Image 
+                        source={{ uri: `data:image/jpeg;base64,${listing.images[0]}` }}
+                        style={styles.listingImage}
+                      />
+                    ) : (
+                      <View style={styles.listingNoImage}>
+                        <Ionicons name="image-outline" size={24} color={Colors.textSecondary} />
+                      </View>
+                    )}
+                    
+                    <View style={styles.listingInfo}>
+                      <Text style={styles.listingTitle} numberOfLines={1}>
+                        {listing.title}
+                      </Text>
+                      <Text style={styles.listingPrice}>
+                        {formatPrice(listing.price)}
+                      </Text>
+                      <Text style={styles.listingLocation}>
+                        {listing.location.city}, {listing.location.district}
+                      </Text>
+                      <Text style={styles.listingTime}>
+                        {timeAgo(listing.created_at)}
+                      </Text>
                     </View>
-                  )}
-                  
-                  <View style={styles.listingInfo}>
-                    <Text 
-                      style={[styles.listingTitle, { cursor: 'pointer' }]} 
-                      numberOfLines={1}
-                      onClick={() => {
-                        console.log('🎯 Recent listing text clicked:', listing.id);
-                        navigateToListing(listing);
-                      }}
-                    >
-                      {listing.title}
-                    </Text>
-                    <Text style={styles.listingPrice}>
-                      {formatPrice(listing.price)}
-                    </Text>
-                    <Text style={styles.listingLocation}>
-                      {listing.location.city}, {listing.location.district}
-                    </Text>
-                    <Text style={styles.listingTime}>
-                      {timeAgo(listing.created_at)}
-                    </Text>
-                  </View>
-                  
-                  <View style={styles.listingActions}>
-                    <Ionicons name="chevron-forward" size={20} color="#666" />
-                  </View>
-                </View>
-              );
-            } else {
-              return (
-                <TouchableOpacity
-                  key={listing.id}
-                  style={styles.listingCard}
-                  onPress={() => navigateToListing(listing)}
-                >
-                  {listing.images.length > 0 ? (
-                    <Image 
-                      source={{ uri: `data:image/jpeg;base64,${listing.images[0]}` }}
-                      style={styles.listingImage}
-                    />
-                  ) : (
-                    <View style={styles.listingNoImage}>
-                      <Ionicons name="image-outline" size={24} color="#ccc" />
+                    
+                    <View style={styles.listingActions}>
+                      <Ionicons name="chevron-forward" size={20} color={Colors.textSecondary} />
                     </View>
-                  )}
-                  
-                  <View style={styles.listingInfo}>
-                    <Text style={styles.listingTitle} numberOfLines={1}>
-                      {listing.title}
-                    </Text>
-                    <Text style={styles.listingPrice}>
-                      {formatPrice(listing.price)}
-                    </Text>
-                    <Text style={styles.listingLocation}>
-                      {listing.location.city}, {listing.location.district}
-                    </Text>
-                    <Text style={styles.listingTime}>
-                      {timeAgo(listing.created_at)}
-                    </Text>
                   </View>
-                  
-                  <View style={styles.listingActions}>
-                    <Ionicons name="chevron-forward" size={20} color="#666" />
-                  </View>
-                </TouchableOpacity>
-              );
-            }
-          })}
-        </View>
-
-        {/* Quick Actions */}
-        <View style={styles.quickActions}>
-          {Platform.OS === 'web' ? (
-            <View
-              style={{
-                backgroundColor: '#007AFF',
-                borderRadius: 12,
-                padding: 16,
-                alignItems: 'center',
-                justifyContent: 'center',
-                cursor: 'pointer'
-              }}
-              onTouchEnd={() => {
-                console.log('🎯 İlan Ver web onTouchEnd triggered!');
-                navigation.navigate('CreateListing');
-              }}
-              onClick={() => {
-                console.log('🎯 İlan Ver web onClick triggered!');
-                navigation.navigate('CreateListing');
-              }}
-            >
-              <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
-                <Text style={{ fontSize: 24, color: 'white' }}>+</Text>
-                <Text style={{ color: 'white', fontSize: 16, fontWeight: '600' }}>
-                  İlan Ver
-                </Text>
-              </View>
-            </View>
-          ) : (
-            <Pressable 
-              style={({ pressed }) => [
-                styles.quickActionButton,
-                pressed && { opacity: 0.8 }
-              ]}
-              onPress={() => {
-                console.log('🎯 İlan Ver native button clicked!');
-                navigation.navigate('CreateListing');
-              }}
-            >
-              <Ionicons name="add-circle" size={24} color="white" />
-              <Text style={styles.quickActionText}>İlan Ver</Text>
-            </Pressable>
-          )}
+                );
+              } else {
+                return (
+                  <TouchableOpacity
+                    key={listing.id}
+                    style={styles.listingCard}
+                    onPress={() => navigateToListing(listing)}
+                  >
+                    {listing.images.length > 0 ? (
+                      <Image 
+                        source={{ uri: `data:image/jpeg;base64,${listing.images[0]}` }}
+                        style={styles.listingImage}
+                      />
+                    ) : (
+                      <View style={styles.listingNoImage}>
+                        <Ionicons name="image-outline" size={24} color={Colors.textSecondary} />
+                      </View>
+                    )}
+                    
+                    <View style={styles.listingInfo}>
+                      <Text style={styles.listingTitle} numberOfLines={1}>
+                        {listing.title}
+                      </Text>
+                      <Text style={styles.listingPrice}>
+                        {formatPrice(listing.price)}
+                      </Text>
+                      <Text style={styles.listingLocation}>
+                        {listing.location.city}, {listing.location.district}
+                      </Text>
+                      <Text style={styles.listingTime}>
+                        {timeAgo(listing.created_at)}
+                      </Text>
+                    </View>
+                    
+                    <View style={styles.listingActions}>
+                      <Ionicons name="chevron-forward" size={20} color={Colors.textSecondary} />
+                    </View>
+                  </TouchableOpacity>
+                );
+              }
+            })}
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
