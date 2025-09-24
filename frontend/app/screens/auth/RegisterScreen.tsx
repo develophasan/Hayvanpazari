@@ -115,45 +115,48 @@ const RegisterScreen: React.FC<Props> = ({ navigation }) => {
         style={styles.keyboardView}
       >
         <ScrollView contentContainerStyle={styles.scrollContent}>
+          {/* Header with Back Button */}
           <View style={styles.header}>
             <TouchableOpacity 
               onPress={() => navigation.goBack()}
               style={styles.backButton}
             >
-              <Ionicons name="arrow-back" size={24} color="#007AFF" />
+              <Ionicons name="arrow-back" size={24} color={Colors.textPrimary} />
             </TouchableOpacity>
             <Text style={styles.title}>Kayıt Ol</Text>
-            <Text style={styles.subtitle}>Yeni hesap oluştur</Text>
           </View>
 
           <View style={styles.form}>
+            {/* First Name */}
             <View style={styles.inputContainer}>
-              <Ionicons name="person-outline" size={20} color="#666" style={styles.inputIcon} />
               <TextInput
                 style={styles.input}
                 placeholder="Ad"
+                placeholderTextColor={Colors.textSecondary}
                 value={formData.first_name}
                 onChangeText={(value) => updateFormData('first_name', value)}
                 autoCapitalize="words"
               />
             </View>
 
+            {/* Last Name */}
             <View style={styles.inputContainer}>
-              <Ionicons name="person-outline" size={20} color="#666" style={styles.inputIcon} />
               <TextInput
                 style={styles.input}
                 placeholder="Soyad"
+                placeholderTextColor={Colors.textSecondary}
                 value={formData.last_name}
                 onChangeText={(value) => updateFormData('last_name', value)}
                 autoCapitalize="words"
               />
             </View>
 
+            {/* Email */}
             <View style={styles.inputContainer}>
-              <Ionicons name="mail-outline" size={20} color="#666" style={styles.inputIcon} />
               <TextInput
                 style={styles.input}
                 placeholder="E-posta"
+                placeholderTextColor={Colors.textSecondary}
                 value={formData.email}
                 onChangeText={(value) => updateFormData('email', value)}
                 keyboardType="email-address"
@@ -162,11 +165,12 @@ const RegisterScreen: React.FC<Props> = ({ navigation }) => {
               />
             </View>
 
+            {/* Phone */}
             <View style={styles.inputContainer}>
-              <Ionicons name="call-outline" size={20} color="#666" style={styles.inputIcon} />
               <TextInput
                 style={styles.input}
-                placeholder="Telefon (5xxxxxxxxx)"
+                placeholder="Telefon"
+                placeholderTextColor={Colors.textSecondary}
                 value={formData.phone}
                 onChangeText={(value) => updateFormData('phone', value)}
                 keyboardType="phone-pad"
@@ -174,11 +178,12 @@ const RegisterScreen: React.FC<Props> = ({ navigation }) => {
               />
             </View>
 
+            {/* Password */}
             <View style={styles.inputContainer}>
-              <Ionicons name="lock-closed-outline" size={20} color="#666" style={styles.inputIcon} />
               <TextInput
                 style={styles.input}
-                placeholder="Şifre"
+                placeholder="Parola"
+                placeholderTextColor={Colors.textSecondary}
                 value={formData.password}
                 onChangeText={(value) => updateFormData('password', value)}
                 secureTextEntry={!showPassword}
@@ -186,21 +191,46 @@ const RegisterScreen: React.FC<Props> = ({ navigation }) => {
               />
               <TouchableOpacity 
                 onPress={() => setShowPassword(!showPassword)}
-                style={styles.eyeIcon}
+                style={styles.passwordToggle}
               >
                 <Ionicons 
                   name={showPassword ? "eye-outline" : "eye-off-outline"} 
                   size={20} 
-                  color="#666" 
+                  color={Colors.textSecondary} 
                 />
               </TouchableOpacity>
             </View>
 
+            {/* Password Strength Indicator */}
+            {formData.password.length > 0 && (
+              <View style={styles.passwordStrengthContainer}>
+                <Text style={styles.passwordStrengthLabel}>Parola gücü</Text>
+                <View style={styles.passwordStrengthBar}>
+                  <View 
+                    style={[
+                      styles.passwordStrengthFill, 
+                      { 
+                        width: `${passwordStrength}%`,
+                        backgroundColor: getPasswordStrengthColor(passwordStrength)
+                      }
+                    ]} 
+                  />
+                </View>
+                <Text style={[
+                  styles.passwordStrengthText,
+                  { color: getPasswordStrengthColor(passwordStrength) }
+                ]}>
+                  {getPasswordStrengthText(passwordStrength)}
+                </Text>
+              </View>
+            )}
+
+            {/* Confirm Password */}
             <View style={styles.inputContainer}>
-              <Ionicons name="lock-closed-outline" size={20} color="#666" style={styles.inputIcon} />
               <TextInput
                 style={styles.input}
-                placeholder="Şifre Tekrar"
+                placeholder="Parola Tekrarı"
+                placeholderTextColor={Colors.textSecondary}
                 value={formData.confirmPassword}
                 onChangeText={(value) => updateFormData('confirmPassword', value)}
                 secureTextEntry={!showConfirmPassword}
@@ -208,34 +238,68 @@ const RegisterScreen: React.FC<Props> = ({ navigation }) => {
               />
               <TouchableOpacity 
                 onPress={() => setShowConfirmPassword(!showConfirmPassword)}
-                style={styles.eyeIcon}
+                style={styles.passwordToggle}
               >
                 <Ionicons 
                   name={showConfirmPassword ? "eye-outline" : "eye-off-outline"} 
                   size={20} 
-                  color="#666" 
+                  color={Colors.textSecondary} 
                 />
               </TouchableOpacity>
             </View>
 
+            {/* User Type Selection */}
+            <View style={styles.userTypeContainer}>
+              <Text style={styles.userTypeLabel}>Kullanıcı Tipi:</Text>
+              <View style={styles.userTypeOptions}>
+                <TouchableOpacity
+                  style={styles.userTypeOption}
+                  onPress={() => setUserType('buyer')}
+                >
+                  <View style={[
+                    styles.radioButton,
+                    userType === 'buyer' && styles.radioButtonSelected
+                  ]}>
+                    {userType === 'buyer' && <View style={styles.radioButtonInner} />}
+                  </View>
+                  <Text style={styles.userTypeText}>Alıcı</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  style={styles.userTypeOption}
+                  onPress={() => setUserType('seller')}
+                >
+                  <View style={[
+                    styles.radioButton,
+                    userType === 'seller' && styles.radioButtonSelected
+                  ]}>
+                    {userType === 'seller' && <View style={styles.radioButtonInner} />}
+                  </View>
+                  <Text style={styles.userTypeText}>Satıcı</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+
+            {/* Register Button */}
             <TouchableOpacity 
               style={styles.registerButton}
               onPress={handleRegister}
               disabled={isLoading}
             >
               {isLoading ? (
-                <ActivityIndicator color="white" />
+                <ActivityIndicator color={Colors.textWhite} />
               ) : (
                 <Text style={styles.registerButtonText}>Kayıt Ol</Text>
               )}
             </TouchableOpacity>
 
+            {/* Login Link */}
             <TouchableOpacity 
               style={styles.loginLink}
               onPress={() => navigation.navigate('Login')}
             >
               <Text style={styles.loginLinkText}>
-                Zaten hesabın var mı? <Text style={styles.loginLinkBold}>Giriş Yap</Text>
+                Zaten hesabın var mı? <Text style={styles.loginLinkBold}>Giriş yap</Text>
               </Text>
             </TouchableOpacity>
           </View>
