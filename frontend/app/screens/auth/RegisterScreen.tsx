@@ -82,6 +82,32 @@ const RegisterScreen: React.FC<Props> = ({ navigation }) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
+  // Password strength calculation
+  const calculatePasswordStrength = (password: string) => {
+    let strength = 0;
+    if (password.length >= 6) strength += 25;
+    if (password.match(/[a-z]/)) strength += 25;
+    if (password.match(/[A-Z]/)) strength += 25;
+    if (password.match(/[0-9]/) || password.match(/[^a-zA-Z0-9]/)) strength += 25;
+    return strength;
+  };
+
+  const getPasswordStrengthText = (strength: number) => {
+    if (strength <= 25) return 'Zayıf';
+    if (strength <= 50) return 'Orta';
+    if (strength <= 75) return 'İyi';
+    return 'Güçlü';
+  };
+
+  const getPasswordStrengthColor = (strength: number) => {
+    if (strength <= 25) return Colors.error;
+    if (strength <= 50) return Colors.warning;
+    if (strength <= 75) return Colors.info;
+    return Colors.success;
+  };
+
+  const passwordStrength = calculatePasswordStrength(formData.password);
+
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView 
