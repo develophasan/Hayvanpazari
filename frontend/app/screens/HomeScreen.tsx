@@ -59,23 +59,34 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
 
   const loadData = async () => {
     try {
+      console.log('🏠 HomeScreen loadData started, API_BASE_URL:', API_BASE_URL);
+      
       // Load categories
+      console.log('📂 Fetching categories...');
       const categoriesResponse = await fetch(`${API_BASE_URL}/api/categories`);
+      console.log('📂 Categories response status:', categoriesResponse.status);
+      
       if (categoriesResponse.ok) {
         const categoriesData = await categoriesResponse.json();
+        console.log('📂 Categories data:', categoriesData.length, 'categories loaded');
         setCategories(categoriesData);
       }
 
       // Load recent listings
+      console.log('📋 Fetching listings...');
       const listingsResponse = await fetch(`${API_BASE_URL}/api/listings?limit=10`);
+      console.log('📋 Listings response status:', listingsResponse.status);
+      
       if (listingsResponse.ok) {
         const listingsData = await listingsResponse.json();
+        console.log('📋 Listings data:', listingsData.length, 'listings loaded');
+        console.log('📋 First listing title:', listingsData[0]?.title);
         setRecentListings(listingsData);
         // Use first 3 as featured
         setFeaturedListings(listingsData.slice(0, 3));
       }
     } catch (error) {
-      console.error('Error loading home data:', error);
+      console.error('❌ HomeScreen loadData error:', error);
     }
   };
 
