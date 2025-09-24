@@ -278,41 +278,82 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
           </View>
           
           {recentListings.map((listing) => (
-            <TouchableOpacity
-              key={listing.id}
-              style={styles.listingCard}
-              onPress={() => navigateToListing(listing)}
-            >
-              {listing.images.length > 0 ? (
-                <Image 
-                  source={{ uri: `data:image/jpeg;base64,${listing.images[0]}` }}
-                  style={styles.listingImage}
-                />
-              ) : (
-                <View style={styles.listingNoImage}>
-                  <Ionicons name="image-outline" size={24} color="#ccc" />
+            {Platform.OS === 'web' ? (
+              <View
+                key={listing.id}
+                style={styles.listingCard}
+                onClick={() => {
+                  console.log('🎯 Web listing card clicked:', listing.id);
+                  navigateToListing(listing);
+                }}
+              >
+                {listing.images.length > 0 ? (
+                  <Image 
+                    source={{ uri: `data:image/jpeg;base64,${listing.images[0]}` }}
+                    style={styles.listingImage}
+                  />
+                ) : (
+                  <View style={styles.listingNoImage}>
+                    <Ionicons name="image-outline" size={24} color="#ccc" />
+                  </View>
+                )}
+                
+                <View style={styles.listingInfo}>
+                  <Text style={styles.listingTitle} numberOfLines={1}>
+                    {listing.title}
+                  </Text>
+                  <Text style={styles.listingPrice}>
+                    {formatPrice(listing.price)}
+                  </Text>
+                  <Text style={styles.listingLocation}>
+                    {listing.location.city}, {listing.location.district}
+                  </Text>
+                  <Text style={styles.listingTime}>
+                    {timeAgo(listing.created_at)}
+                  </Text>
                 </View>
-              )}
-              
-              <View style={styles.listingInfo}>
-                <Text style={styles.listingTitle} numberOfLines={1}>
-                  {listing.title}
-                </Text>
-                <Text style={styles.listingPrice}>
-                  {formatPrice(listing.price)}
-                </Text>
-                <Text style={styles.listingLocation}>
-                  {listing.location.city}, {listing.location.district}
-                </Text>
-                <Text style={styles.listingTime}>
-                  {timeAgo(listing.created_at)}
-                </Text>
+                
+                <View style={styles.listingActions}>
+                  <Ionicons name="chevron-forward" size={20} color="#666" />
+                </View>
               </View>
-              
-              <View style={styles.listingActions}>
-                <Ionicons name="chevron-forward" size={20} color="#666" />
-              </View>
-            </TouchableOpacity>
+            ) : (
+              <TouchableOpacity
+                key={listing.id}
+                style={styles.listingCard}
+                onPress={() => navigateToListing(listing)}
+              >
+                {listing.images.length > 0 ? (
+                  <Image 
+                    source={{ uri: `data:image/jpeg;base64,${listing.images[0]}` }}
+                    style={styles.listingImage}
+                  />
+                ) : (
+                  <View style={styles.listingNoImage}>
+                    <Ionicons name="image-outline" size={24} color="#ccc" />
+                  </View>
+                )}
+                
+                <View style={styles.listingInfo}>
+                  <Text style={styles.listingTitle} numberOfLines={1}>
+                    {listing.title}
+                  </Text>
+                  <Text style={styles.listingPrice}>
+                    {formatPrice(listing.price)}
+                  </Text>
+                  <Text style={styles.listingLocation}>
+                    {listing.location.city}, {listing.location.district}
+                  </Text>
+                  <Text style={styles.listingTime}>
+                    {timeAgo(listing.created_at)}
+                  </Text>
+                </View>
+                
+                <View style={styles.listingActions}>
+                  <Ionicons name="chevron-forward" size={20} color="#666" />
+                </View>
+              </TouchableOpacity>
+            )}
           ))}
         </View>
 
