@@ -845,6 +845,39 @@ const CreateListingScreen: React.FC<Props> = ({ navigation, route }) => {
           </ScrollView>
         </SafeAreaView>
       </Modal>
+
+      {/* Breed Modal */}
+      <Modal
+        visible={showBreedModal}
+        animationType="slide"
+        presentationStyle="pageSheet"
+      >
+        <SafeAreaView style={styles.modalContainer}>
+          <View style={styles.modalHeader}>
+            <Text style={styles.modalTitle}>Irk Seçin</Text>
+            <TouchableOpacity onPress={() => setShowBreedModal(false)}>
+              <Text style={styles.doneButton}>Kapat</Text>
+            </TouchableOpacity>
+          </View>
+          <ScrollView style={styles.modalContent}>
+            {getSelectedCategory()?.breeds.map((breed) => (
+              <TouchableOpacity
+                key={breed}
+                style={styles.categoryOption}
+                onPress={() => {
+                  updateAnimalDetails('breed', breed);
+                  setShowBreedModal(false);
+                }}
+              >
+                <Text style={styles.categoryName}>{breed}</Text>
+                {formData.animal_details.breed === breed && (
+                  <Ionicons name="checkmark" size={20} color="#007AFF" />
+                )}
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
+        </SafeAreaView>
+      </Modal>
     </SafeAreaView>
   );
 };
