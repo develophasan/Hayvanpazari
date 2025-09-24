@@ -783,6 +783,123 @@ async def get_messages(other_user_id: str, listing_id: str, user_id: str = Depen
         message.pop("_id", None)
     return [Message(**message) for message in messages]
 
+# Notifications Routes
+@api_router.get("/notifications", response_model=List[Notification])
+async def get_notifications(
+    user_id: str = Depends(verify_token),
+    status: Optional[str] = None,
+    limit: int = 50
+):
+    """Get user notifications with optional status filter"""
+    query = {"user_id": user_id}
+    if status:
+        query["status"] = status
+    
+    notifications = await db.notifications.find(query).sort("created_at", -1).limit(limit).to_list(limit)
+    
+    # Handle ObjectId conversion
+    for notification in notifications:
+        notification["id"] = str(notification["_id"])
+        notification.pop("_id", None)
+    
+    print(f"🔔 Retrieved {len(notifications)} notifications for user {user_id}")
+    return [Notification(**notification) for notification in notifications]
+
+@api_router.put("/notifications/{notification_id}/read")
+async def mark_notification_read(
+    notification_id: str,
+    user_id: str = Depends(verify_token)
+):
+    """Mark a specific notification as read"""
+    result = await db.notifications.update_one(
+        {"_id": notification_id, "user_id": user_id},
+        {
+            "$set": {
+                "status": NotificationStatus.READ,
+                "read_at": datetime.utcnow()
+            }
+        }
+    )
+    
+    if result.matched_count == 0:
+        raise HTTPException(status_code=404, detail="Notification not found")
+    
+    print(f"🔔 Marked notification {notification_id} as read")
+    return {"status": "success", "message": "Notification marked as read"}
+
+@api_router.put("/notifications/read-all")
+async def mark_all_notifications_read(user_id: str = Depends(verify_token)):
+    """Mark all unread notifications as read"""
+    result = await db.notifications.update_many(
+        {"user_id": user_id, "status": NotificationStatus.UNREAD},
+        {
+            "$set": {
+                "status": NotificationStatus.READ,
+                "read_at": datetime.utcnow()
+            }
+        }
+    )
+    
+    print(f"🔔 Marked {result.modified_count} notifications as read for user {user_id}")
+    return {"status": "success", "message": f"Marked {result.modified_count} notifications as read"}
+
+@api_router.get("/notifications/unread-count")
+async def get_unread_count(user_id: str = Depends(verify_token)):
+    """Get count of unread notifications"""
+    count = await db.notifications.count_documents({
+        "user_id": user_id,
+        "status": NotificationStatus.UNREAD
+    })
+    
+    print(f"🔔 User {user_id} has {count} unread notifications")
+    return {"unread_count": count}
+
+@api_router.get("/notifications/settings", response_model=NotificationSettings)
+async def get_notification_settings(user_id: str = Depends(verify_token)):
+    """Get user notification settings"""
+    from notification_service import get_user_notification_settings
+    settings = await get_user_notification_settings(db, user_id)
+    
+    # Ensure id is set properly
+    settings["id"] = settings.get("_id") or settings.get("user_id")
+    settings.pop("_id", None)
+    
+    return NotificationSettings(**settings)
+
+@api_router.put("/notifications/settings")
+async def update_notification_settings(
+    settings_data: NotificationSettings,
+    user_id: str = Depends(verify_token)
+):
+    """Update user notification settings"""
+    settings_dict = settings_data.dict()
+    settings_dict["user_id"] = user_id
+    settings_dict.pop("id", None)  # Remove id field for update
+    
+    result = await db.notification_settings.update_one(
+        {"user_id": user_id},
+        {"$set": settings_dict},
+        upsert=True
+    )
+    
+    print(f"🔧 Updated notification settings for user {user_id}")
+    return {"status": "success", "message": "Notification settings updated"}
+
+@api_router.post("/notifications/test")
+async def test_notification(user_id: str = Depends(verify_token)):
+    """Test notification system - development only"""
+    await create_notification(
+        db=db,
+        user_id=user_id,
+        notification_type=NotificationType.PROFILE,
+        priority=NotificationPriority.LOW,
+        title="Test Bildirimi",
+        message="Bu bir test bildirimidir. Sistem doğru çalışıyor!",
+        data={"test": True}
+    )
+    
+    return {"status": "success", "message": "Test notification sent"}
+
 # Initialize database on startup
 @app.on_event("startup")
 async def startup_db():
