@@ -233,6 +233,25 @@ class ListingStatus(str):
     INACTIVE = "inactive"
     PENDING = "pending"
 
+class NotificationType(str, Enum):
+    MESSAGE = "message"
+    OFFER = "offer"
+    LISTING = "listing"
+    SECURITY = "security"
+    PAYMENT = "payment"
+    PROFILE = "profile"
+
+class NotificationPriority(str, Enum):
+    CRITICAL = "critical"  # Security, payment - Email + Push + Sound
+    HIGH = "high"         # Messages, offers - Push + Sound  
+    MEDIUM = "medium"     # Listing updates - Push only
+    LOW = "low"           # General info - In-app only
+
+class NotificationStatus(str, Enum):
+    UNREAD = "unread"
+    READ = "read"
+    ARCHIVED = "archived"
+
 class User(BaseModel):
     id: Optional[str] = Field(None, alias="_id")
     email: EmailStr
