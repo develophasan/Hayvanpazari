@@ -307,7 +307,14 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                   )}
                   
                   <View style={styles.listingInfo}>
-                    <Text style={styles.listingTitle} numberOfLines={1}>
+                    <Text 
+                      style={[styles.listingTitle, { cursor: 'pointer' }]} 
+                      numberOfLines={1}
+                      onClick={() => {
+                        console.log('🎯 Recent listing text clicked:', listing.id);
+                        navigateToListing(listing);
+                      }}
+                    >
                       {listing.title}
                     </Text>
                     <Text style={styles.listingPrice}>
