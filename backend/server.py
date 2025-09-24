@@ -784,7 +784,7 @@ async def get_messages(other_user_id: str, listing_id: str, user_id: str = Depen
     return [Message(**message) for message in messages]
 
 # Notifications Routes
-@api_router.get("/notifications", response_model=List[Notification])
+@api_router.get("/notifications")
 async def get_notifications(
     user_id: str = Depends(verify_token),
     status: Optional[str] = None,
