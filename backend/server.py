@@ -528,7 +528,7 @@ async def get_user_listings(user_id: str, current_user_id: str = Depends(verify_
     listings = await db.listings.find(query).sort("created_at", -1).to_list(100)
     # Set id field from _id for frontend compatibility
     for listing in listings:
-        listing["id"] = listing["_id"]  # Copy _id to id
+        listing["id"] = str(listing["_id"])  # Copy _id to id as string
         listing.pop("_id", None)  # Remove _id
     return [Listing(**listing) for listing in listings]
 
