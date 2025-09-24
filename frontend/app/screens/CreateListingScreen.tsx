@@ -244,8 +244,22 @@ const CreateListingScreen: React.FC<Props> = ({ navigation, route }) => {
       if (response.ok) {
         const responseData = await response.json();
         console.log('✅ İlan başarıyla oluşturuldu:', responseData);
+        
+        // Navigate to the newly created listing detail page
+        const listingId = responseData.id || responseData._id;
+        console.log('🔗 Navigating to listing detail:', listingId);
+        
         Alert.alert('Başarılı', 'İlan oluşturuldu!', [
-          { text: 'Tamam', onPress: () => navigation.goBack() }
+          { 
+            text: 'İlanı Gör', 
+            onPress: () => {
+              navigation.navigate('ListingDetail', { listingId: listingId });
+            }
+          },
+          {
+            text: 'Ana Sayfa',
+            onPress: () => navigation.navigate('Home')
+          }
         ]);
       } else {
         const errorData = await response.json();
