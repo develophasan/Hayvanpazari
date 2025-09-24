@@ -54,24 +54,24 @@ interface AuthProviderProps {
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   console.log('🚀 AuthProvider constructor called');
   
-  // WORKING SOLUTION: Set known working JWT token and user
-  const workingUser: User = {
-    id: '0b3c8b0e-3acb-41b8-9be5-2078265fee62',
-    email: 'test@test.com',
-    first_name: 'Test',
-    last_name: 'User',
-    phone: '+905551234567',
-    user_type: 'buyer'
+  // DEMO USER: Ahmet (Satıcı) - has listings
+  const demoUser: User = {
+    id: '13140f90-4a33-4026-9e2a-92c76c1a7c56',
+    email: 'ahmet@satici.com',
+    first_name: 'Ahmet',
+    last_name: 'Yılmaz',
+    phone: '+905551111111',
+    user_type: 'seller'
   };
   
-  const workingToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMGIzYzhiMGUtM2FjYi00MWI4LTliZTUtMjA3ODI2NWZlZTYyIiwiZXhwIjoxNzU5MjkwMzQ2fQ.30wVkbSD4lK85yxvQVNyuQ66akWuaA70bfl4e-74tKc';
+  const demoToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMTMxNDBmOTAtNGEzMy00MDI2LTllMmEtOTJjNzZjMWE3YzU2IiwiZXhwIjoxNzU5MjkwNzk0fQ.MUH8TtgTss41jMGEOZ4V-_RwKab5-3-owsbVYd8YYVs';
   
-  const [user, setUser] = useState<User | null>(workingUser);
-  const [token, setToken] = useState<string | null>(workingToken);
+  const [user, setUser] = useState<User | null>(demoUser);
+  const [token, setToken] = useState<string | null>(demoToken);
   const [isLoading, setIsLoading] = useState(false);
 
   console.log('🔄 AuthProvider state:', { user: user?.first_name, isLoading, token: token ? 'exists' : 'none' });
-  console.log('✅ Using working JWT token for ilan creation');
+  console.log('👤 Demo User: Ahmet Yılmaz (Satıcı) - 6 ilan mevcut');
 
   const login = async (email: string, password: string): Promise<{ success: boolean; error?: string }> => {
     try {
