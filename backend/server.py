@@ -470,12 +470,23 @@ async def get_listings(
 
 @api_router.get("/listings/{listing_id}", response_model=Listing)
 async def get_listing(listing_id: str):
-    listing = await db.listings.find_one({"_id": listing_id})  # Query by _id, not id
+    print(f"🔍 Looking for listing with ID: {listing_id}")
+    
+    # Try both _id and id fields for compatibility
+    listing = await db.listings.find_one({"_id": listing_id})
     if not listing:
+        listing = await db.listings.find_one({"id": listing_id})
+    
+    print(f"🔍 Found listing: {listing is not None}")
+    
+    if not listing:
+        print(f"❌ Listing not found with ID: {listing_id}")
         raise HTTPException(status_code=404, detail="Listing not found")
     
+    print(f"✅ Listing found: {listing.get('title', 'No title')}")
+    
     # Increment view count
-    await db.listings.update_one({"_id": listing_id}, {"$inc": {"views": 1}})  # Update by _id
+    await db.listings.update_one({"_id": listing["_id"]}, {"$inc": {"views": 1}})
     listing["views"] = listing.get("views", 0) + 1
     
     # Set id field from _id for frontend compatibility
