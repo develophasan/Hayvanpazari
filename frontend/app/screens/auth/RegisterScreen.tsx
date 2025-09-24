@@ -312,94 +312,163 @@ const RegisterScreen: React.FC<Props> = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: Colors.backgroundLight,
   },
   keyboardView: {
     flex: 1,
   },
   scrollContent: {
     flexGrow: 1,
-    paddingHorizontal: 24,
-    paddingVertical: 16,
+    paddingHorizontal: Spacing.md,
+    paddingVertical: Spacing.md,
   },
+
+  // Header Styles
   header: {
     alignItems: 'center',
-    marginBottom: 32,
+    marginBottom: Spacing.xl,
     position: 'relative',
   },
   backButton: {
     position: 'absolute',
     left: 0,
     top: 0,
-    padding: 8,
+    padding: Spacing.sm,
+    borderRadius: BorderRadius.full,
+    backgroundColor: Colors.backgroundLight,
   },
   title: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: '#007AFF',
-    marginBottom: 4,
+    fontSize: Typography.sizes.xl,
+    fontWeight: Typography.weights.bold,
+    color: Colors.textPrimary,
+    fontFamily: Typography.fontFamily.display,
   },
-  subtitle: {
-    fontSize: 16,
-    color: '#666',
-  },
+
+  // Form Styles
   form: {
     width: '100%',
   },
   inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#e0e0e0',
-    borderRadius: 12,
-    marginBottom: 16,
-    paddingHorizontal: 16,
-    backgroundColor: '#f8f9fa',
-  },
-  inputIcon: {
-    marginRight: 12,
+    position: 'relative',
+    marginBottom: Spacing.md,
   },
   input: {
-    flex: 1,
-    height: 50,
-    fontSize: 16,
-    color: '#333',
+    ...ComponentStyles.input,
+    backgroundColor: Colors.inputLight,
+    borderWidth: 0,
+    fontSize: Typography.sizes.base,
+    color: Colors.textPrimary,
+    fontFamily: Typography.fontFamily.display,
   },
-  eyeIcon: {
-    padding: 4,
+  passwordToggle: {
+    position: 'absolute',
+    right: Spacing.md,
+    top: 16,
+    padding: Spacing.xs,
   },
-  registerButton: {
-    backgroundColor: '#007AFF',
-    borderRadius: 12,
-    height: 50,
+
+  // Password Strength Styles
+  passwordStrengthContainer: {
+    marginBottom: Spacing.lg,
+  },
+  passwordStrengthLabel: {
+    fontSize: Typography.sizes.sm,
+    fontWeight: Typography.weights.medium,
+    color: Colors.textSecondary,
+    marginBottom: Spacing.xs,
+    fontFamily: Typography.fontFamily.display,
+  },
+  passwordStrengthBar: {
+    height: 8,
+    backgroundColor: Colors.inputLight,
+    borderRadius: BorderRadius.full,
+    marginBottom: Spacing.xs,
+  },
+  passwordStrengthFill: {
+    height: '100%',
+    borderRadius: BorderRadius.full,
+    transition: 'width 0.3s ease' as any,
+  },
+  passwordStrengthText: {
+    fontSize: Typography.sizes.xs,
+    fontWeight: Typography.weights.medium,
+    fontFamily: Typography.fontFamily.display,
+  },
+
+  // User Type Selection Styles
+  userTypeContainer: {
+    marginBottom: Spacing.xl,
+  },
+  userTypeLabel: {
+    fontSize: Typography.sizes.sm,
+    fontWeight: Typography.weights.medium,
+    color: Colors.textSecondary,
+    marginBottom: Spacing.md,
+    fontFamily: Typography.fontFamily.display,
+  },
+  userTypeOptions: {
+    flexDirection: 'row',
+    gap: Spacing.xl,
+  },
+  userTypeOption: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.sm,
+  },
+  radioButton: {
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: Colors.borderLight,
+    backgroundColor: Colors.backgroundWhite,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 8,
-    shadowColor: '#007AFF',
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 4.65,
-    elevation: 8,
+  },
+  radioButtonSelected: {
+    borderColor: Colors.primary,
+  },
+  radioButtonInner: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: Colors.primary,
+  },
+  userTypeText: {
+    fontSize: Typography.sizes.base,
+    fontWeight: Typography.weights.medium,
+    color: Colors.textPrimary,
+    fontFamily: Typography.fontFamily.display,
+  },
+
+  // Button Styles
+  registerButton: {
+    ...ComponentStyles.button.primaryButton,
+    height: ComponentStyles.button.height,
+    marginTop: Spacing.lg,
+    marginBottom: Spacing.md,
   },
   registerButtonText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: '600',
+    color: Colors.textWhite,
+    fontSize: Typography.sizes.base,
+    fontWeight: Typography.weights.bold,
+    fontFamily: Typography.fontFamily.display,
   },
+
+  // Login Link Styles
   loginLink: {
     alignItems: 'center',
-    marginTop: 24,
+    paddingVertical: Spacing.md,
   },
   loginLinkText: {
-    fontSize: 14,
-    color: '#666',
+    fontSize: Typography.sizes.sm,
+    color: Colors.textSecondary,
+    textAlign: 'center',
+    fontFamily: Typography.fontFamily.display,
   },
   loginLinkBold: {
-    color: '#007AFF',
-    fontWeight: '600',
+    color: Colors.primary,
+    fontWeight: Typography.weights.medium,
   },
 });
 
