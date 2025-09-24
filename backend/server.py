@@ -464,7 +464,7 @@ async def get_listings(
     
     # Set id field from _id for frontend compatibility
     for listing in listings:
-        listing["id"] = listing["_id"]  # Copy _id to id
+        listing["id"] = str(listing["_id"])  # Copy _id to id as string
         listing.pop("_id", None)  # Remove _id
     return [Listing(**listing) for listing in listings]
 
