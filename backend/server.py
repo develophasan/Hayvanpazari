@@ -436,7 +436,7 @@ async def get_listings(
     limit: int = 20,
     skip: int = 0
 ):
-    query = {"status": ListingStatus.ACTIVE}
+    query = {"status": "active"}  # Fixed: use string instead of enum
     
     if category:
         query["category"] = category
@@ -454,7 +454,10 @@ async def get_listings(
     if search:
         query["$text"] = {"$search": search}
     
+    print(f"📋 Listings query: {query}")  # Debug log
     listings = await db.listings.find(query).sort("created_at", -1).skip(skip).limit(limit).to_list(limit)
+    print(f"📋 Found {len(listings)} listings")  # Debug log
+    
     # Remove MongoDB _id field from each listing
     for listing in listings:
         listing.pop("_id", None)
