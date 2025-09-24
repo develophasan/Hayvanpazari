@@ -247,6 +247,52 @@ class MessageCreate(BaseModel):
     message_type: str = "text"
     offer_amount: Optional[float] = None
 
+class Notification(BaseModel):
+    id: Optional[str] = Field(None, alias="_id")
+    user_id: str  # Alıcı user
+    type: NotificationType
+    priority: NotificationPriority
+    title: str
+    message: str
+    data: Optional[Dict[str, Any]] = None  # İlgili veriler (listing_id, message_id, vb)
+    status: NotificationStatus = NotificationStatus.UNREAD
+    is_email_sent: bool = False
+    is_push_sent: bool = False
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    read_at: Optional[datetime] = None
+    
+    class Config:
+        populate_by_name = True
+
+class NotificationCreate(BaseModel):
+    user_id: str
+    type: NotificationType
+    priority: NotificationPriority
+    title: str
+    message: str
+    data: Optional[Dict[str, Any]] = None
+
+class NotificationSettings(BaseModel):
+    user_id: str
+    email_notifications: bool = True
+    push_notifications: bool = True
+    sound_enabled: bool = True
+    vibration_enabled: bool = True
+    quiet_hours_enabled: bool = False
+    quiet_hours_start: str = "22:00"  # 22:00
+    quiet_hours_end: str = "08:00"    # 08:00
+    notification_types: Dict[str, bool] = {
+        "messages": True,
+        "offers": True,
+        "listings": True,
+        "security": True,
+        "payments": True,
+        "profile": True
+    }
+    
+    class Config:
+        populate_by_name = True
+
 class SearchFilters(BaseModel):
     category: Optional[str] = None
     min_price: Optional[float] = None
