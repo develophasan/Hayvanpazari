@@ -472,21 +472,38 @@ async def get_listings(
 async def get_listing(listing_id: str):
     print(f"🔍 Looking for listing with ID: {listing_id}")
     
-    # Try both _id and id fields for compatibility
+    # Try to find by multiple ID formats
+    listing = None
+    
+    # Try 1: Direct _id match (UUID format)
     listing = await db.listings.find_one({"_id": listing_id})
+    if listing:
+        print(f"✅ Found by _id (UUID): {listing_id}")
+    
+    # Try 2: Search by id field (may be hex)
     if not listing:
         listing = await db.listings.find_one({"id": listing_id})
+        if listing:
+            print(f"✅ Found by id field: {listing_id}")
     
-    print(f"🔍 Found listing: {listing is not None}")
+    # Try 3: Search all listings where str(_id) matches (hex conversion)
+    if not listing:
+        all_listings = await db.listings.find({}).to_list(None)
+        for l in all_listings:
+            if str(l["_id"]) == listing_id:
+                listing = l
+                print(f"✅ Found by hex conversion: {listing_id} -> {l['_id']}")
+                break
     
     if not listing:
-        print(f"❌ Listing not found with ID: {listing_id}")
+        print(f"❌ Listing not found with any ID format: {listing_id}")
         raise HTTPException(status_code=404, detail="Listing not found")
     
     print(f"✅ Listing found: {listing.get('title', 'No title')}")
     
-    # Increment view count
-    await db.listings.update_one({"_id": listing["_id"]}, {"$inc": {"views": 1}})
+    # Increment view count using original _id
+    original_id = listing["_id"]
+    await db.listings.update_one({"_id": original_id}, {"$inc": {"views": 1}})
     listing["views"] = listing.get("views", 0) + 1
     
     # Set id field from _id for frontend compatibility
