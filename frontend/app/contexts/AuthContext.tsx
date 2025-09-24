@@ -92,11 +92,28 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
-  // Initialize auth on mount
+  // Initialize auth on mount - will auto-login test user
   React.useEffect(() => {
-    console.log('🔥 useEffect triggered - calling loadStoredAuth');
-    loadStoredAuth();
+    console.log('🔥 useEffect triggered - auto login test user');
+    autoLoginTestUser();
   }, []);
+
+  // Auto-login function for test user
+  const autoLoginTestUser = async () => {
+    try {
+      console.log('🔐 Auto-login test user...');
+      const result = await login('test@test.com', '123456');
+      if (result.success) {
+        console.log('✅ Auto-login successful');
+      } else {
+        console.log('❌ Auto-login failed:', result.error);
+        setIsLoading(false);
+      }
+    } catch (error) {
+      console.log('❌ Auto-login error:', error);
+      setIsLoading(false);
+    }
+  };
 
   const login = async (email: string, password: string): Promise<{ success: boolean; error?: string }> => {
     try {
