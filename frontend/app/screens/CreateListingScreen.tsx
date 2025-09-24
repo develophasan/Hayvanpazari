@@ -375,6 +375,25 @@ const CreateListingScreen: React.FC<Props> = ({ navigation, route }) => {
               </TouchableOpacity>
             </View>
 
+            {/* Breed Selection - Only show if category is selected */}
+            {formData.category && (
+              <View style={styles.inputContainer}>
+                <Text style={styles.label}>Irk</Text>
+                <TouchableOpacity 
+                  style={styles.categoryButton}
+                  onPress={() => setShowBreedModal(true)}
+                >
+                  <Text style={[
+                    styles.categoryButtonText,
+                    !formData.animal_details.breed && styles.placeholderText
+                  ]}>
+                    {formData.animal_details.breed || 'Irk seçin (opsiyonel)'}
+                  </Text>
+                  <Ionicons name="chevron-down" size={20} color="#666" />
+                </TouchableOpacity>
+              </View>
+            )}
+
             <View style={styles.inputContainer}>
               <Text style={styles.label}>Fiyat *</Text>
               <View style={styles.priceContainer}>
