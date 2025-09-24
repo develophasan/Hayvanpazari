@@ -16,9 +16,6 @@ import bcrypt
 import base64
 from bson import ObjectId
 import pymongo
-import smtplib
-from email.mime.text import MimeText
-from email.mime.multipart import MimeMultipart
 import asyncio
 from enum import Enum
 
