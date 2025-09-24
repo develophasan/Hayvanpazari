@@ -286,7 +286,19 @@ async def root():
 # Categories
 @api_router.get("/categories", response_model=List[AnimalCategory])
 async def get_categories():
-    return ANIMAL_CATEGORIES
+    """Güncellenmiş hayvan kategorileri ve ırkları döndür"""
+    categories = []
+    for category_id, category_data in ANIMAL_BREEDS.items():
+        categories.append({
+            "id": category_id,
+            "name": category_data["name"], 
+            "name_en": category_data["name_en"],
+            "icon": category_data["icon"],
+            "breeds": category_data["breeds"]
+        })
+    
+    print(f"📂 Categories loaded: {len(categories)} categories, total breeds: {sum(len(cat['breeds']) for cat in categories)}")
+    return categories
 
 # Authentication Routes
 @api_router.post("/auth/register")
