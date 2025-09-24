@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HayvanPazarı - İlan Oluştur</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+<script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#0561d1",
+            "background-light": "#f5f7f8",
+            "background-dark": "#0f1823",
+          },
+          fontFamily: {
+            "display": ["Plus Jakarta Sans", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+<style>
+    .form-select {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+      background-position: right 0.5rem center;
+      background-repeat: no-repeat;
+      background-size: 1.5em 1.5em;
+      padding-right: 2.5rem;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-800 dark:text-slate-200">
+<div class="flex flex-col min-h-screen">
+<header class="sticky top-0 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm z-10">
+<div class="flex items-center p-4">
+<button class="p-2 rounded-full hover:bg-primary/10">
+<svg class="text-slate-800 dark:text-slate-200" fill="currentColor" height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"></path>
+</svg>
+</button>
+<h1 class="flex-1 text-center text-lg font-bold pr-12">İlan Oluştur</h1>
+</div>
+</header>
+<main class="flex-grow">
+<section class="p-4">
+<h2 class="text-xl font-bold mb-3">Fotoğraflar</h2>
+<div class="flex space-x-4 overflow-x-auto pb-4 -mx-4 px-4 [-ms-scrollbar-style:none] [scrollbar-width:none] [&amp;::-webkit-scrollbar]:hidden">
+<div class="flex-shrink-0 w-32 h-32 rounded-lg border-2 border-dashed border-slate-300 dark:border-slate-700 flex flex-col items-center justify-center text-slate-500 hover:bg-primary/5 dark:hover:bg-primary/10 cursor-pointer">
+<span class="material-symbols-outlined text-4xl">add_a_photo</span>
+<span class="text-sm">Fotoğraf Ekle</span>
+</div>
+<div class="relative flex-shrink-0 w-32 h-32 group">
+<img alt="Cow" class="w-full h-full object-cover rounded-lg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEcj8rGv-KuMhGlma1_SZFo3-k3vThHm_CtyvIOP1AlwGAjMHGKqfWKoNo6uNTVSWOSckrVLl0kevrRC2WrxyqTERfP6KX3gux61rPY1UdhVemaCPjlewCrd9IcU0gdHbUxK_QeiPwvWiysW4L-FcuoJIM6z50C_byY9YhiyJ5H-CshmIYOoRU1_3ehX0X75zagqHR_0vrHSE70eVtEzcv-q0sNgHOzutsIYzVqHZQFO14dPRwQY-77jBpsd9tEqRruqhcquf-OGA"/>
+<button class="absolute top-1 right-1 bg-black/50 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-base">close</span>
+</button>
+</div>
+<div class="relative flex-shrink-0 w-32 h-32 group">
+<img alt="Sheep" class="w-full h-full object-cover rounded-lg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBj91wL3W19JrIwxLNqud4kShCVdMVujQ9NnbOkGo0YyjR_ub01apy3ModbTMKRMWoQEPZfAxkCTrc2zpczzupCUoZkOrLuECcczWfW4kmWQfq5NmRJZ5f_Udns1N0cm0fNAgvkvLuwWIEJ_TdoSQ5LshMI6-CpQwGt7aK96yYP0UkYuRY-Z8uWxuSeEhp1QDNHpTNbOWp5tTCogloEsfC6_f7cEyEiCy5n-_f4O5XX1Dt8lKEX8aqyVxeZBXSdmDqd-JYV9xNo4AE"/>
+<button class="absolute top-1 right-1 bg-black/50 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-base">close</span>
+</button>
+</div>
+</div>
+</section>
+<form class="space-y-6 p-4">
+<div class="space-y-4">
+<div>
+<label class="block text-sm font-medium mb-1" for="title">İlan Başlığı</label>
+<input class="w-full bg-slate-200/50 dark:bg-slate-800/50 border-transparent focus:ring-2 focus:ring-primary focus:border-transparent rounded-lg" id="title" placeholder="İlan başlığını girin" type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block text-sm font-medium mb-1" for="category">Kategori</label>
+<select class="w-full bg-slate-200/50 dark:bg-slate-800/50 border-transparent focus:ring-2 focus:ring-primary focus:border-transparent rounded-lg form-select" id="category">
+<option disabled="" selected="">Kategori Seçin</option>
+<option>Büyükbaş</option>
+<option>Küçükbaş</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-medium mb-1" for="breed">Cins</label>
+<select class="w-full bg-slate-200/50 dark:bg-slate-800/50 border-transparent focus:ring-2 focus:ring-primary focus:border-transparent rounded-lg form-select" id="breed">
+<option disabled="" selected="">Cins Seçin</option>
+<option>Simental</option>
+<option>Holstein</option>
+</select>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium mb-1" for="price">Fiyat</label>
+<div class="flex">
+<input class="w-2/3 bg-slate-200/50 dark:bg-slate-800/50 border-transparent focus:ring-2 focus:ring-primary focus:border-transparent rounded-l-lg" id="price" placeholder="Fiyat" type="number"/>
+<select class="w-1/3 bg-slate-200/50 dark:bg-slate-800/50 border-transparent focus:ring-2 focus:ring-primary focus:border-transparent rounded-r-lg form-select">
+<option>TL</option>
+<option>USD</option>
+<option>EUR</option>
+</select>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium mb-1" for="description">Açıklama</label>
+<textarea class="w-full bg-slate-200/50 dark:bg-slate-800/50 border-transparent focus:ring-2 focus:ring-primary focus:border-transparent rounded-lg" id="description" placeholder="İlan açıklamasını girin" rows="4"></textarea>
+</div>
+</div>
+<hr class="border-slate-300 dark:border-slate-700"/>
+<div>
+<h2 class="text-xl font-bold mb-3">Hayvan Bilgileri</h2>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block text-sm font-medium mb-1" for="age">Yaş</label>
+<input class="w-full bg-slate-200/50 dark:bg-slate-800/50 border-transparent focus:ring-2 focus:ring-primary focus:border-transparent rounded-lg" id="age" placeholder="Yaş" type="number"/>
+</div>
+<div>
+<label class="block text-sm font-medium mb-1" for="weight">Kilo (kg)</label>
+<input class="w-full bg-slate-200/50 dark:bg-slate-800/50 border-transparent focus:ring-2 focus:ring-primary focus:border-transparent rounded-lg" id="weight" placeholder="Kilo" type="number"/>
+</div>
+<div>
+<label class="block text-sm font-medium mb-1" for="gender">Cinsiyet</label>
+<select class="w-full bg-slate-200/50 dark:bg-slate-800/50 border-transparent focus:ring-2 focus:ring-primary focus:border-transparent rounded-lg form-select" id="gender">
+<option disabled="" selected="">Seçin</option>
+<option>Erkek</option>
+<option>Dişi</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-medium mb-1" for="purpose">Amaç</label>
+<select class="w-full bg-slate-200/50 dark:bg-slate-800/50 border-transparent focus:ring-2 focus:ring-primary focus:border-transparent rounded-lg form-select" id="purpose">
+<option disabled="" selected="">Seçin</option>
+<option>Kurbanlık</option>
+<option>Damızlık</option>
+<option>Besilik</option>
+</select>
+</div>
+<div class="col-span-2">
+<label class="block text-sm font-medium mb-1" for="ear-tag">Kulak Küpe Numarası (İsteğe bağlı)</label>
+<input class="w-full bg-slate-200/50 dark:bg-slate-800/50 border-transparent focus:ring-2 focus:ring-primary focus:border-transparent rounded-lg" id="ear-tag" placeholder="TR..." type="text"/>
+</div>
+</div>
+</div>
+<hr class="border-slate-300 dark:border-slate-700"/>
+<div>
+<h2 class="text-xl font-bold mb-3">Konum</h2>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block text-sm font-medium mb-1" for="city">İl</label>
+<select class="w-full bg-slate-200/50 dark:bg-slate-800/50 border-transparent focus:ring-2 focus:ring-primary focus:border-transparent rounded-lg form-select" id="city">
+<option disabled="" selected="">İl Seçin</option>
+<option>Ankara</option>
+<option>İstanbul</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-medium mb-1" for="district">İlçe</label>
+<select class="w-full bg-slate-200/50 dark:bg-slate-800/50 border-transparent focus:ring-2 focus:ring-primary focus:border-transparent rounded-lg form-select" id="district">
+<option disabled="" selected="">İlçe Seçin</option>
+<option>Çankaya</option>
+<option>Kadıköy</option>
+</select>
+</div>
+</div>
+</div>
+</form>
+</main>
+<footer class="sticky bottom-0 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm p-4 border-t border-slate-200 dark:border-slate-800">
+<button class="w-full bg-primary text-white font-bold py-3 px-5 rounded-lg h-12 flex items-center justify-center hover:bg-primary/90 transition-colors">
+        İlanı Yayınla
+      </button>
+</footer>
+</div>
+
+</body></html>

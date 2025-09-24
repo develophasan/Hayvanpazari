@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HayvanPazarı - Giriş Yap</title>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0561d1",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0f1823",
+                        "text-light": "#111827",
+                        "text-dark": "#f3f4f6",
+                        "subtext-light": "#6b7280",
+                        "subtext-dark": "#9ca3af",
+                        "border-light": "#d1d5db",
+                        "border-dark": "#374151"
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "0.75rem",
+                        "xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .form-input::placeholder {
+            color: #9ca3af;
+        }
+        .dark .form-input::placeholder {
+            color: #6b7280;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="flex flex-col h-screen">
+<div class="flex-grow flex flex-col items-center justify-center px-4">
+<div class="w-full max-w-sm text-center">
+<div class="mb-8">
+<svg class="mx-auto h-16 w-auto text-primary" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M14.28 2.342C12.923 1.13 11.077 1.13 9.72 2.342L5.854 5.864C5.558 6.134 5.515 6.586 5.753 6.904L7.54 9.53C7.752 9.814 8.16 9.878 8.46 9.684L10.945 8.13C11.196 7.973 11.516 7.933 11.796 8.025L14.73 8.948C15.022 9.044 15.222 9.324 15.222 9.626V13.5H9.722C9.42 13.5 9.14 13.7 9.044 13.992L8.12 16.927C8.028 17.207 7.988 17.527 8.145 17.778L9.69 20.263C9.884 20.563 10.336 20.606 10.606 20.31L14.128 16.644C15.34 15.287 15.34 13.213 14.128 11.856L12.016 9.984C11.874 9.857 11.97 9.626 12.164 9.626H16.5C16.776 9.626 17 9.402 17 9.126V6.5C17 6.224 16.776 6 16.5 6H13.626C13.385 6 13.155 5.908 12.984 5.737L10.374 3.126C9.998 2.75 9.686 2.5 9.25 2.5C8.814 2.5 8.502 2.75 8.126 3.126L5.516 5.737C5.345 5.908 5.115 6 4.874 6H2.5C2.224 6 2 5.776 2 5.5V3.5C2 3.224 2.224 3 2.5 3H7.374C7.615 3 7.845 2.908 8.016 2.737L10.626 0.126C11.654 -0.902 13.346 -0.902 14.374 0.126L18.874 4.626C19.902 5.654 19.902 7.346 18.874 8.374L14.374 12.874C13.346 13.902 11.654 13.902 10.626 12.874L8.516 10.763C8.374 10.621 8.136 10.686 8.052 10.864L6.264 13.49C6.042 13.801 6.098 14.238 6.388 14.484L8.316 16.144C8.423 16.236 8.572 16.275 8.711 16.246L11.646 15.323C11.938 15.227 12.138 14.947 12.138 14.645V10.771C12.138 10.495 12.362 10.271 12.638 10.271H17.5C17.776 10.271 18 10.495 18 10.771V13.874C18.928 13.874 19.784 14.239 20.414 14.869L21.828 16.283C22.414 16.869 22.707 17.662 22.707 18.5C22.707 19.338 22.414 20.131 21.828 20.717C20.657 21.888 18.791 21.888 17.62 20.717L14.316 17.413C13.931 17.028 13.402 16.828 12.857 16.945L10.026 17.653C9.076 17.878 8.163 18.508 7.643 19.349L6.19 21.674C5.518 22.77 6.331 24.129 7.558 23.82L10.672 23.018C11.536 22.793 12.441 22.17 12.946 21.34L14.28 19.342C15.932 16.942 18.89 16.595 21.13 18.358C23.036 19.866 23.418 22.585 21.91 24.491C20.402 26.397 17.683 26.779 15.777 25.271C13.377 23.364 12.923 20.134 14.28 17.658L16.283 14.283C16.869 13.298 16.143 12 15 12H13.626L16.644 8.978C17.856 7.77 17.856 5.73 16.644 4.522L14.28 2.342Z" fill-rule="evenodd"></path>
+</svg>
+<h1 class="text-3xl font-bold text-text-light dark:text-text-dark mt-4">HayvanPazarı</h1>
+</div>
+<form class="space-y-4">
+<div>
+<input class="form-input w-full px-4 py-3 rounded-lg bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark text-text-light dark:text-text-dark focus:ring-primary focus:border-primary" placeholder="E-posta" required="" type="email"/>
+</div>
+<div>
+<input class="form-input w-full px-4 py-3 rounded-lg bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark text-text-light dark:text-text-dark focus:ring-primary focus:border-primary" placeholder="Parola" required="" type="password"/>
+</div>
+<div class="text-right">
+<a class="text-sm text-primary hover:underline" href="#">Şifremi unuttum</a>
+</div>
+<div>
+<button class="w-full bg-primary text-white font-bold py-3 px-4 rounded-lg hover:bg-opacity-90 transition duration-300" type="submit">Giriş Yap</button>
+</div>
+</form>
+</div>
+</div>
+<div class="py-6 px-4 text-center">
+<p class="text-sm text-subtext-light dark:text-subtext-dark">
+                Hesabın yok mu? <a class="font-medium text-primary hover:underline" href="#">Kayıt ol</a>
+</p>
+</div>
+</div>
+
+</body></html>

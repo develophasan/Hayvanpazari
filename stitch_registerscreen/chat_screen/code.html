@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HayvanPazarı Chat</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0561d1",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0f1823",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
+<div class="flex flex-col h-screen justify-between">
+<header class="bg-background-light dark:bg-background-dark shadow-md sticky top-0 z-10">
+<div class="p-4 flex items-center justify-between">
+<button class="text-gray-700 dark:text-gray-300">
+<span class="material-symbols-outlined">arrow_back_ios_new</span>
+</button>
+<div class="flex flex-col items-center">
+<div class="flex items-center gap-2">
+<img alt="Ahmet's avatar" class="w-8 h-8 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCV2xKY2WfkK03wjkzl_LbhxyKOExM_aelBFYZc8YGrCUsUEoSMHkHApdURcV1noY0xotwyz2a0f6YCpQ_CKUyTz8DT4PDKxaYN-8PaPKs9tlmuZgZZlrT9xT2MD_hA_ENwIm4FSbjpxtRLGFw0r-zUR-Mkv4taDgSYDz8XFVzBKviUNol1KDiP7pJ127-J8b-zUQWlPGp0-jEHNxk0Q4dhgfeLKjFEJWyaeSmGLkR4lyVTUZ8T1e4jXE9sJ49vblpH-nsCq4Rlrao"/>
+<h1 class="text-lg font-bold text-gray-900 dark:text-white">Ahmet</h1>
+</div>
+<p class="text-xs text-gray-500 dark:text-gray-400">Satılık Kedi için</p>
+</div>
+<button class="text-gray-700 dark:text-gray-300">
+<span class="material-symbols-outlined">phone</span>
+</button>
+</div>
+<div class="border-t border-gray-200 dark:border-gray-700 bg-white/50 dark:bg-black/20">
+<div class="p-2 flex items-center gap-3">
+<img alt="Listing image" class="w-12 h-12 rounded-lg object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLwL0kzy7hSQF_BnkqiG6XbGyIZwaGD5hcZKHy5xB-OZyq4hFhPc3pg6ky7ebOCLOFV8M-qER9IWqU_7gAEa046z0PgEHbDFVa8MMbFusIiR7RQInYZ03Z0O9Drqlj8pCOICE8vX9qU1SqsDRHHz7uXj7y58uF47zwcTbZKoOCYuZoL0EIEi-KWor6WoG6ztIEunEXlkCY8rvmE2EWCbLqq_MKw4LBJppTKKzQTzWf8WidfIOi4jWuIjrPBB7Pq7iMMxxIw4g8RSw"/>
+<div class="flex-1">
+<p class="font-semibold text-sm text-gray-800 dark:text-gray-200">Satılık Kedi</p>
+<p class="text-xs text-primary font-bold">1.800 TL</p>
+</div>
+<button class="text-primary">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</header>
+<main class="flex-1 overflow-y-auto p-4 space-y-6">
+<div class="flex items-end gap-2 max-w-[80%]">
+<img alt="Ahmet's avatar" class="w-8 h-8 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDX6doKFgURxNKXZAzRLboBAyfNaIcUJIJvER69TXi1qucXukXrhq9czbm8cUrERAJE4xNauR1XwwAgGHaz5ya9XfBrEm1OL7GDvfm7cJd2T512kp27fxlnuOwwuPXCfv3s_SWAwmbjyagxHhmbCcvX359HFjWVf3_UWCwPvxIRiAxhRrihQnwbuKkSeri-W0edreVcnXGdDb0SZOKkSiGy3CZuP_CY7FMcMvEzgChFn3qZ_y_BSTbeHp98G9jeIVsZAzXB9FtnSNY"/>
+<div class="space-y-1">
+<div class="bg-white dark:bg-gray-700 p-3 rounded-lg rounded-bl-none">
+<p class="text-sm text-gray-800 dark:text-gray-200">Merhaba, kedinizle ilgileniyorum. Fiyat konusunda anlaşabilir miyiz?</p>
+</div>
+<span class="text-xs text-gray-400 dark:text-gray-500 px-2">10:45</span>
+</div>
+</div>
+<div class="flex items-end gap-2 max-w-[80%] ml-auto justify-end">
+<div class="space-y-1 text-right">
+<div class="bg-primary p-3 rounded-lg rounded-br-none">
+<p class="text-sm text-white">Merhaba Ahmet, tabii ki konuşabiliriz. Ne düşünüyorsunuz?</p>
+</div>
+<span class="text-xs text-gray-400 dark:text-gray-500 px-2">10:46</span>
+</div>
+<img alt="Mehmet's avatar" class="w-8 h-8 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCV2xKY2WfkK03wjkzl_LbhxyKOExM_aelBFYZc8YGrCUsUEoSMHkHApdURcV1noY0xotwyz2a0f6YCpQ_CKUyTz8DT4PDKxaYN-8PaPKs9tlmuZgZZlrT9xT2MD_hA_ENwIm4FSbjpxtRLGFw0r-zUR-Mkv4taDgSYDz8XFVzBKviUNol1KDiP7pJ127-J8b-zUQWlPGp0-jEHNxk0Q4dhgfeLKjFEJWyaeSmGLkR4lyVTUZ8T1e4jXE9sJ49vblpH-nsCq4Rlrao"/>
+</div>
+<div class="flex items-end gap-2 max-w-[80%]">
+<img alt="Ahmet's avatar" class="w-8 h-8 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDv6mcFYi-SfbWduGD3taVL8yVomYfbNEoKK8CYGriHUk6w-73NHNwl8qRBmIDToh8neHAu1lJ1Hryo2LSgSJQq21pXzK5-FY4qvWmsoMeiRq1iH5irZDBHx8VKdbJam_RPpbqMeJtC2cPyEmWGpQYP_k50k98a-_7bwXLswuFb5pxK1EtrQrzq8gbwrcep1kVnXaKRzxeJVAbAzixuUx_IUepbc0nev_u8vRZZfxczV0x4HTTHqyhb86Iys3XdkXPPX3pRS_OwXus"/>
+<div class="space-y-1">
+<div class="bg-primary/10 dark:bg-primary/20 border border-primary/50 p-3 rounded-lg rounded-bl-none">
+<p class="text-sm font-semibold text-primary dark:text-primary/90">Teklif: 1.500 TL</p>
+</div>
+<span class="text-xs text-gray-400 dark:text-gray-500 px-2">10:48</span>
+</div>
+</div>
+<div class="flex items-end gap-2 max-w-[80%] ml-auto justify-end">
+<div class="space-y-1 text-right">
+<div class="bg-primary p-3 rounded-lg rounded-br-none">
+<p class="text-sm text-white">1800 TL son fiyatım.</p>
+</div>
+<span class="text-xs text-gray-400 dark:text-gray-500 px-2">10:49</span>
+</div>
+<img alt="Mehmet's avatar" class="w-8 h-8 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBE1JkCvT9U8i2lyBYPjsJrX7MmP8nB1HAH8naZez2aUUGNr1_fw9o2-rtGEPtwsSWT5b1bU4jsNbXdbkiXhj6ChNOYHrnUH8ANwSZ1xIRX9vLMY0HX2tMcS1vRys3Zu5RxbgKY5OCyLUw0eN2MMsbSwa3oK9_5srdchvx9qk7LrZD4u20Mado_-UJLXmQItACVzPDHOVeeFnjyj70gTJl2AlCHegcMN5b06HaKPWRDJKVAi7MqiOL3EFHSHP-G15EFxzBSHYZdcA8"/>
+</div>
+<div class="flex items-end gap-2 max-w-[80%]">
+<img alt="Ahmet's avatar" class="w-8 h-8 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmV9pkbk8gNnhM-zxsniaKT2OqsBzQ8njSXs9816axmljJ9jMXdNTYzocHRWISgNemjgPRqXjkMu3WzOh3VVxU2cHdhznD1hHL6B5GxWu0eOUFeGOo25dQf-gC1_wrat5fS2JwsqM3gV0fGqd58tCw5g3btZlyYWrfKgwd5LiuRgxeurTEGnXYxSn8sHpStUlbdlWqNXEvLzIcI54iPpU_V9DN0aKP1Gb6ha9geiGrCBklwFKT5suEprAs6GjAuy3r4qnlUW2CeQ8"/>
+<div class="space-y-1">
+<div class="bg-white dark:bg-gray-700 p-3 rounded-lg rounded-bl-none">
+<p class="text-sm text-gray-800 dark:text-gray-200">Tamam, kabul ediyorum.</p>
+</div>
+<span class="text-xs text-gray-400 dark:text-gray-500 px-2">10:51</span>
+</div>
+</div>
+</main>
+<footer class="bg-background-light dark:bg-background-dark border-t border-gray-200 dark:border-gray-700 p-4 sticky bottom-0">
+<div class="flex items-center gap-2 mb-2">
+<button class="flex-shrink-0 bg-primary/10 dark:bg-primary/20 text-primary font-bold py-2 px-4 rounded-lg text-sm">
+                    Teklif Ver
+                </button>
+<div class="relative flex-grow">
+<input class="w-full bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg py-2 pl-4 pr-12 focus:outline-none focus:ring-2 focus:ring-primary text-sm text-gray-900 dark:text-gray-100" placeholder="Mesajınızı yazın..." type="text"/>
+<button class="absolute inset-y-0 right-0 flex items-center justify-center w-12 text-primary">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+</footer>
+</div>
+
+</body></html>

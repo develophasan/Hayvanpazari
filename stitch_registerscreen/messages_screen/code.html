@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HayvanPazarı - Messages</title>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Plus+Jakarta+Sans:wght@400;500;700;800" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0561d1",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0f1823",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-800 dark:text-slate-200">
+<div class="relative flex h-auto min-h-screen w-full flex-col justify-between overflow-x-hidden">
+<div class="flex-grow">
+<header class="sticky top-0 z-10 flex items-center justify-between border-b border-slate-200/80 bg-background-light/80 p-4 pb-3 backdrop-blur-sm dark:border-slate-800/80 dark:bg-background-dark/80">
+<button class="flex size-10 shrink-0 items-center justify-center rounded-full text-slate-600 hover:bg-slate-200 dark:text-slate-400 dark:hover:bg-slate-800">
+<svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"></path>
+</svg>
+</button>
+<h1 class="flex-1 text-center text-lg font-bold text-slate-900 dark:text-white">Mesajlar</h1>
+<div class="size-10"></div>
+</header>
+<main class="divide-y divide-slate-200 dark:divide-slate-800">
+<a class="flex cursor-pointer items-center gap-4 bg-background-light p-4 transition-colors hover:bg-slate-100 dark:bg-background-dark dark:hover:bg-slate-800/50" href="#">
+<div class="relative shrink-0">
+<img alt="Emre Can" class="h-14 w-14 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1i2jlou1lq4D33C2UqpQITkzHVN__QN2OODfYqsyHfoXmX8ucmiZM6GyGG-zG9NAabRN2cVgiCY3W-RCRaluGCdPUk51MJimQVwj3N91ewNqlQnBbfsRa4Ir_BL5nAZQPe_WdCn4TYLWPD7OmnVXnKvxh7_I0-ovSo_b2QIcP-jkI2DADBQuxwXLLhnZlWKlumZPjSBL5XefNlcQOcnNVeUeVwTdXRZpsIyfuS34GFZH5R-482VPWDpK_S5KXg80qT-ySciS2RXA"/>
+</div>
+<div class="flex-1">
+<div class="flex items-start justify-between">
+<div>
+<p class="font-bold text-slate-900 dark:text-white">Emre Can</p>
+<p class="text-sm text-slate-600 dark:text-slate-400">Listing: Exotic Birds</p>
+</div>
+<span class="text-xs text-slate-500 dark:text-slate-500">2d</span>
+</div>
+<div class="mt-1 flex items-center justify-between">
+<p class="w-10/12 truncate text-sm text-slate-500 dark:text-slate-400">Hey! Is the macaw still available? I'm very interested.</p>
+<span class="flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs font-bold text-white">2</span>
+</div>
+</div>
+</a>
+<a class="flex cursor-pointer items-center gap-4 bg-background-light p-4 transition-colors hover:bg-slate-100 dark:bg-background-dark dark:hover:bg-slate-800/50" href="#">
+<div class="relative shrink-0">
+<img alt="Ayse Demir" class="h-14 w-14 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLyc9tzAU9nfkEynXrDlBcn8h1HK6MAFnidjls4WkuU2_Z7_EYqMs7aPjk1CDcomVdbrx19r5tHu1I22EQkTsc-TRiekmCDvpgxj3NuNc8znUg_Ac55GxoOHgCYP1_zztdljd87w2sRa18xphirJdGTYfilzUW-3lutwRolXDn4rZI-4IkDSY4_0WYDfWG3Y3dR-AW7xCI_nBXRgvSnTw8TfMPvuHD5NOXaWV5lL0dE6c7wiHkBFFe6uqVMU4aECSWoZqZGh7rKSc"/>
+</div>
+<div class="flex-1">
+<div class="flex items-start justify-between">
+<div>
+<p class="font-bold text-slate-900 dark:text-white">Ayse Demir</p>
+<p class="text-sm text-slate-600 dark:text-slate-400">Listing: Rare Fish</p>
+</div>
+<span class="text-xs text-slate-500 dark:text-slate-500">1w</span>
+</div>
+<p class="mt-1 w-full truncate text-sm text-slate-500 dark:text-slate-400">Okay, thank you for the information!</p>
+</div>
+</a>
+<a class="flex cursor-pointer items-center gap-4 bg-background-light p-4 transition-colors hover:bg-slate-100 dark:bg-background-dark dark:hover:bg-slate-800/50" href="#">
+<div class="relative shrink-0">
+<img alt="Mehmet Yilmaz" class="h-14 w-14 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWY3EIihHb9UDM_TXrCSI1-qFXK1kaYhLgAvBj3ZbqUdOmaBE3MJqObRcdDS1YNabDvaBNB98FrzplIDB23aUrQQmuO7lB90WZGaXN0S6b5gicZ-ed3kZaaWZskWm9POKEinVZ4LSLMVPbujQSYXaUQUdWN002UqzgDk5cvIoKvgA7jNB9xIfI5W2FeyYppbiDu2RblYyki-vaShYVe9IDisgHbj8EmXgfmN2_WIpl_ROOmrFTWHeEaNAkrxOdCJGdqSfFYyLxZHQ"/>
+</div>
+<div class="flex-1">
+<div class="flex items-start justify-between">
+<div>
+<p class="font-bold text-slate-900 dark:text-white">Mehmet Yilmaz</p>
+<p class="text-sm text-slate-600 dark:text-slate-400">Listing: Farm Animals</p>
+</div>
+<span class="text-xs text-slate-500 dark:text-slate-500">2w</span>
+</div>
+<p class="mt-1 w-full truncate text-sm text-slate-500 dark:text-slate-400">You're welcome. Let me know if you have other questions.</p>
+</div>
+</a>
+</main>
+</div>
+<nav class="sticky bottom-0 z-10 border-t border-slate-200/80 bg-background-light/80 backdrop-blur-sm dark:border-slate-800/80 dark:bg-background-dark/80">
+<div class="flex justify-around px-2 pt-2 pb-4">
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500 dark:text-slate-400" href="#">
+<svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M218.83,103.77l-80-75.48a1.14,1.14,0,0,1-.11-.11,16,16,0,0,0-21.53,0l-.11.11L37.17,103.77A16,16,0,0,0,32,115.55V208a16,16,0,0,0,16,16H96a16,16,0,0,0,16-16V160h32v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V115.55A16,16,0,0,0,218.83,103.77ZM208,208H160V160a16,16,0,0,0-16-16H112a16,16,0,0,0-16,16v48H48V115.55l.11-.1L128,40l79.9,75.43.11.1Z"></path>
+</svg>
+<p class="text-xs font-medium">Home</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500 dark:text-slate-400" href="#">
+<svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path>
+</svg>
+<p class="text-xs font-medium">Search</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500 dark:text-slate-400" href="#">
+<svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M208,32H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32Zm0,176H48V48H208V208Zm-32-80a8,8,0,0,1-8,8H136v32a8,8,0,0,1-16,0V136H88a8,8,0,0,1,0-16h32V88a8,8,0,0,1,16,0v32h32A8,8,0,0,1,176,128Z"></path>
+</svg>
+<p class="text-xs font-medium">Listings</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-primary dark:text-primary" href="#">
+<svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48ZM98.71,128,40,181.81V74.19Zm11.84,10.85,12,11.05a8,8,0,0,0,10.82,0l12-11.05,58,53.15H52.57ZM157.29,128,216,74.18V181.82Z"></path>
+</svg>
+<p class="text-xs font-bold">Messages</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500 dark:text-slate-400" href="#">
+<svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M230.92,212c-15.23-26.33-38.7-45.21-66.09-54.16a72,72,0,1,0-73.66,0C63.78,166.78,40.31,185.66,25.08,212a8,8,0,1,0,13.85,8c18.84-32.56,52.14-52,89.07-52s70.23,19.44,89.07,52a8,8,0,1,0,13.85-8ZM72,96a56,56,0,1,1,56,56A56.06,56.06,0,0,1,72,96Z"></path>
+</svg>
+<p class="text-xs font-medium">Profile</p>
+</a>
+</div>
+</nav>
+</div>
+
+</body></html>

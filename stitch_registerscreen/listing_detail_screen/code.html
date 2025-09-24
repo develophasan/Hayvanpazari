@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Plus+Jakarta+Sans%3Awght%40400%3B500%3B700%3B800" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#0561d1",
+              "background-light": "#f5f7f8",
+              "background-dark": "#0f1823",
+            },
+            fontFamily: {
+              display: ["Plus Jakarta Sans"],
+            },
+            borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" },
+          },
+        },
+      };
+    </script>
+<title>Stitch Design</title>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-display bg-background-light dark:bg-background-dark">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<div class="flex-grow">
+<div class="absolute top-0 left-0 right-0 z-10 flex items-center justify-between p-4">
+<button class="flex h-10 w-10 items-center justify-center rounded-full bg-black/30 text-white">
+<svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"></path>
+</svg>
+</button>
+<div class="flex items-center gap-2">
+<button class="flex h-10 w-10 items-center justify-center rounded-full bg-black/30 text-white">
+<svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M229.66,109.66l-48,48a8,8,0,0,1-11.32-11.32L204.69,112H165a88,88,0,0,0-85.23,66,8,8,0,0,1-15.5-4A103.94,103.94,0,0,1,165,96h39.71L170.34,61.66a8,8,0,0,1,11.32-11.32l48,48A8,8,0,0,1,229.66,109.66ZM192,208H40V88a8,8,0,0,0-16,0V208a16,16,0,0,0,16,16H192a8,8,0,0,0,0-16Z"></path>
+</svg>
+</button>
+<button class="flex h-10 w-10 items-center justify-center rounded-full bg-black/30 text-white">
+<svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M224,128a8,8,0,0,1-8,8H160v32a8,8,0,0,1-16,0V136H80a8,8,0,0,1,0-16h64V88a8,8,0,0,1,16,0v32h56A8,8,0,0,1,224,128Z"></path>
+</svg>
+</button>
+</div>
+</div>
+<div class="relative h-80 w-full">
+<div class="h-full w-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC5gL_OJ57F5oYwIt3ty2JBpCnq08-yav6vSOk5ZW0fKbKiHlj5ZFVXcmEcQGh16LmgYGemTrEjsXSiBAlfJro11Gl1KMDqxqvv74bEVbgERxZwPbq6De6XsgeHfNSneK_2oyIbHHl4NrhMkMkA1Z1MnHfbrTaE2NZrt1QwOiSlLvwAjGyIG43C4glC8FTV3mHyUSGJkLNFWKF6mX76uFFABea8FhzXCXlYfviOQSFJwp0I54_hDo355yHGnTvY252VTZKZmlTcWJ8");'></div>
+<div class="absolute inset-x-0 bottom-0 flex justify-center gap-2 p-4">
+<div class="h-2 w-8 rounded-full bg-white"></div>
+<div class="h-2 w-2 rounded-full bg-white/50"></div>
+<div class="h-2 w-2 rounded-full bg-white/50"></div>
+<div class="h-2 w-2 rounded-full bg-white/50"></div>
+<div class="h-2 w-2 rounded-full bg-white/50"></div>
+</div>
+</div>
+<div class="p-4 space-y-4">
+<div class="flex items-center justify-between">
+<div>
+<p class="text-sm text-primary">Goats</p>
+<h1 class="text-2xl font-bold text-gray-900 dark:text-white">Saanen Goat</h1>
+</div>
+<p class="text-2xl font-bold text-primary">₺1,500</p>
+</div>
+<div class="text-sm text-gray-500 dark:text-gray-400 space-y-1">
+<div class="flex items-center gap-2">
+<svg fill="currentColor" height="16" viewBox="0 0 256 256" width="16" xmlns="http://www.w3.org/2000/svg">
+<path d="M128,64a40,40,0,1,0,40,40A40,40,0,0,0,128,64Zm0,64a24,24,0,1,1,24-24A24,24,0,0,1,128,128Zm0-112a88.1,88.1,0,0,0-88,88c0,33.4,27,73.1,80.52,112.8a8,8,0,0,0,14.9,0C189.05,213.1,216,173.4,216,120A88.1,88.1,0,0,0,128,16Zm0,200c-40.38-34-72-66.36-72-96a72,72,0,1,1,144,0C200,150,168.3,182.23,128,216Z"></path>
+</svg>
+<span>Izmir, Turkey</span>
+</div>
+<div class="flex items-center gap-2">
+<svg fill="currentColor" height="16" viewBox="0 0 256 256" width="16" xmlns="http://www.w3.org/2000/svg">
+<path d="M208,32H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM128,224a16,16,0,0,1-16-16V176H96a16,16,0,0,1,0-32h16V128a16,16,0,0,1,16-16h48V48h48V208H128Z"></path>
+</svg>
+<span>Published: 2 days ago · 123 views</span>
+</div>
+</div>
+</div>
+<div class="border-t border-gray-200 dark:border-gray-800">
+<div class="p-4">
+<h2 class="text-lg font-bold text-gray-900 dark:text-white">Animal Details</h2>
+<div class="mt-4 grid grid-cols-2 gap-4 text-sm">
+<div>
+<p class="text-gray-500 dark:text-gray-400">Breed</p>
+<p class="text-gray-900 dark:text-white font-medium">Saanen</p>
+</div>
+<div>
+<p class="text-gray-500 dark:text-gray-400">Age</p>
+<p class="text-gray-900 dark:text-white font-medium">2 years</p>
+</div>
+<div>
+<p class="text-gray-500 dark:text-gray-400">Gender</p>
+<p class="text-gray-900 dark:text-white font-medium">Female</p>
+</div>
+<div>
+<p class="text-gray-500 dark:text-gray-400">Vaccination Status</p>
+<p class="text-gray-900 dark:text-white font-medium">Vaccinated</p>
+</div>
+<div>
+<p class="text-gray-500 dark:text-gray-400">Health Certificate</p>
+<p class="text-gray-900 dark:text-white font-medium">Available</p>
+</div>
+<div>
+<p class="text-gray-500 dark:text-gray-400">Pedigree</p>
+<p class="text-gray-900 dark:text-white font-medium">Available</p>
+</div>
+</div>
+</div>
+</div>
+<div class="border-t border-gray-200 dark:border-gray-800">
+<div class="p-4">
+<h2 class="text-lg font-bold text-gray-900 dark:text-white">Description</h2>
+<p class="mt-2 text-sm text-gray-600 dark:text-gray-300">
+              Healthy Saanen goat for sale. Excellent milk production. Suitable for breeding or dairy farming. Contact for more details.
+            </p>
+</div>
+</div>
+<div class="border-t border-gray-200 dark:border-gray-800">
+<div class="p-4">
+<h2 class="text-lg font-bold text-gray-900 dark:text-white">Seller Information</h2>
+<div class="mt-4 flex items-center gap-4">
+<img alt="Seller Avatar" class="h-14 w-14 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCM1soPHiB7SsUQJBO4xo-yL0n5IyRH40ld-_58rPsIzO6A1-WN4eoOk-BjKt2UAlEWnwNPRCFRMrEwYJlzHORcEOJeBxV_A7xn1uSlzMr-BHERCXJmhWBmRmnatS9Kg5BA7SoePN5nbfuL7nyE7BvjNq_Cb5Qe2E5DKqHR_a5ZRxR1i3AiGdlZu9_eWZzYs9YTe9suIywMCD6NPTBMYOEFMN4jQkMTX0r8eEH0Nj77m92OPsWjwk7WwrwQ70mndKkcq4yqzH1yPto"/>
+<div>
+<p class="font-bold text-gray-900 dark:text-white">Ahmet Yilmaz</p>
+<div class="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400">
+<svg class="text-yellow-400" fill="currentColor" height="16" viewBox="0 0 256 256" width="16" xmlns="http://www.w3.org/2000/svg">
+<path d="M239.2,97.4A16.4,16.4,0,0,0,224.6,86l-59.4-5.1-23.2-55.2a16.2,16.2,0,0,0-28.8,0L89.9,81,30.5,86A16.4,16.4,0,0,0,16.8,97.4a16.8,16.8,0,0,0,6.2,17.4l45.2,39.4-13.5,58.6a16.1,16.1,0,0,0,23.8,18.1L128,206.3l50,29.8a16.1,16.1,0,0,0,23.8-18.1l-13.5-58.6,45.2-39.4A16.8,16.8,0,0,0,239.2,97.4Z"></path>
+</svg>
+<span>4.8 (15 reviews)</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-t border-gray-200 dark:border-gray-800">
+<div class="p-4">
+<h2 class="text-lg font-bold text-gray-900 dark:text-white">Seller's Other Listings</h2>
+</div>
+<div class="flex overflow-x-auto px-4 pb-4 gap-4 [-ms-scrollbar-style:none] [scrollbar-width:none] [&amp;::-webkit-scrollbar]:hidden">
+<div class="flex w-40 flex-shrink-0 flex-col gap-2">
+<img alt="Saanen Goat" class="w-full h-28 rounded-lg object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuByELgr4sjc8FW44HIib7fCG8JS_lettg4glIswH6v9G_ZfB8d-G-_DxXYl3bQJav-7zAHNEQoQ9KaCdTsWQEnQY-irQpksaLndNa6Es4bgRCOM4htVlkLuT32Ofu34PLnhOmra9A8HTUD5NwweZMuxK9IYIIywoOWEMYJuVL2B7mTkZnkPeg79ggDmVopWDJEY7AWFPJDZ4eI3yPBNtpQscGSU4raH7aZS5iPzcnM6euE871VeYMTGYuxbdstAVlAWTCrCrqhwMeM"/>
+<div>
+<p class="font-medium text-gray-900 dark:text-white">Saanen Goat</p>
+<p class="text-sm text-primary">₺1,200</p>
+</div>
+</div>
+<div class="flex w-40 flex-shrink-0 flex-col gap-2">
+<img alt="Merino Sheep" class="w-full h-28 rounded-lg object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjy26eXI6U3amY-8o2yIz20JHtjwBMCEUIgvDvOUqa4PdUEsix_KVhHrltkf1OpVEansfkbGXZKFnaxeQVfX58EWlgwYpoXYxzPx5pYI_QZIGRNOMja0XdWbV2CdfexvswWLMGQaKwaK3zlpvOMDXLgbks0uOKR63B0L6sKaAIjYEvtGQcBfeuScnOndiPt7t2bOKHLGy6MaBR1sJrRcBXB3jeYj1CEsn-mcDyygiL495yrKzZ0I4qOQFP7eqwFU9_DIyCLpJ_6fY"/>
+<div>
+<p class="font-medium text-gray-900 dark:text-white">Merino Sheep</p>
+<p class="text-sm text-primary">₺800</p>
+</div>
+</div>
+<div class="flex w-40 flex-shrink-0 flex-col gap-2">
+<img alt="Holstein Cow" class="w-full h-28 rounded-lg object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjpCLNgMnt-EnjqBQPqWbAMwyFQQ5FD1RIav4dIOGAjca_vraNpCKwl3xp_hplK7CkHxENPW68okN4xMufOJbqvRHRd5fPR4cPrVBgLIdRanuyb1WJrtKsU56Pa3OKr6ZSMDFhzIOm0UuH0AT2rTrN50yUGHjChPv5kQfu63wRirlZmsbLgA9afKiUhWqEs3cmXwEIm90lDvw5AL4MpmSaYa7NhnyfWQloIB0KkEZxghqbxRVkAgCOjzma99CRKHP3Clj7Dvf0ZEE"/>
+<div>
+<p class="font-medium text-gray-900 dark:text-white">Holstein Cow</p>
+<p class="text-sm text-primary">₺2,500</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sticky bottom-0 bg-background-light dark:bg-background-dark border-t border-gray-200 dark:border-gray-800 p-4 space-y-2">
+<div class="flex gap-2">
+<button class="flex-1 rounded-lg bg-primary/10 dark:bg-primary/20 text-primary py-3 text-sm font-bold">Mesaj Gönder</button>
+<button class="flex-1 rounded-lg bg-primary/10 dark:bg-primary/20 text-primary py-3 text-sm font-bold">Ara</button>
+</div>
+<button class="w-full rounded-lg bg-primary text-white py-3 text-sm font-bold">Teklif Ver</button>
+</div>
+</div>
+
+</body></html>
