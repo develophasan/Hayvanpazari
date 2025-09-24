@@ -46,12 +46,62 @@ interface Props {
 }
 
 const HomeScreen: React.FC<Props> = ({ navigation }) => {
+  console.log('🏠 HomeScreen component rendering');
+  
   const [categories, setCategories] = useState<Category[]>([]);
   const [featuredListings, setFeaturedListings] = useState<Listing[]>([]);
   const [recentListings, setRecentListings] = useState<Listing[]>([]);
   const [refreshing, setRefreshing] = useState(false);
   const { user } = useAuth();
   const nav = useNavigation();
+
+  // BYPASS useEffect - direct data fetch on component mount
+  const [dataLoaded, setDataLoaded] = useState(false);
+  
+  console.log('🏠 HomeScreen state:', { 
+    categories: categories.length, 
+    recentListings: recentListings.length,
+    dataLoaded 
+  });
+
+  // Load data immediately if not loaded
+  if (!dataLoaded && API_BASE_URL) {
+    console.log('🏠 Starting immediate data load...');
+    setDataLoaded(true);
+    
+    // Use setTimeout to avoid state update during render
+    setTimeout(async () => {
+      try {
+        console.log('⏰ Timeout triggered - loading data');
+        
+        // Load categories
+        console.log('📂 Fetching categories from:', `${API_BASE_URL}/api/categories`);
+        const categoriesResponse = await fetch(`${API_BASE_URL}/api/categories`);
+        console.log('📂 Categories response status:', categoriesResponse.status);
+        
+        if (categoriesResponse.ok) {
+          const categoriesData = await categoriesResponse.json();
+          console.log('📂 Categories loaded:', categoriesData.length);
+          setCategories(categoriesData);
+        }
+
+        // Load recent listings
+        console.log('📋 Fetching listings from:', `${API_BASE_URL}/api/listings?limit=10`);
+        const listingsResponse = await fetch(`${API_BASE_URL}/api/listings?limit=10`);
+        console.log('📋 Listings response status:', listingsResponse.status);
+        
+        if (listingsResponse.ok) {
+          const listingsData = await listingsResponse.json();
+          console.log('📋 Listings loaded:', listingsData.length);
+          console.log('📋 First listing:', listingsData[0]?.title);
+          setRecentListings(listingsData);
+          setFeaturedListings(listingsData.slice(0, 3));
+        }
+      } catch (error) {
+        console.error('❌ Data load error:', error);
+      }
+    }, 100);
+  }
 
   useEffect(() => {
     loadData();
