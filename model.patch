@@ -576,7 +576,7 @@ index 19d2a48..e69de29 100644
 ---------+import requests
 ---------+import json
 ---------+
----------+BACKEND_URL = "https://animal-bazaar-1.preview.emergentagent.com/api"
+---------+BACKEND_URL = "https://livestock-app-2.preview.emergentagent.com/api"
 ---------+TEST_EMAIL = "test@test.com"
 ---------+TEST_PASSWORD = "123456"
 ---------+
@@ -1357,7 +1357,7 @@ index 19d2a48..e69de29 100644
 -------------------------+import sys
 -------------------------+
 -------------------------+# Backend URL from frontend .env
--------------------------+BACKEND_URL = "https://animal-bazaar-1.preview.emergentagent.com/api"
+-------------------------+BACKEND_URL = "https://livestock-app-2.preview.emergentagent.com/api"
 -------------------------+
 -------------------------+class HayvanPazariTester:
 -------------------------+    def __init__(self):
@@ -2458,7 +2458,7 @@ index 19d2a48..e69de29 100644
 ---------+import requests
 ---------+import json
 ---------+
----------+BACKEND_URL = "https://animal-bazaar-1.preview.emergentagent.com/api"
+---------+BACKEND_URL = "https://livestock-app-2.preview.emergentagent.com/api"
 ---------+TEST_EMAIL = "test@test.com"
 ---------+TEST_PASSWORD = "123456"
 ---------+

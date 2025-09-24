@@ -6,7 +6,7 @@ Test with the specific user mentioned in the review request
 import requests
 import json
 
-BACKEND_URL = "https://animal-bazaar-1.preview.emergentagent.com/api"
+BACKEND_URL = "https://livestock-app-2.preview.emergentagent.com/api"
 TEST_EMAIL = "test@test.com"
 TEST_PASSWORD = "123456"
 
