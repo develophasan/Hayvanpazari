@@ -784,6 +784,38 @@ async def send_message(message_data: MessageCreate, user_id: str = Depends(verif
     # Remove MongoDB _id field to avoid conflicts  
     message_dict.pop("_id", None)
     
+    # Create notification for receiver
+    receiver_id = message_data.receiver_id
+    sender = await db.users.find_one({"_id": user_id})
+    sender_name = f"{sender['first_name']} {sender['last_name']}" if sender else "Bilinmeyen Kullanıcı"
+    
+    # Get listing info for context
+    listing = await db.listings.find_one({"_id": message_data.listing_id})
+    listing_title = listing["title"] if listing else "İlan"
+    
+    if message_data.message_type == "offer":
+        title = "Yeni Teklif"
+        message = f"{sender_name} '{listing_title}' ilanınız için {message_data.offer_amount:,.0f} TL teklif verdi"
+        priority = NotificationPriority.HIGH
+    else:
+        title = "Yeni Mesaj"
+        message = f"{sender_name} '{listing_title}' ilanınız hakkında mesaj gönderdi"
+        priority = NotificationPriority.HIGH
+    
+    await create_notification(
+        user_id=receiver_id,
+        notification_type=NotificationType.MESSAGE,
+        priority=priority,
+        title=title,
+        message=message,
+        data={
+            "message_id": message_dict["id"],
+            "listing_id": message_data.listing_id,
+            "sender_id": user_id,
+            "sender_name": sender_name
+        }
+    )
+    
     # Ensure the response follows the expected Message model
     return Message(**message_dict)
 
