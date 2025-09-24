@@ -255,28 +255,31 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
         {/* Quick Actions */}
         <View style={styles.quickActions}>
           {Platform.OS === 'web' ? (
-            <div
-              onClick={() => {
-                console.log('🎯 İlan Ver web button clicked!');
-                navigation.navigate('CreateListing');
-              }}
+            <View
               style={{
                 backgroundColor: '#007AFF',
                 borderRadius: 12,
                 padding: 16,
                 alignItems: 'center',
                 justifyContent: 'center',
-                cursor: 'pointer',
-                display: 'flex',
-                flexDirection: 'row',
-                gap: 8
+                cursor: 'pointer'
+              }}
+              onTouchEnd={() => {
+                console.log('🎯 İlan Ver web onTouchEnd triggered!');
+                navigation.navigate('CreateListing');
+              }}
+              onClick={() => {
+                console.log('🎯 İlan Ver web onClick triggered!');
+                navigation.navigate('CreateListing');
               }}
             >
-              <span style={{ fontSize: 24 }}>+</span>
-              <span style={{ color: 'white', fontSize: 16, fontWeight: '600' }}>
-                İlan Ver
-              </span>
-            </div>
+              <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+                <Text style={{ fontSize: 24, color: 'white' }}>+</Text>
+                <Text style={{ color: 'white', fontSize: 16, fontWeight: '600' }}>
+                  İlan Ver
+                </Text>
+              </View>
+            </View>
           ) : (
             <Pressable 
               style={({ pressed }) => [
@@ -284,13 +287,8 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                 pressed && { opacity: 0.8 }
               ]}
               onPress={() => {
-                console.log('🎯 İlan Ver button clicked! Using nav.navigate');
-                try {
-                  nav.navigate('CreateListing' as never);
-                } catch (error) {
-                  console.log('❌ Navigation error:', error);
-                  navigation.navigate('CreateListing');
-                }
+                console.log('🎯 İlan Ver native button clicked!');
+                navigation.navigate('CreateListing');
               }}
             >
               <Ionicons name="add-circle" size={24} color="white" />
