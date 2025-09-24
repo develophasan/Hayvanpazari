@@ -60,12 +60,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   console.log('🔄 AuthProvider state:', { user: user?.first_name, isLoading, token: token ? 'exists' : 'none' });
 
-  // Initialize auth on mount - will auto-login test user
-  React.useEffect(() => {
-    console.log('🔥 useEffect triggered - auto login test user');
-    autoLoginTestUser();
-  }, []);
-
   // Auto-login function for test user
   const autoLoginTestUser = async () => {
     try {
@@ -82,6 +76,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       setIsLoading(false);
     }
   };
+
+  // Initialize auth - use setTimeout to ensure it runs
+  console.log('🔥 Setting up auto-login with setTimeout');
+  setTimeout(() => {
+    console.log('⏰ setTimeout triggered - starting auto-login');
+    autoLoginTestUser();
+  }, 1000);
 
   const login = async (email: string, password: string): Promise<{ success: boolean; error?: string }> => {
     try {
