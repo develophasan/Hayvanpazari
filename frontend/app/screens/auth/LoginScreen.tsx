@@ -55,17 +55,21 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
         style={styles.keyboardView}
       >
         <View style={styles.content}>
+          {/* Logo and Brand */}
           <View style={styles.header}>
+            <View style={styles.logoContainer}>
+              <Ionicons name="leaf" size={64} color={Colors.primary} />
+            </View>
             <Text style={styles.title}>HayvanPazarı</Text>
-            <Text style={styles.subtitle}>Giriş Yap</Text>
           </View>
 
+          {/* Form */}
           <View style={styles.form}>
             <View style={styles.inputContainer}>
-              <Ionicons name="mail-outline" size={20} color="#666" style={styles.inputIcon} />
               <TextInput
                 style={styles.input}
                 placeholder="E-posta"
+                placeholderTextColor={Colors.textSecondary}
                 value={email}
                 onChangeText={setEmail}
                 keyboardType="email-address"
@@ -75,10 +79,10 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
             </View>
 
             <View style={styles.inputContainer}>
-              <Ionicons name="lock-closed-outline" size={20} color="#666" style={styles.inputIcon} />
               <TextInput
                 style={styles.input}
-                placeholder="Şifre"
+                placeholder="Parola"
+                placeholderTextColor={Colors.textSecondary}
                 value={password}
                 onChangeText={setPassword}
                 secureTextEntry={!showPassword}
@@ -86,41 +90,51 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
               />
               <TouchableOpacity 
                 onPress={() => setShowPassword(!showPassword)}
-                style={styles.eyeIcon}
+                style={styles.passwordToggle}
               >
                 <Ionicons 
                   name={showPassword ? "eye-outline" : "eye-off-outline"} 
                   size={20} 
-                  color="#666" 
+                  color={Colors.textSecondary} 
                 />
               </TouchableOpacity>
             </View>
 
-            {/* Use Pressable for better web compatibility */}
+            {/* Forgot Password Link */}
+            <View style={styles.forgotPasswordContainer}>
+              <TouchableOpacity>
+                <Text style={styles.forgotPasswordText}>Şifremi unuttum</Text>
+              </TouchableOpacity>
+            </View>
+
+            {/* Login Button */}
             <Pressable 
               style={({ pressed }) => [
                 styles.loginButton,
-                pressed && { opacity: 0.8 }
+                pressed && { opacity: 0.9 }
               ]}
               onPress={() => {
-                console.log('🎯 PRESSABLE CLICKED!');
+                console.log('🎯 Login button pressed!');
                 handleLogin();
               }}
               disabled={isLoading}
             >
               {isLoading ? (
-                <ActivityIndicator color="white" />
+                <ActivityIndicator color={Colors.textWhite} />
               ) : (
                 <Text style={styles.loginButtonText}>Giriş Yap</Text>
               )}
             </Pressable>
+          </View>
 
+          {/* Register Link */}
+          <View style={styles.footer}>
             <TouchableOpacity 
               style={styles.registerLink}
               onPress={() => navigation.navigate('Register')}
             >
               <Text style={styles.registerLinkText}>
-                Hesabın yok mu? <Text style={styles.registerLinkBold}>Kayıt Ol</Text>
+                Hesabın yok mu? <Text style={styles.registerLinkBold}>Kayıt ol</Text>
               </Text>
             </TouchableOpacity>
           </View>
