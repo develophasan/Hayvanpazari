@@ -19,6 +19,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { useAuth } from '../contexts/AuthContext';
 import { CITIES, getDistrictsByCity } from '../data/turkeyData';
 import Constants from 'expo-constants';
+import { Colors, Typography, Spacing, BorderRadius, ComponentStyles } from '../styles/designSystem';
 
 const API_BASE_URL = Constants.expoConfig?.extra?.EXPO_PUBLIC_BACKEND_URL || process.env.EXPO_PUBLIC_BACKEND_URL;
 
