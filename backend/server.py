@@ -1,3 +1,4 @@
+from animal_breeds_data import ANIMAL_BREEDS
 from fastapi import FastAPI, APIRouter, HTTPException, Depends, UploadFile, File, Form
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from dotenv import load_dotenv
