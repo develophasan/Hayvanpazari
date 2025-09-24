@@ -683,6 +683,7 @@ async def send_message(message_data: MessageCreate, user_id: str = Depends(verif
         priority = NotificationPriority.HIGH
     
     await create_notification(
+        db=db,
         user_id=receiver_id,
         notification_type=NotificationType.MESSAGE,
         priority=priority,
