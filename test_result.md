@@ -327,7 +327,7 @@ metadata:
 
 test_plan:
   current_focus:
-    - "HomeScreen UI Design Update"
+    - "Notification System API"
   stuck_tasks:
     - "Create Listing"
     - "Profile Management"
