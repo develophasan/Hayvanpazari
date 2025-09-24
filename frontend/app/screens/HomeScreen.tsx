@@ -16,6 +16,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigation } from '@react-navigation/native';
 import Constants from 'expo-constants';
+import { Colors, Typography, Spacing, BorderRadius, Shadows } from '../styles/designSystem';
 
 const API_BASE_URL = process.env.EXPO_PUBLIC_BACKEND_URL;
 const { width } = Dimensions.get('window');
