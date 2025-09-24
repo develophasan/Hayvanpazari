@@ -21,6 +21,7 @@ import ProfileScreen from './screens/ProfileScreen';
 import ListingDetailScreen from './screens/ListingDetailScreen';
 import CreateListingScreen from './screens/CreateListingScreen';
 import ChatScreen from './screens/ChatScreen';
+import NotificationsScreen from './screens/NotificationsScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
