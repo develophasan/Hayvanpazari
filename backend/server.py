@@ -163,7 +163,7 @@ class AnimalDetails(BaseModel):
     ear_tag: Optional[str] = None
 
 class Listing(BaseModel):
-    id: Optional[str] = Field(None, alias="_id")
+    id: Optional[str] = None
     title: str
     description: str
     category: str
