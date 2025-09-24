@@ -315,13 +315,12 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Authentication Screens"
-    - "Create Listing"
+    - "HomeScreen UI Design Update"
   stuck_tasks:
     - "Create Listing"
     - "Profile Management"
   test_all: false
-  test_priority: "stuck_first"
+  test_priority: "high_first"
 
 agent_communication:
   - agent: "main"
