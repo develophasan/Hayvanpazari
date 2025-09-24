@@ -1,4 +1,5 @@
 from animal_breeds_data import ANIMAL_BREEDS
+from notification_service import NotificationType, NotificationPriority, NotificationStatus, create_notification
 from fastapi import FastAPI, APIRouter, HTTPException, Depends, UploadFile, File, Form
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from dotenv import load_dotenv
