@@ -139,6 +139,11 @@ function MainStack() {
           headerTintColor: 'white',
         }}
       />
+      <Stack.Screen 
+        name="Notifications" 
+        component={NotificationsScreen}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
 }
