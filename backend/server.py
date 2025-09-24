@@ -44,6 +44,16 @@ async def create_indexes():
     # Messages indexes
     await db.messages.create_index([("sender_id", 1), ("receiver_id", 1)])
     await db.messages.create_index("created_at")
+    
+    # Notifications indexes
+    await db.notifications.create_index("user_id")
+    await db.notifications.create_index("status")
+    await db.notifications.create_index("priority")
+    await db.notifications.create_index("created_at")
+    await db.notifications.create_index([("user_id", 1), ("status", 1)])
+    
+    # Notification Settings indexes
+    await db.notification_settings.create_index("user_id", unique=True)
 
 app = FastAPI(title="HayvanPazarı API", version="1.0.0")
 
