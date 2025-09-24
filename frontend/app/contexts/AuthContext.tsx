@@ -54,19 +54,9 @@ interface AuthProviderProps {
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   console.log('🚀 AuthProvider constructor called');
   
-  // TEMPORARY: Create a test user to bypass login issues
-  const testUser: User = {
-    id: '0b3c8b0e-3acb-41b8-9be5-2078265fee62',
-    email: 'test@test.com',
-    first_name: 'Test',
-    last_name: 'User',
-    phone: '+905551234567',
-    user_type: 'buyer'
-  };
-  
-  const [user, setUser] = useState<User | null>(testUser); // TEMPORARY: Set test user
-  const [token, setToken] = useState<string | null>('test-token'); // TEMPORARY: Set test token
-  const [isLoading, setIsLoading] = useState(false); // TEMPORARY: Set to false to bypass loading
+  const [user, setUser] = useState<User | null>(null);
+  const [token, setToken] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   console.log('🔄 AuthProvider state:', { user: user?.first_name, isLoading, token: token ? 'exists' : 'none' });
 
