@@ -436,7 +436,8 @@ async def get_listings(
     limit: int = 20,
     skip: int = 0
 ):
-    query = {"status": "active"}  # Fixed: use string instead of enum
+    # TEMPORARY: Get ALL listings without status filter for debugging
+    query = {}  # Remove status filter temporarily
     
     if category:
         query["category"] = category
@@ -457,6 +458,9 @@ async def get_listings(
     print(f"📋 Listings query: {query}")  # Debug log
     listings = await db.listings.find(query).sort("created_at", -1).skip(skip).limit(limit).to_list(limit)
     print(f"📋 Found {len(listings)} listings")  # Debug log
+    
+    if listings:
+        print(f"📋 First listing status: {listings[0].get('status')}")  # Debug status field
     
     # Remove MongoDB _id field from each listing
     for listing in listings:
