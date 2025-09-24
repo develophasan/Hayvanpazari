@@ -132,36 +132,108 @@ export const Shadows = {
   },
 };
 
-// Component Specific Styles
+// Component Specific Styles (Based on Google Stitch Design)
 export const ComponentStyles = {
-  // Button Styles
+  // Button Styles (matched to Stitch design)
   button: {
     height: 48,
     borderRadius: BorderRadius.lg,
     paddingHorizontal: Spacing.lg,
+    primaryButton: {
+      height: 48,
+      borderRadius: BorderRadius.lg,
+      backgroundColor: Colors.primary,
+      paddingHorizontal: Spacing.lg,
+    },
+    secondaryButton: {
+      height: 48,
+      borderRadius: BorderRadius.lg,
+      backgroundColor: 'transparent',
+      borderWidth: 1,
+      borderColor: Colors.borderLight,
+      paddingHorizontal: Spacing.lg,
+    },
   },
   
-  // Input Styles  
+  // Input Styles (56px height from Stitch design)
   input: {
-    height: 48,
+    height: 56,
     borderRadius: BorderRadius.lg,
     paddingHorizontal: Spacing.md,
-    borderWidth: 1,
+    backgroundColor: Colors.inputLight,
+    borderWidth: 0, // Borderless design from Stitch
     fontSize: Typography.sizes.base,
+    color: Colors.textPrimary,
   },
   
-  // Card Styles
+  // Card Styles (Modern elevated cards)
   card: {
     borderRadius: BorderRadius.xl,
     padding: Spacing.md,
     backgroundColor: Colors.backgroundWhite,
     ...Shadows.card,
+    marginBottom: Spacing.sm,
   },
   
-  // Header Styles
+  // Category Card (Circular design from home screen)
+  categoryCard: {
+    width: 80,
+    height: 100,
+    alignItems: 'center' as 'center',
+    marginHorizontal: Spacing.sm,
+  },
+  
+  // Category Icon (Circular background)
+  categoryIcon: {
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    backgroundColor: Colors.backgroundLight,
+    justifyContent: 'center' as 'center',
+    alignItems: 'center' as 'center',
+    marginBottom: Spacing.xs,
+  },
+  
+  // Listing Card (From home screen design)
+  listingCard: {
+    width: 200,
+    borderRadius: BorderRadius.xl,
+    backgroundColor: Colors.backgroundWhite,
+    ...Shadows.card,
+    marginRight: Spacing.md,
+    overflow: 'hidden' as 'hidden',
+  },
+  
+  // Header Styles (Sticky header from Stitch)
   header: {
     height: 60,
     paddingHorizontal: Spacing.md,
+    backgroundColor: Colors.backgroundWhite,
+    flexDirection: 'row' as 'row',
+    alignItems: 'center' as 'center',
+    justifyContent: 'space-between' as 'space-between',
+  },
+  
+  // Bottom Tab Navigation
+  bottomTab: {
+    height: 60,
+    backgroundColor: Colors.backgroundWhite,
+    borderTopWidth: 1,
+    borderTopColor: Colors.borderLight,
+    flexDirection: 'row' as 'row',
+  },
+  
+  // Form Section (Create listing sections)
+  formSection: {
+    marginBottom: Spacing.xl,
+  },
+  
+  // Section Title
+  sectionTitle: {
+    fontSize: Typography.sizes.xl,
+    fontWeight: Typography.weights.bold,
+    color: Colors.textPrimary,
+    marginBottom: Spacing.md,
   },
 };
 
