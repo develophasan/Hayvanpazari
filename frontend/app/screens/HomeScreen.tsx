@@ -251,7 +251,14 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                       </View>
                     )}
                     <View style={styles.featuredInfo}>
-                      <Text style={styles.featuredTitle} numberOfLines={2}>
+                      <Text 
+                        style={[styles.featuredTitle, { cursor: 'pointer' }]} 
+                        numberOfLines={2}
+                        onClick={() => {
+                          console.log('🎯 Text element clicked:', listing.id);
+                          navigateToListing(listing);
+                        }}
+                      >
                         {listing.title}
                       </Text>
                       <Text style={styles.featuredPrice}>
