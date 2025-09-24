@@ -494,6 +494,287 @@ class HayvanPazariTester:
             self.log_result("Delete Listing", False, f"Failed with status {status_code}: {error_msg}")
             return False
     
+    def test_notification_test_endpoint(self):
+        """Test notification test endpoint"""
+        response = self.make_request("POST", "/notifications/test")
+        
+        if response and response.status_code == 200:
+            data = response.json()
+            if "status" in data and data["status"] == "success":
+                self.log_result("Notification Test", True, "Test notification sent successfully", data)
+                return True
+            else:
+                self.log_result("Notification Test", False, "Invalid response format", data)
+                return False
+        else:
+            error_msg = response.json().get("detail", "Unknown error") if response else "No response"
+            status_code = response.status_code if response else "No response"
+            self.log_result("Notification Test", False, f"Failed with status {status_code}: {error_msg}")
+            return False
+    
+    def test_get_notifications(self):
+        """Test get notifications endpoint"""
+        response = self.make_request("GET", "/notifications")
+        
+        if response and response.status_code == 200:
+            data = response.json()
+            if isinstance(data, list):
+                self.log_result("Get Notifications", True, f"Retrieved {len(data)} notifications", {
+                    "notifications_count": len(data)
+                })
+                return True
+            else:
+                self.log_result("Get Notifications", False, "Invalid response format", data)
+                return False
+        else:
+            error_msg = response.json().get("detail", "Unknown error") if response else "No response"
+            status_code = response.status_code if response else "No response"
+            self.log_result("Get Notifications", False, f"Failed with status {status_code}: {error_msg}")
+            return False
+    
+    def test_get_unread_count(self):
+        """Test get unread notifications count endpoint"""
+        response = self.make_request("GET", "/notifications/unread-count")
+        
+        if response and response.status_code == 200:
+            data = response.json()
+            if "unread_count" in data:
+                self.log_result("Get Unread Count", True, f"Unread count: {data['unread_count']}", data)
+                return True
+            else:
+                self.log_result("Get Unread Count", False, "Invalid response format", data)
+                return False
+        else:
+            error_msg = response.json().get("detail", "Unknown error") if response else "No response"
+            status_code = response.status_code if response else "No response"
+            self.log_result("Get Unread Count", False, f"Failed with status {status_code}: {error_msg}")
+            return False
+    
+    def test_mark_all_notifications_read(self):
+        """Test mark all notifications as read endpoint"""
+        response = self.make_request("PUT", "/notifications/read-all")
+        
+        if response and response.status_code == 200:
+            data = response.json()
+            if "status" in data and data["status"] == "success":
+                self.log_result("Mark All Notifications Read", True, "All notifications marked as read", data)
+                return True
+            else:
+                self.log_result("Mark All Notifications Read", False, "Invalid response format", data)
+                return False
+        else:
+            error_msg = response.json().get("detail", "Unknown error") if response else "No response"
+            status_code = response.status_code if response else "No response"
+            self.log_result("Mark All Notifications Read", False, f"Failed with status {status_code}: {error_msg}")
+            return False
+    
+    def test_get_notification_settings(self):
+        """Test get notification settings endpoint"""
+        response = self.make_request("GET", "/notifications/settings")
+        
+        if response and response.status_code == 200:
+            data = response.json()
+            if "user_id" in data and "email_notifications" in data:
+                self.log_result("Get Notification Settings", True, "Notification settings retrieved", {
+                    "email_notifications": data.get("email_notifications"),
+                    "push_notifications": data.get("push_notifications"),
+                    "sound_enabled": data.get("sound_enabled")
+                })
+                return True
+            else:
+                self.log_result("Get Notification Settings", False, "Invalid response format", data)
+                return False
+        else:
+            error_msg = response.json().get("detail", "Unknown error") if response else "No response"
+            status_code = response.status_code if response else "No response"
+            self.log_result("Get Notification Settings", False, f"Failed with status {status_code}: {error_msg}")
+            return False
+    
+    def test_update_notification_settings(self):
+        """Test update notification settings endpoint"""
+        settings_data = {
+            "user_id": self.user_id,
+            "email_notifications": True,
+            "push_notifications": True,
+            "sound_enabled": False,
+            "vibration_enabled": True,
+            "quiet_hours_enabled": True,
+            "quiet_hours_start": "23:00",
+            "quiet_hours_end": "07:00",
+            "notification_types": {
+                "messages": True,
+                "offers": True,
+                "listings": True,
+                "security": True,
+                "payments": True,
+                "profile": True
+            }
+        }
+        
+        response = self.make_request("PUT", "/notifications/settings", settings_data)
+        
+        if response and response.status_code == 200:
+            data = response.json()
+            if "status" in data and data["status"] == "success":
+                self.log_result("Update Notification Settings", True, "Notification settings updated", data)
+                return True
+            else:
+                self.log_result("Update Notification Settings", False, "Invalid response format", data)
+                return False
+        else:
+            error_msg = response.json().get("detail", "Unknown error") if response else "No response"
+            status_code = response.status_code if response else "No response"
+            self.log_result("Update Notification Settings", False, f"Failed with status {status_code}: {error_msg}")
+            return False
+    
+    def test_message_notification_integration(self):
+        """Test that sending messages creates notifications automatically"""
+        if not self.created_listing_id:
+            self.log_result("Message Notification Integration", False, "No listing ID available for testing")
+            return False
+        
+        # Create a second user to send message to
+        second_user_data = {
+            "email": f"notif_test_{uuid.uuid4().hex[:8]}@example.com",
+            "phone": f"+90555{uuid.uuid4().hex[:7]}",
+            "password": "NotifTest123!",
+            "first_name": "Notification",
+            "last_name": "Tester"
+        }
+        
+        # Register second user
+        response = self.make_request("POST", "/auth/register", second_user_data)
+        if not response or response.status_code != 200:
+            self.log_result("Message Notification Integration", False, "Failed to create second user for notification test")
+            return False
+            
+        second_user_token = response.json()["access_token"]
+        second_user_id = response.json()["user"]["id"]
+        
+        # Get initial notification count for the listing owner (first user)
+        initial_response = self.make_request("GET", "/notifications/unread-count")
+        initial_count = 0
+        if initial_response and initial_response.status_code == 200:
+            initial_count = initial_response.json().get("unread_count", 0)
+        
+        # Send message as second user to listing owner
+        message_data = {
+            "listing_id": self.created_listing_id,
+            "receiver_id": self.user_id,
+            "message": "Bu ilan hakkında bilgi alabilir miyim? Notification test mesajı.",
+            "message_type": "text"
+        }
+        
+        # Temporarily switch to second user's token
+        original_token = self.access_token
+        self.access_token = second_user_token
+        
+        response = self.make_request("POST", "/messages", message_data)
+        
+        # Switch back to original token
+        self.access_token = original_token
+        
+        if response and response.status_code == 200:
+            # Wait a moment for notification to be created
+            import time
+            time.sleep(1)
+            
+            # Check if notification count increased
+            final_response = self.make_request("GET", "/notifications/unread-count")
+            if final_response and final_response.status_code == 200:
+                final_count = final_response.json().get("unread_count", 0)
+                if final_count > initial_count:
+                    self.log_result("Message Notification Integration", True, f"Message created notification (count: {initial_count} → {final_count})", {
+                        "initial_count": initial_count,
+                        "final_count": final_count
+                    })
+                    return True
+                else:
+                    self.log_result("Message Notification Integration", False, f"No notification created (count: {initial_count} → {final_count})")
+                    return False
+            else:
+                self.log_result("Message Notification Integration", False, "Failed to check final notification count")
+                return False
+        else:
+            error_msg = response.json().get("detail", "Unknown error") if response else "No response"
+            status_code = response.status_code if response else "No response"
+            self.log_result("Message Notification Integration", False, f"Failed to send message with status {status_code}: {error_msg}")
+            return False
+    
+    def test_offer_notification_integration(self):
+        """Test that sending offer messages creates HIGH priority notifications"""
+        if not self.created_listing_id:
+            self.log_result("Offer Notification Integration", False, "No listing ID available for testing")
+            return False
+        
+        # Create a third user to send offer to
+        third_user_data = {
+            "email": f"offer_test_{uuid.uuid4().hex[:8]}@example.com",
+            "phone": f"+90555{uuid.uuid4().hex[:7]}",
+            "password": "OfferTest123!",
+            "first_name": "Offer",
+            "last_name": "Tester"
+        }
+        
+        # Register third user
+        response = self.make_request("POST", "/auth/register", third_user_data)
+        if not response or response.status_code != 200:
+            self.log_result("Offer Notification Integration", False, "Failed to create third user for offer test")
+            return False
+            
+        third_user_token = response.json()["access_token"]
+        third_user_id = response.json()["user"]["id"]
+        
+        # Send offer message as third user to listing owner
+        offer_data = {
+            "listing_id": self.created_listing_id,
+            "receiver_id": self.user_id,
+            "message": "Bu ilan için teklif veriyorum - Notification test",
+            "message_type": "offer",
+            "offer_amount": 12000.0
+        }
+        
+        # Temporarily switch to third user's token
+        original_token = self.access_token
+        self.access_token = third_user_token
+        
+        response = self.make_request("POST", "/messages", offer_data)
+        
+        # Switch back to original token
+        self.access_token = original_token
+        
+        if response and response.status_code == 200:
+            # Wait a moment for notification to be created
+            import time
+            time.sleep(1)
+            
+            # Check notifications list for offer notification
+            notifications_response = self.make_request("GET", "/notifications")
+            if notifications_response and notifications_response.status_code == 200:
+                notifications = notifications_response.json()
+                offer_notifications = [n for n in notifications if "teklif" in n.get("title", "").lower()]
+                
+                if offer_notifications:
+                    offer_notif = offer_notifications[0]
+                    priority = offer_notif.get("priority", "unknown")
+                    self.log_result("Offer Notification Integration", True, f"Offer notification created with {priority} priority", {
+                        "title": offer_notif.get("title"),
+                        "priority": priority,
+                        "type": offer_notif.get("type")
+                    })
+                    return True
+                else:
+                    self.log_result("Offer Notification Integration", False, "No offer notification found")
+                    return False
+            else:
+                self.log_result("Offer Notification Integration", False, "Failed to retrieve notifications")
+                return False
+        else:
+            error_msg = response.json().get("detail", "Unknown error") if response else "No response"
+            status_code = response.status_code if response else "No response"
+            self.log_result("Offer Notification Integration", False, f"Failed to send offer with status {status_code}: {error_msg}")
+            return False
+    
     def run_all_tests(self):
         """Run all tests in sequence"""
         print(f"🚀 Starting HayvanPazarı Backend API Tests")
