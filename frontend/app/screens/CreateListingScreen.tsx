@@ -534,11 +534,7 @@ const CreateListingScreen: React.FC<Props> = ({ navigation, route }) => {
 
           {/* Web-compatible submit button */}
           {Platform.OS === 'web' ? (
-            <div
-              onClick={() => {
-                console.log('🎯 Web submit button clicked!');
-                handleSubmit();
-              }}
+            <View
               style={{
                 backgroundColor: '#007AFF',
                 borderRadius: 12,
@@ -547,19 +543,26 @@ const CreateListingScreen: React.FC<Props> = ({ navigation, route }) => {
                 justifyContent: 'center',
                 marginTop: 24,
                 cursor: 'pointer',
-                display: 'flex',
                 opacity: isLoading ? 0.7 : 1,
                 pointerEvents: isLoading ? 'none' : 'auto'
               }}
+              onClick={() => {
+                console.log('🎯 Web submit button clicked!');
+                handleSubmit();
+              }}
+              onTouchEnd={() => {
+                console.log('🎯 Web submit onTouchEnd!');
+                handleSubmit();
+              }}
             >
-              <span style={{
+              <Text style={{
                 color: 'white',
                 fontSize: 16,
                 fontWeight: '600'
               }}>
                 {isLoading ? 'İlan Oluşturuluyor...' : 'İlanı Yayınla'}
-              </span>
-            </div>
+              </Text>
+            </View>
           ) : (
             <Pressable
               style={({ pressed }) => [
@@ -567,7 +570,7 @@ const CreateListingScreen: React.FC<Props> = ({ navigation, route }) => {
                 pressed && { opacity: 0.8 }
               ]}
               onPress={() => {
-                console.log('🎯 Submit button clicked!');
+                console.log('🎯 Native submit button clicked!');
                 handleSubmit();
               }}
               disabled={isLoading}
