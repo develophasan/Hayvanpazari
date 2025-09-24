@@ -14,6 +14,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useAuth } from '../../contexts/AuthContext';
 import { Ionicons } from '@expo/vector-icons';
+import { Colors, Typography, Spacing, BorderRadius, ComponentStyles } from '../../styles/designSystem';
 
 interface Props {
   navigation: any;
@@ -31,6 +32,7 @@ const RegisterScreen: React.FC<Props> = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [userType, setUserType] = useState<'buyer' | 'seller'>('buyer');
 
   const { register } = useAuth();
 
