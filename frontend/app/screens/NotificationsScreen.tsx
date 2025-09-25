@@ -44,7 +44,46 @@ const NotificationsScreen: React.FC<Props> = ({ navigation }) => {
   const [unreadCount, setUnreadCount] = useState(0);
   const [refreshing, setRefreshing] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [swipedNotification, setSwipedNotification] = useState<string | null>(null);
   const { user, token } = useAuth();
+
+  const deleteNotification = async (notificationId: string) => {
+    if (!token) return;
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/notifications/${notificationId}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        // Update local state
+        setNotifications(prev => prev.filter(n => n.id !== notificationId));
+        fetchUnreadCount();
+        console.log('🗑️ Notification deleted:', notificationId);
+      }
+    } catch (error) {
+      console.error('❌ Failed to delete notification:', error);
+      Alert.alert('Hata', 'Bildirim silinemedi. Lütfen tekrar deneyin.');
+    }
+  };
+
+  const confirmDelete = (notification: Notification) => {
+    Alert.alert(
+      'Bildirimi Sil',
+      `"${notification.title}" bildirimini silmek istediğinizden emin misiniz?`,
+      [
+        { text: 'İptal', style: 'cancel' },
+        { 
+          text: 'Sil', 
+          style: 'destructive',
+          onPress: () => deleteNotification(notification.id)
+        }
+      ]
+    );
+  };
 
   const fetchNotifications = async () => {
     if (!token) return;
