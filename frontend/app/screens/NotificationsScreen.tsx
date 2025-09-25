@@ -501,6 +501,7 @@ const styles = StyleSheet.create({
   notificationContent: {
     flex: 1,
     position: 'relative',
+    paddingRight: 48, // Silme butonu için boşluk
   },
   notificationHeader: {
     flexDirection: 'row',
@@ -515,11 +516,13 @@ const styles = StyleSheet.create({
     flex: 1,
     marginRight: Spacing.sm,
     fontFamily: Typography.fontFamily.display,
+    lineHeight: Typography.lineHeights.snug,
   },
   notificationTime: {
     fontSize: Typography.sizes.xs,
     color: Colors.subtleLight,
     fontFamily: Typography.fontFamily.display,
+    minWidth: 60, // Zamanı koruma
   },
   notificationMessage: {
     fontSize: Typography.sizes.sm,
