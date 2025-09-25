@@ -928,14 +928,24 @@ class HayvanPazariTester:
         # Switch back to first user and try to delete second user's notification
         self.access_token = original_token
         
-        response = self.make_request("DELETE", f"/notifications/{notification_id}")
-        
-        if response and response.status_code == 404:
-            self.log_result("Delete Other User's Notification", True, "Security check passed: User cannot delete other user's notifications")
-            return True
-        else:
-            status_code = response.status_code if response else "No response"
-            self.log_result("Delete Other User's Notification", False, f"Security vulnerability: Expected 404, got {status_code}")
+        try:
+            response = self.make_request("DELETE", f"/notifications/{notification_id}")
+            
+            if response and response.status_code == 404:
+                self.log_result("Delete Other User's Notification", True, "Security check passed: User cannot delete other user's notifications")
+                return True
+            else:
+                status_code = response.status_code if response else "No response"
+                error_msg = "Unknown error"
+                if response:
+                    try:
+                        error_msg = response.json().get("detail", "Unknown error")
+                    except:
+                        error_msg = response.text if hasattr(response, 'text') else "Unknown error"
+                self.log_result("Delete Other User's Notification", False, f"Security vulnerability: Expected 404, got {status_code}: {error_msg}")
+                return False
+        except Exception as e:
+            self.log_result("Delete Other User's Notification", False, f"Exception occurred: {str(e)}")
             return False
     
     def test_delete_all_notifications(self):
