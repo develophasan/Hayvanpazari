@@ -330,7 +330,7 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Notification System API"
+    - "Notification Delete Functionality Testing Completed"
   stuck_tasks:
     - "Create Listing"
     - "Profile Management"
