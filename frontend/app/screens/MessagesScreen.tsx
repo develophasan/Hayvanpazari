@@ -158,75 +158,12 @@ const MessagesScreen: React.FC<Props> = ({ navigation }) => {
   };
 
   const renderConversationItem = ({ item }: { item: Conversation }) => (
-    <TouchableOpacity
-      style={styles.conversationCard}
-      onPress={() => navigation.navigate('Chat', {
-        otherUserId: item.other_user.id,
-        listingId: item.last_message.listing_id,
-        otherUserName: `${item.other_user.first_name} ${item.other_user.last_name}`,
-        listingTitle: item.listing.title,
-      })}
-    >
-      <View style={styles.avatarContainer}>
-        {item.other_user.profile_image ? (
-          <Image 
-            source={{ uri: `data:image/jpeg;base64,${item.other_user.profile_image}` }}
-            style={styles.avatar}
-          />
-        ) : (
-          <View style={styles.avatarPlaceholder}>
-            <Ionicons name="person" size={24} color="#666" />
-          </View>
-        )}
-        {item.unread_count > 0 && (
-          <View style={styles.unreadBadge}>
-            <Text style={styles.unreadCount}>
-              {item.unread_count > 9 ? '9+' : item.unread_count}
-            </Text>
-          </View>
-        )}
-      </View>
-
-      <View style={styles.conversationInfo}>
-        <View style={styles.conversationHeader}>
-          <Text style={styles.userName}>
-            {item.other_user.first_name} {item.other_user.last_name}
-          </Text>
-          <Text style={styles.timeText}>
-            {formatTime(item.last_message.created_at)}
-          </Text>
-        </View>
-
-        <Text style={styles.listingTitle} numberOfLines={1}>
-          {item.listing.title}
-        </Text>
-
-        <Text style={[
-          styles.lastMessage,
-          item.unread_count > 0 && item.last_message.sender_id !== user?.id && styles.unreadMessage
-        ]} numberOfLines={2}>
-          {item.last_message.sender_id === user?.id ? 'Sen: ' : ''}
-          {item.last_message.message}
-        </Text>
-
-        <Text style={styles.priceText}>
-          {formatPrice(item.listing.price)}
-        </Text>
-      </View>
-
-      <View style={styles.listingImageContainer}>
-        {item.listing.images.length > 0 ? (
-          <Image 
-            source={{ uri: `data:image/jpeg;base64,${item.listing.images[0]}` }}
-            style={styles.listingImage}
-          />
-        ) : (
-          <View style={styles.listingImagePlaceholder}>
-            <Ionicons name="image-outline" size={20} color="#ccc" />
-          </View>
-        )}
-      </View>
-    </TouchableOpacity>
+    <SwipeableConversationCard
+      conversation={item}
+      onPress={handleConversationPress}
+      onDelete={confirmDeleteConversation}
+      formatTime={formatTime}
+    />
   );
 
   if (!user) {
