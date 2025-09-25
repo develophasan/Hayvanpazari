@@ -783,6 +783,99 @@ async def get_messages(other_user_id: str, listing_id: str, user_id: str = Depen
         message.pop("_id", None)
     return [Message(**message) for message in messages]
 
+@api_router.delete("/listings/{listing_id}")
+async def delete_listing(listing_id: str, user_id: str = Depends(verify_token)):
+    """Delete a listing (only owner can delete)"""
+    try:
+        # Check if listing exists and user owns it
+        listing = await db.listings.find_one({
+            "_id": listing_id,
+            "seller_id": user_id
+        })
+        
+        if not listing:
+            raise HTTPException(status_code=404, detail="Listing not found or not authorized")
+        
+        # Delete the listing
+        result = await db.listings.delete_one({
+            "_id": listing_id,
+            "seller_id": user_id
+        })
+        
+        if result.deleted_count == 0:
+            raise HTTPException(status_code=404, detail="Listing not found")
+        
+        print(f"🗑️ Deleted listing {listing_id}")
+        return {"status": "success", "message": "Listing deleted"}
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f"❌ Error deleting listing: {e}")
+        raise HTTPException(status_code=500, detail="Failed to delete listing")
+
+@api_router.put("/listings/{listing_id}")
+async def update_listing(
+    listing_id: str,
+    title: str = Form(...),
+    description: str = Form(...),
+    price: float = Form(...),
+    category: str = Form(...),
+    animal_details: str = Form(...),
+    location: str = Form(...),
+    user_id: str = Depends(verify_token)
+):
+    """Update an existing listing"""
+    try:
+        # Check if listing exists and user owns it
+        existing_listing = await db.listings.find_one({
+            "_id": listing_id,
+            "seller_id": user_id
+        })
+        
+        if not existing_listing:
+            raise HTTPException(status_code=404, detail="Listing not found or not authorized")
+        
+        # Parse JSON fields
+        try:
+            animal_details_obj = json.loads(animal_details)
+            location_obj = json.loads(location)
+        except json.JSONDecodeError:
+            raise HTTPException(status_code=400, detail="Invalid JSON in animal_details or location")
+        
+        # Update fields
+        update_data = {
+            "title": title,
+            "description": description,
+            "price": price,
+            "category": category,
+            "animal_details": animal_details_obj,
+            "location": location_obj,
+            "updated_at": datetime.utcnow()
+        }
+        
+        result = await db.listings.update_one(
+            {"_id": listing_id, "seller_id": user_id},
+            {"$set": update_data}
+        )
+        
+        if result.modified_count == 0:
+            raise HTTPException(status_code=404, detail="Listing not found or no changes made")
+        
+        # Get updated listing
+        updated_listing = await db.listings.find_one({"_id": listing_id})
+        updated_listing["id"] = str(updated_listing["_id"])
+        updated_listing.pop("_id", None)
+        
+        print(f"✏️ Updated listing {listing_id}")
+        return updated_listing
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f"❌ Error updating listing: {e}")
+        raise HTTPException(status_code=500, detail="Failed to update listing")
+
 @api_router.delete("/conversations/{conversation_id}")
 async def delete_conversation(
     conversation_id: str,
