@@ -159,8 +159,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const updateUser = (userData: Partial<User>) => {
     if (user) {
       const updatedUser = { ...user, ...userData };
+      console.log('🔄 Updating user:', updatedUser);
       setUser(updatedUser);
-      storage.setItem('user_data', JSON.stringify(updatedUser));
+      // Async olarak storage'a kaydet
+      storage.setItem('user_data', JSON.stringify(updatedUser)).catch(error => {
+        console.error('❌ Failed to save user data:', error);
+      });
     }
   };
 
