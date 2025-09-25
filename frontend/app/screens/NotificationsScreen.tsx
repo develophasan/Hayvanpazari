@@ -16,6 +16,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors, Typography, Spacing, BorderRadius, ComponentStyles } from '../styles/designSystem';
 import { useAuth } from '../contexts/AuthContext';
+import SwipeableNotificationCard from '../components/SwipeableNotificationCard';
 import Constants from 'expo-constants';
 
 const API_BASE_URL = process.env.EXPO_PUBLIC_BACKEND_URL;
