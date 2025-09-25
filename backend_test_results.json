@@ -10,7 +10,7 @@
       "test": "Root Endpoint",
       "success": true,
       "message": "API is running",
-      "timestamp": "2025-09-25T03:02:02.153498",
+      "timestamp": "2025-09-25T03:02:53.527786",
       "response_data": {
         "message": "HayvanPazarı API v1.0.0",
         "status": "running"
@@ -20,27 +20,27 @@
       "test": "User Registration",
       "success": true,
       "message": "User registered successfully",
-      "timestamp": "2025-09-25T03:02:02.458747",
+      "timestamp": "2025-09-25T03:02:53.820548",
       "response_data": {
-        "user_id": "2f9cfbac-c071-4d5f-88db-fce4fef2b78a",
-        "email": "test_5bde62fe@example.com"
+        "user_id": "70c09c29-4de9-48d2-b454-fa8d100047a8",
+        "email": "test_444b9c5b@example.com"
       }
     },
     {
       "test": "User Login",
       "success": true,
       "message": "Login successful",
-      "timestamp": "2025-09-25T03:02:02.744962",
+      "timestamp": "2025-09-25T03:02:54.111123",
       "response_data": {
-        "user_id": "2f9cfbac-c071-4d5f-88db-fce4fef2b78a",
-        "email": "test_5bde62fe@example.com"
+        "user_id": "70c09c29-4de9-48d2-b454-fa8d100047a8",
+        "email": "test_444b9c5b@example.com"
       }
     },
     {
       "test": "SMS Verification",
       "success": true,
       "message": "SMS verified successfully",
-      "timestamp": "2025-09-25T03:02:02.803700",
+      "timestamp": "2025-09-25T03:02:54.168567",
       "response_data": {
         "message": "Phone verified successfully"
       }
@@ -49,10 +49,10 @@
       "test": "Get Current User",
       "success": true,
       "message": "User data retrieved successfully",
-      "timestamp": "2025-09-25T03:02:02.858778",
+      "timestamp": "2025-09-25T03:02:54.227933",
       "response_data": {
-        "user_id": "2f9cfbac-c071-4d5f-88db-fce4fef2b78a",
-        "email": "test_5bde62fe@example.com",
+        "user_id": "70c09c29-4de9-48d2-b454-fa8d100047a8",
+        "email": "test_444b9c5b@example.com",
         "is_phone_verified": true
       }
     },
@@ -60,7 +60,7 @@
       "test": "Get Categories",
       "success": true,
       "message": "Retrieved 6 categories",
-      "timestamp": "2025-09-25T03:02:02.915277",
+      "timestamp": "2025-09-25T03:02:54.286409",
       "response_data": {
         "categories_count": 6,
         "sample_category": "Sığır"
@@ -70,9 +70,9 @@
       "test": "Create Listing",
       "success": true,
       "message": "Listing created successfully",
-      "timestamp": "2025-09-25T03:02:02.976400",
+      "timestamp": "2025-09-25T03:02:54.341597",
       "response_data": {
-        "listing_id": "2562f688-6b2a-4e79-ae1a-e2690dd34619",
+        "listing_id": "21748653-7a1f-4855-b5e0-7c87414ae4b5",
         "title": "Sağlıklı Holstein İnek",
         "price": 15000.0
       }
@@ -81,7 +81,7 @@
       "test": "Get Listings (No Filter)",
       "success": true,
       "message": "Retrieved 20 listings",
-      "timestamp": "2025-09-25T03:02:03.035952",
+      "timestamp": "2025-09-25T03:02:54.406448",
       "response_data": {
         "listings_count": 20
       }
@@ -90,7 +90,7 @@
       "test": "Get Listings (Category Filter)",
       "success": true,
       "message": "Retrieved 20 cattle listings",
-      "timestamp": "2025-09-25T03:02:03.107264",
+      "timestamp": "2025-09-25T03:02:54.468883",
       "response_data": {
         "filtered_count": 20
       }
@@ -99,9 +99,9 @@
       "test": "Get Listing Detail",
       "success": true,
       "message": "Listing detail retrieved successfully",
-      "timestamp": "2025-09-25T03:02:03.165846",
+      "timestamp": "2025-09-25T03:02:54.529134",
       "response_data": {
-        "listing_id": "68d4b0aa8698174de4e56164",
+        "listing_id": "68d4b0de8698174de4e5616f",
         "title": "Sağlıklı Holstein İnek",
         "views": 1
       }
@@ -110,7 +110,7 @@
       "test": "Update Listing",
       "success": true,
       "message": "Listing updated successfully",
-      "timestamp": "2025-09-25T03:02:03.226206",
+      "timestamp": "2025-09-25T03:02:54.586796",
       "response_data": {
         "message": "Listing updated successfully"
       }
@@ -119,18 +119,18 @@
       "test": "Send Message",
       "success": true,
       "message": "Message sent successfully",
-      "timestamp": "2025-09-25T03:02:03.583032",
+      "timestamp": "2025-09-25T03:02:54.934275",
       "response_data": {
-        "message_id": "1399243c-b4f3-449a-b0cd-0d8c65472866",
+        "message_id": "e15a9aef-f8e8-47e2-bc10-84d8f02ffdbf",
         "message": "Merhaba, bu inek hala satılık mı?",
-        "sender_id": "3866fb6b-852b-4493-a757-03bf362df3cc"
+        "sender_id": "3a7874f2-cf42-458a-ad3d-ba6cf25a3069"
       }
     },
     {
       "test": "Get Conversations",
       "success": true,
       "message": "Retrieved 1 conversations",
-      "timestamp": "2025-09-25T03:02:03.639286",
+      "timestamp": "2025-09-25T03:02:54.995307",
       "response_data": {
         "conversations_count": 1
       }
@@ -139,7 +139,7 @@
       "test": "Update Profile",
       "success": true,
       "message": "Profile updated successfully",
-      "timestamp": "2025-09-25T03:02:03.703993",
+      "timestamp": "2025-09-25T03:02:55.059164",
       "response_data": {
         "message": "Profile updated successfully"
       }
@@ -148,7 +148,7 @@
       "test": "Notification Test",
       "success": true,
       "message": "Test notification sent successfully",
-      "timestamp": "2025-09-25T03:02:03.759444",
+      "timestamp": "2025-09-25T03:02:55.121986",
       "response_data": {
         "status": "success",
         "message": "Test notification sent"
@@ -158,7 +158,7 @@
       "test": "Get Notifications",
       "success": true,
       "message": "Retrieved 2 notifications",
-      "timestamp": "2025-09-25T03:02:03.815809",
+      "timestamp": "2025-09-25T03:02:55.184549",
       "response_data": {
         "notifications_count": 2
       }
@@ -167,7 +167,7 @@
       "test": "Get Unread Count",
       "success": true,
       "message": "Unread count: 2",
-      "timestamp": "2025-09-25T03:02:03.868498",
+      "timestamp": "2025-09-25T03:02:55.240581",
       "response_data": {
         "unread_count": 2
       }
@@ -176,7 +176,7 @@
       "test": "Mark All Notifications Read",
       "success": true,
       "message": "All notifications marked as read",
-      "timestamp": "2025-09-25T03:02:03.921892",
+      "timestamp": "2025-09-25T03:02:55.300177",
       "response_data": {
         "status": "success",
         "message": "Marked 2 notifications as read"
@@ -186,7 +186,7 @@
       "test": "Get Notification Settings",
       "success": true,
       "message": "Notification settings retrieved",
-      "timestamp": "2025-09-25T03:02:03.975349",
+      "timestamp": "2025-09-25T03:02:55.357180",
       "response_data": {
         "email_notifications": true,
         "push_notifications": true,
@@ -197,7 +197,7 @@
       "test": "Update Notification Settings",
       "success": true,
       "message": "Notification settings updated",
-      "timestamp": "2025-09-25T03:02:04.033637",
+      "timestamp": "2025-09-25T03:02:55.416567",
       "response_data": {
         "status": "success",
         "message": "Notification settings updated"
@@ -207,7 +207,7 @@
       "test": "Message Notification Integration",
       "success": true,
       "message": "Message created notification (count: 0 → 1)",
-      "timestamp": "2025-09-25T03:02:05.501832",
+      "timestamp": "2025-09-25T03:02:56.885524",
       "response_data": {
         "initial_count": 0,
         "final_count": 1
@@ -217,7 +217,7 @@
       "test": "Offer Notification Integration",
       "success": true,
       "message": "Offer notification created with high priority",
-      "timestamp": "2025-09-25T03:02:06.906731",
+      "timestamp": "2025-09-25T03:02:58.298880",
       "response_data": {
         "title": "Yeni Teklif",
         "priority": "high",
@@ -228,9 +228,9 @@
       "test": "Delete Single Notification",
       "success": true,
       "message": "Notification deleted and unread count updated (3 → 2)",
-      "timestamp": "2025-09-25T03:02:07.256138",
+      "timestamp": "2025-09-25T03:02:58.673671",
       "response_data": {
-        "deleted_id": "1e760200-deed-4a18-825a-d9b845846acf",
+        "deleted_id": "226f5368-8e53-4ab4-be95-65183f2c8445",
         "initial_count": 5,
         "final_count": 4
       }
@@ -238,20 +238,20 @@
     {
       "test": "Delete Invalid Notification",
       "success": false,
-      "message": "Expected 404, got No response: No response",
-      "timestamp": "2025-09-25T03:02:07.319092"
+      "message": "Expected 404, got No response: Unknown error",
+      "timestamp": "2025-09-25T03:02:58.740030"
     },
     {
       "test": "Delete Other User's Notification",
       "success": false,
-      "message": "Security vulnerability: Expected 404, got No response",
-      "timestamp": "2025-09-25T03:02:07.773045"
+      "message": "Security vulnerability: Expected 404, got No response: Unknown error",
+      "timestamp": "2025-09-25T03:02:59.198338"
     },
     {
       "test": "Delete All Notifications",
       "success": true,
       "message": "All 7 notifications deleted and unread count reset",
-      "timestamp": "2025-09-25T03:02:08.205767",
+      "timestamp": "2025-09-25T03:02:59.666680",
       "response_data": {
         "initial_count": 7,
         "initial_unread": 5,
@@ -263,9 +263,9 @@
       "test": "Notification Delete Integration",
       "success": true,
       "message": "Integration workflow completed successfully",
-      "timestamp": "2025-09-25T03:02:08.443890",
+      "timestamp": "2025-09-25T03:02:59.901839",
       "response_data": {
-        "created_id": "d1f52e70-4575-4788-be22-34fa7a2b1d8a",
+        "created_id": "c94892cc-faff-48a9-87da-ce13a3875d09",
         "verified_deleted": true
       }
     },
@@ -273,11 +273,11 @@
       "test": "Delete Listing",
       "success": true,
       "message": "Listing deleted successfully",
-      "timestamp": "2025-09-25T03:02:08.504837",
+      "timestamp": "2025-09-25T03:02:59.964228",
       "response_data": {
         "message": "Listing deleted successfully"
       }
     }
   ],
-  "timestamp": "2025-09-25T03:02:08.506838"
+  "timestamp": "2025-09-25T03:02:59.965915"
 }
