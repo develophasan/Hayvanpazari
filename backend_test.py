@@ -775,6 +775,280 @@ class HayvanPazariTester:
             self.log_result("Offer Notification Integration", False, f"Failed to send offer with status {status_code}: {error_msg}")
             return False
     
+    def test_delete_single_notification(self):
+        """Test DELETE /api/notifications/{id} - Delete specific notification"""
+        # First create a test notification
+        test_response = self.make_request("POST", "/notifications/test")
+        if not test_response or test_response.status_code != 200:
+            self.log_result("Delete Single Notification", False, "Failed to create test notification")
+            return False
+        
+        # Get notifications to find the one we just created
+        notifications_response = self.make_request("GET", "/notifications")
+        if not notifications_response or notifications_response.status_code != 200:
+            self.log_result("Delete Single Notification", False, "Failed to get notifications")
+            return False
+        
+        notifications = notifications_response.json()
+        if not notifications:
+            self.log_result("Delete Single Notification", False, "No notifications available for testing")
+            return False
+        
+        # Get initial counts
+        initial_count = len(notifications)
+        initial_unread_count_response = self.make_request("GET", "/notifications/unread-count")
+        initial_unread_count = 0
+        if initial_unread_count_response and initial_unread_count_response.status_code == 200:
+            initial_unread_count = initial_unread_count_response.json().get("unread_count", 0)
+        
+        # Select first notification to delete
+        notification_to_delete = notifications[0]
+        notification_id = notification_to_delete["id"]
+        was_unread = notification_to_delete.get("status") == "unread"
+        
+        # Delete the notification
+        response = self.make_request("DELETE", f"/notifications/{notification_id}")
+        
+        if response and response.status_code == 200:
+            data = response.json()
+            if "status" in data and data["status"] == "success":
+                # Verify notification is gone
+                updated_notifications_response = self.make_request("GET", "/notifications")
+                if updated_notifications_response and updated_notifications_response.status_code == 200:
+                    updated_notifications = updated_notifications_response.json()
+                    deleted_notification = next((n for n in updated_notifications if n["id"] == notification_id), None)
+                    
+                    if deleted_notification is None:
+                        # Check unread count if it was unread
+                        if was_unread:
+                            updated_unread_count_response = self.make_request("GET", "/notifications/unread-count")
+                            if updated_unread_count_response and updated_unread_count_response.status_code == 200:
+                                updated_unread_count = updated_unread_count_response.json().get("unread_count", 0)
+                                if updated_unread_count == initial_unread_count - 1:
+                                    self.log_result("Delete Single Notification", True, f"Notification deleted and unread count updated ({initial_unread_count} → {updated_unread_count})", {
+                                        "deleted_id": notification_id,
+                                        "initial_count": initial_count,
+                                        "final_count": len(updated_notifications)
+                                    })
+                                    return True
+                                else:
+                                    self.log_result("Delete Single Notification", False, f"Unread count not updated correctly: {initial_unread_count} → {updated_unread_count}")
+                                    return False
+                        else:
+                            self.log_result("Delete Single Notification", True, "Notification deleted successfully", {
+                                "deleted_id": notification_id,
+                                "initial_count": initial_count,
+                                "final_count": len(updated_notifications)
+                            })
+                            return True
+                    else:
+                        self.log_result("Delete Single Notification", False, "Notification still exists after deletion")
+                        return False
+                else:
+                    self.log_result("Delete Single Notification", False, "Failed to verify deletion")
+                    return False
+            else:
+                self.log_result("Delete Single Notification", False, "Invalid response format", data)
+                return False
+        else:
+            error_msg = response.json().get("detail", "Unknown error") if response else "No response"
+            status_code = response.status_code if response else "No response"
+            self.log_result("Delete Single Notification", False, f"Failed with status {status_code}: {error_msg}")
+            return False
+    
+    def test_delete_invalid_notification(self):
+        """Test deleting non-existent notification"""
+        invalid_id = "invalid-notification-id-12345"
+        
+        response = self.make_request("DELETE", f"/notifications/{invalid_id}")
+        
+        if response and response.status_code == 404:
+            self.log_result("Delete Invalid Notification", True, "Correctly returned 404 for invalid notification ID")
+            return True
+        else:
+            status_code = response.status_code if response else "No response"
+            error_msg = response.json().get("detail", "Unknown error") if response else "No response"
+            self.log_result("Delete Invalid Notification", False, f"Expected 404, got {status_code}: {error_msg}")
+            return False
+    
+    def test_delete_other_users_notification(self):
+        """Test security: users can only delete their own notifications"""
+        # Create a second user for security testing
+        second_user_data = {
+            "email": f"security_test_{uuid.uuid4().hex[:8]}@example.com",
+            "phone": f"+90555{uuid.uuid4().hex[:7]}",
+            "password": "SecurityTest123!",
+            "first_name": "Security",
+            "last_name": "Tester"
+        }
+        
+        # Register second user
+        response = self.make_request("POST", "/auth/register", second_user_data)
+        if not response or response.status_code != 200:
+            self.log_result("Delete Other User's Notification", False, "Failed to create second user for security test")
+            return False
+            
+        second_user_token = response.json()["access_token"]
+        second_user_id = response.json()["user"]["id"]
+        
+        # Create notification for second user
+        original_token = self.access_token
+        self.access_token = second_user_token
+        
+        test_response = self.make_request("POST", "/notifications/test")
+        if not test_response or test_response.status_code != 200:
+            self.access_token = original_token
+            self.log_result("Delete Other User's Notification", False, "Failed to create notification for second user")
+            return False
+        
+        # Get second user's notifications
+        notifications_response = self.make_request("GET", "/notifications")
+        if not notifications_response or notifications_response.status_code != 200:
+            self.access_token = original_token
+            self.log_result("Delete Other User's Notification", False, "Failed to get second user's notifications")
+            return False
+        
+        notifications = notifications_response.json()
+        if not notifications:
+            self.access_token = original_token
+            self.log_result("Delete Other User's Notification", False, "No notifications found for second user")
+            return False
+        
+        notification_id = notifications[0]["id"]
+        
+        # Switch back to first user and try to delete second user's notification
+        self.access_token = original_token
+        
+        response = self.make_request("DELETE", f"/notifications/{notification_id}")
+        
+        if response and response.status_code == 404:
+            self.log_result("Delete Other User's Notification", True, "Security check passed: User cannot delete other user's notifications")
+            return True
+        else:
+            status_code = response.status_code if response else "No response"
+            self.log_result("Delete Other User's Notification", False, f"Security vulnerability: Expected 404, got {status_code}")
+            return False
+    
+    def test_delete_all_notifications(self):
+        """Test DELETE /api/notifications - Delete all user notifications"""
+        # Create multiple test notifications first
+        for i in range(3):
+            test_response = self.make_request("POST", "/notifications/test")
+            if not test_response or test_response.status_code != 200:
+                self.log_result("Delete All Notifications", False, f"Failed to create test notification {i+1}")
+                return False
+        
+        # Get current notifications count
+        notifications_response = self.make_request("GET", "/notifications")
+        if not notifications_response or notifications_response.status_code != 200:
+            self.log_result("Delete All Notifications", False, "Failed to get notifications")
+            return False
+        
+        notifications = notifications_response.json()
+        initial_count = len(notifications)
+        
+        # Get initial unread count
+        initial_unread_count_response = self.make_request("GET", "/notifications/unread-count")
+        initial_unread_count = 0
+        if initial_unread_count_response and initial_unread_count_response.status_code == 200:
+            initial_unread_count = initial_unread_count_response.json().get("unread_count", 0)
+        
+        if initial_count == 0:
+            self.log_result("Delete All Notifications", False, "No notifications to delete")
+            return False
+        
+        # Delete all notifications
+        response = self.make_request("DELETE", "/notifications")
+        
+        if response and response.status_code == 200:
+            data = response.json()
+            if "status" in data and data["status"] == "success":
+                # Verify all notifications are gone
+                updated_notifications_response = self.make_request("GET", "/notifications")
+                if updated_notifications_response and updated_notifications_response.status_code == 200:
+                    updated_notifications = updated_notifications_response.json()
+                    
+                    if len(updated_notifications) == 0:
+                        # Check unread count is reset
+                        updated_unread_count_response = self.make_request("GET", "/notifications/unread-count")
+                        if updated_unread_count_response and updated_unread_count_response.status_code == 200:
+                            updated_unread_count = updated_unread_count_response.json().get("unread_count", 0)
+                            
+                            if updated_unread_count == 0:
+                                self.log_result("Delete All Notifications", True, f"All {initial_count} notifications deleted and unread count reset", {
+                                    "initial_count": initial_count,
+                                    "initial_unread": initial_unread_count,
+                                    "final_count": 0,
+                                    "final_unread": 0
+                                })
+                                return True
+                            else:
+                                self.log_result("Delete All Notifications", False, f"Unread count not reset: expected 0, got {updated_unread_count}")
+                                return False
+                        else:
+                            self.log_result("Delete All Notifications", False, "Failed to check final unread count")
+                            return False
+                    else:
+                        self.log_result("Delete All Notifications", False, f"{len(updated_notifications)} notifications still exist after bulk delete")
+                        return False
+                else:
+                    self.log_result("Delete All Notifications", False, "Failed to verify bulk deletion")
+                    return False
+            else:
+                self.log_result("Delete All Notifications", False, "Invalid response format", data)
+                return False
+        else:
+            error_msg = response.json().get("detail", "Unknown error") if response else "No response"
+            status_code = response.status_code if response else "No response"
+            self.log_result("Delete All Notifications", False, f"Failed with status {status_code}: {error_msg}")
+            return False
+    
+    def test_notification_delete_integration_workflow(self):
+        """Test complete integration workflow for notification deletion"""
+        # Step 1: Create test notification
+        test_response = self.make_request("POST", "/notifications/test")
+        if not test_response or test_response.status_code != 200:
+            self.log_result("Notification Delete Integration", False, "Failed to create test notification")
+            return False
+        
+        # Step 2: Verify notification exists
+        notifications_response = self.make_request("GET", "/notifications")
+        if not notifications_response or notifications_response.status_code != 200:
+            self.log_result("Notification Delete Integration", False, "Failed to get notifications")
+            return False
+        
+        notifications = notifications_response.json()
+        if not notifications:
+            self.log_result("Notification Delete Integration", False, "No notifications found after creation")
+            return False
+        
+        notification_id = notifications[0]["id"]
+        
+        # Step 3: Delete the notification
+        delete_response = self.make_request("DELETE", f"/notifications/{notification_id}")
+        if not delete_response or delete_response.status_code != 200:
+            self.log_result("Notification Delete Integration", False, "Failed to delete notification")
+            return False
+        
+        # Step 4: Verify notification is gone
+        updated_notifications_response = self.make_request("GET", "/notifications")
+        if not updated_notifications_response or updated_notifications_response.status_code != 200:
+            self.log_result("Notification Delete Integration", False, "Failed to verify deletion")
+            return False
+        
+        updated_notifications = updated_notifications_response.json()
+        deleted_notification = next((n for n in updated_notifications if n["id"] == notification_id), None)
+        
+        if deleted_notification is None:
+            self.log_result("Notification Delete Integration", True, "Integration workflow completed successfully", {
+                "created_id": notification_id,
+                "verified_deleted": True
+            })
+            return True
+        else:
+            self.log_result("Notification Delete Integration", False, "Integration workflow failed: notification still exists")
+            return False
+    
     def run_all_tests(self):
         """Run all tests in sequence"""
         print(f"🚀 Starting HayvanPazarı Backend API Tests")
