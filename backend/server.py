@@ -885,6 +885,31 @@ async def update_notification_settings(
     print(f"🔧 Updated notification settings for user {user_id}")
     return {"status": "success", "message": "Notification settings updated"}
 
+@api_router.delete("/notifications/{notification_id}")
+async def delete_notification(
+    notification_id: str,
+    user_id: str = Depends(verify_token)
+):
+    """Delete a specific notification"""
+    result = await db.notifications.delete_one({
+        "_id": notification_id,
+        "user_id": user_id
+    })
+    
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Notification not found")
+    
+    print(f"🗑️ Deleted notification {notification_id}")
+    return {"status": "success", "message": "Notification deleted"}
+
+@api_router.delete("/notifications")
+async def delete_all_notifications(user_id: str = Depends(verify_token)):
+    """Delete all notifications for user"""
+    result = await db.notifications.delete_many({"user_id": user_id})
+    
+    print(f"🗑️ Deleted {result.deleted_count} notifications for user {user_id}")
+    return {"status": "success", "message": f"Deleted {result.deleted_count} notifications"}
+
 @api_router.post("/notifications/test")
 async def test_notification(user_id: str = Depends(verify_token)):
     """Test notification system - development only"""
