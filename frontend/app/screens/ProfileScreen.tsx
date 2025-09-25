@@ -76,32 +76,66 @@ const ProfileScreen: React.FC<Props> = ({ navigation }) => {
       const formData = new FormData();
       
       // Add basic fields
-      if (data.first_name) formData.append('first_name', data.first_name);
-      if (data.last_name) formData.append('last_name', data.last_name);
-      if (data.city) formData.append('city', data.city);
-      if (data.district) formData.append('district', data.district);
-      if (data.profile_image) formData.append('profile_image', data.profile_image);
+      if (data.first_name && data.first_name.trim()) {
+        formData.append('first_name', data.first_name.trim());
+      }
+      if (data.last_name && data.last_name.trim()) {
+        formData.append('last_name', data.last_name.trim());
+      }
+      if (data.city && data.city.trim()) {
+        formData.append('city', data.city.trim());
+      }
+      if (data.district && data.district.trim()) {
+        formData.append('district', data.district.trim());
+      }
+      if (data.profile_image) {
+        formData.append('profile_image', data.profile_image);
+      }
+
+      console.log('🔄 Updating profile with data:', {
+        first_name: data.first_name,
+        last_name: data.last_name,
+        city: data.city,
+        district: data.district,
+        has_profile_image: !!data.profile_image
+      });
 
       const response = await fetch(`${API_BASE_URL}/api/users/profile`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
+          // FormData için Content-Type header'ını eklemiyoruz
         },
         body: formData,
       });
 
+      const responseText = await response.text();
+      console.log('📤 Profile update response:', {
+        status: response.status,
+        statusText: response.statusText,
+        responseText: responseText.substring(0, 200)
+      });
+
       if (response.ok) {
+        let responseData;
+        try {
+          responseData = JSON.parse(responseText);
+        } catch (parseError) {
+          console.error('❌ JSON parse error:', parseError);
+          throw new Error('Server response is not valid JSON');
+        }
+
         // Update user context with new data
-        const updatedUserData: any = {
-          first_name: data.first_name,
-          last_name: data.last_name,
-        };
+        const updatedUserData: any = { ...user };
+        
+        if (data.first_name) updatedUserData.first_name = data.first_name;
+        if (data.last_name) updatedUserData.last_name = data.last_name;
         
         // Update location if provided
         if (data.city || data.district) {
           updatedUserData.location = {
-            city: data.city || user.location?.city,
-            district: data.district || user.location?.district,
+            city: data.city || user.location?.city || '',
+            district: data.district || user.location?.district || '',
           };
         }
         
@@ -110,15 +144,21 @@ const ProfileScreen: React.FC<Props> = ({ navigation }) => {
         }
         
         updateUser(updatedUserData);
-        Alert.alert('Başarılı', 'Profil güncellendi');
+        Alert.alert('✅ Başarılı', 'Profil güncellendi');
         setIsEditing(false);
       } else {
-        const errorData = await response.json();
-        Alert.alert('Hata', errorData.detail || 'Profil güncellenirken bir hata oluştu');
+        let errorMessage = 'Profil güncellenirken bir hata oluştu';
+        try {
+          const errorData = JSON.parse(responseText);
+          errorMessage = errorData.detail || errorMessage;
+        } catch {
+          errorMessage = `HTTP Error: ${response.status}`;
+        }
+        Alert.alert('❌ Hata', errorMessage);
       }
     } catch (error) {
-      console.error('Error updating profile:', error);
-      Alert.alert('Hata', 'Ağ hatası');
+      console.error('❌ Error updating profile:', error);
+      Alert.alert('❌ Hata', `Ağ hatası: ${error.message}`);
     } finally {
       setIsLoading(false);
     }
