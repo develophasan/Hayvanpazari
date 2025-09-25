@@ -105,6 +105,58 @@ const MessagesScreen: React.FC<Props> = ({ navigation }) => {
     }).format(price);
   };
 
+  const deleteConversation = async (conversation: Conversation) => {
+    if (!token) return;
+
+    try {
+      console.log('💬 Deleting conversation:', conversation._id);
+      
+      const response = await fetch(`${API_BASE_URL}/api/conversations/${conversation._id}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        console.log('✅ Conversation deleted successfully');
+        // Remove from local state
+        setConversations(prev => prev.filter(c => c._id !== conversation._id));
+        Alert.alert('✅ Başarılı', 'Konuşma silindi');
+      } else {
+        console.error('❌ Failed to delete conversation:', response.status);
+        Alert.alert('❌ Hata', 'Konuşma silinemedi');
+      }
+    } catch (error) {
+      console.error('❌ Error deleting conversation:', error);
+      Alert.alert('❌ Hata', 'Ağ hatası');
+    }
+  };
+
+  const confirmDeleteConversation = (conversation: Conversation) => {
+    Alert.alert(
+      'Konuşmayı Sil',
+      `${conversation.other_user.first_name} ${conversation.other_user.last_name} ile olan konuşmayı silmek istediğinizden emin misiniz?`,
+      [
+        { text: 'İptal', style: 'cancel' },
+        { 
+          text: 'Sil', 
+          style: 'destructive',
+          onPress: () => deleteConversation(conversation)
+        }
+      ]
+    );
+  };
+
+  const handleConversationPress = (conversation: Conversation) => {
+    navigation.navigate('Chat', {
+      otherUserId: conversation.other_user.id,
+      listingId: conversation.last_message.listing_id,
+      otherUserName: `${conversation.other_user.first_name} ${conversation.other_user.last_name}`,
+      listingTitle: conversation.listing.title,
+    });
+  };
+
   const renderConversationItem = ({ item }: { item: Conversation }) => (
     <TouchableOpacity
       style={styles.conversationCard}
