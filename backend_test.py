@@ -1078,6 +1078,12 @@ class HayvanPazariTester:
             ("Update Notification Settings", self.test_update_notification_settings),
             ("Message Notification Integration", self.test_message_notification_integration),
             ("Offer Notification Integration", self.test_offer_notification_integration),
+            # NEW: Notification Delete Functionality Tests
+            ("Delete Single Notification", self.test_delete_single_notification),
+            ("Delete Invalid Notification", self.test_delete_invalid_notification),
+            ("Delete Other User's Notification", self.test_delete_other_users_notification),
+            ("Delete All Notifications", self.test_delete_all_notifications),
+            ("Notification Delete Integration", self.test_notification_delete_integration_workflow),
             ("Delete Listing", self.test_delete_listing),
         ]
         
