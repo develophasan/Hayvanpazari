@@ -469,6 +469,87 @@ const styles = StyleSheet.create({
     lineHeight: Typography.lineHeights.relaxed,
     fontFamily: Typography.fontFamily.display,
   },
+
+  // Web Notification Cards
+  notificationCardContainer: {
+    position: 'relative',
+    marginBottom: Spacing.sm,
+  },
+  notificationCard: {
+    flexDirection: 'row',
+    backgroundColor: Colors.backgroundWhite,
+    borderRadius: BorderRadius.xl,
+    padding: Spacing.md,
+    ...ComponentStyles.card,
+    borderLeftWidth: 0,
+  },
+  unreadCard: {
+    borderLeftWidth: 4,
+    borderLeftColor: Colors.primary,
+    backgroundColor: Colors.backgroundWhite,
+  },
+  notificationLeft: {
+    marginRight: Spacing.md,
+  },
+  iconContainer: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  notificationContent: {
+    flex: 1,
+    position: 'relative',
+  },
+  notificationHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: Spacing.xs,
+  },
+  notificationTitle: {
+    fontSize: Typography.sizes.base,
+    fontWeight: Typography.weights.semibold,
+    color: Colors.textPrimary,
+    flex: 1,
+    marginRight: Spacing.sm,
+    fontFamily: Typography.fontFamily.display,
+  },
+  notificationTime: {
+    fontSize: Typography.sizes.xs,
+    color: Colors.subtleLight,
+    fontFamily: Typography.fontFamily.display,
+  },
+  notificationMessage: {
+    fontSize: Typography.sizes.sm,
+    color: Colors.textSecondary,
+    lineHeight: Typography.lineHeights.snug,
+    fontFamily: Typography.fontFamily.display,
+  },
+  unreadIndicator: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: Colors.primary,
+  },
+  webDeleteButton: {
+    position: 'absolute',
+    top: Spacing.md,
+    right: Spacing.md,
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: Colors.error + '20',
+    alignItems: 'center',
+    justifyContent: 'center',
+    zIndex: 100,
+    borderWidth: 1,
+    borderColor: Colors.error + '40',
+  },
 });
 
 export default NotificationsScreen;
