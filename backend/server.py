@@ -783,6 +783,34 @@ async def get_messages(other_user_id: str, listing_id: str, user_id: str = Depen
         message.pop("_id", None)
     return [Message(**message) for message in messages]
 
+@api_router.delete("/conversations/{conversation_id}")
+async def delete_conversation(
+    conversation_id: str,
+    user_id: str = Depends(verify_token)
+):
+    """Delete a conversation (all messages between users)"""
+    # First verify this user is part of the conversation
+    messages = await db.messages.find({
+        "$or": [
+            {"sender_id": user_id, "conversation_id": conversation_id},
+            {"receiver_id": user_id, "conversation_id": conversation_id}
+        ]
+    }).to_list(1)
+    
+    if not messages:
+        raise HTTPException(status_code=404, detail="Conversation not found")
+    
+    # Delete all messages in this conversation for this user
+    result = await db.messages.delete_many({
+        "$or": [
+            {"sender_id": user_id, "conversation_id": conversation_id},
+            {"receiver_id": user_id, "conversation_id": conversation_id}
+        ]
+    })
+    
+    print(f"💬 Deleted {result.deleted_count} messages from conversation {conversation_id}")
+    return {"status": "success", "message": f"Deleted {result.deleted_count} messages"}
+
 # Notifications Routes
 @api_router.get("/notifications")
 async def get_notifications(
