@@ -860,15 +860,24 @@ class HayvanPazariTester:
         """Test deleting non-existent notification"""
         invalid_id = "invalid-notification-id-12345"
         
-        response = self.make_request("DELETE", f"/notifications/{invalid_id}")
-        
-        if response and response.status_code == 404:
-            self.log_result("Delete Invalid Notification", True, "Correctly returned 404 for invalid notification ID")
-            return True
-        else:
-            status_code = response.status_code if response else "No response"
-            error_msg = response.json().get("detail", "Unknown error") if response else "No response"
-            self.log_result("Delete Invalid Notification", False, f"Expected 404, got {status_code}: {error_msg}")
+        try:
+            response = self.make_request("DELETE", f"/notifications/{invalid_id}")
+            
+            if response and response.status_code == 404:
+                self.log_result("Delete Invalid Notification", True, "Correctly returned 404 for invalid notification ID")
+                return True
+            else:
+                status_code = response.status_code if response else "No response"
+                error_msg = "Unknown error"
+                if response:
+                    try:
+                        error_msg = response.json().get("detail", "Unknown error")
+                    except:
+                        error_msg = response.text if hasattr(response, 'text') else "Unknown error"
+                self.log_result("Delete Invalid Notification", False, f"Expected 404, got {status_code}: {error_msg}")
+                return False
+        except Exception as e:
+            self.log_result("Delete Invalid Notification", False, f"Exception occurred: {str(e)}")
             return False
     
     def test_delete_other_users_notification(self):
