@@ -196,7 +196,10 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
           <View style={styles.headerRight}>
             <TouchableOpacity 
               style={styles.notificationButton}
-              onPress={() => navigation.navigate('Notifications')}
+              onPress={() => {
+                console.log('🔔 Notification button clicked, navigating to Notifications');
+                navigation.navigate('Notifications');
+              }}
             >
               <Ionicons name="notifications-outline" size={24} color={Colors.textSecondary} />
             </TouchableOpacity>
