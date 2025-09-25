@@ -302,44 +302,15 @@ const NotificationsScreen: React.FC<Props> = ({ navigation }) => {
           </View>
         ) : (
           notifications.map((notification) => (
-            <TouchableOpacity
+            <SwipeableNotificationCard
               key={notification.id}
-              style={[
-                styles.notificationCard,
-                notification.status === 'unread' && styles.unreadCard
-              ]}
-              onPress={() => markAsRead(notification.id)}
-            >
-              <View style={styles.notificationLeft}>
-                <View style={[
-                  styles.iconContainer,
-                  { backgroundColor: getPriorityColor(notification.priority) + '20' }
-                ]}>
-                  <Ionicons
-                    name={getNotificationIcon(notification.type, notification.priority) as any}
-                    size={24}
-                    color={getPriorityColor(notification.priority)}
-                  />
-                </View>
-              </View>
-              
-              <View style={styles.notificationContent}>
-                <View style={styles.notificationHeader}>
-                  <Text style={styles.notificationTitle}>{notification.title}</Text>
-                  <Text style={styles.notificationTime}>
-                    {formatTimeAgo(notification.created_at)}
-                  </Text>
-                </View>
-                
-                <Text style={styles.notificationMessage} numberOfLines={3}>
-                  {notification.message}
-                </Text>
-                
-                {notification.status === 'unread' && (
-                  <View style={styles.unreadIndicator} />
-                )}
-              </View>
-            </TouchableOpacity>
+              notification={notification}
+              onRead={markAsRead}
+              onDelete={confirmDelete}
+              formatTimeAgo={formatTimeAgo}
+              getNotificationIcon={getNotificationIcon}
+              getPriorityColor={getPriorityColor}
+            />
           ))
         )}
       </ScrollView>
