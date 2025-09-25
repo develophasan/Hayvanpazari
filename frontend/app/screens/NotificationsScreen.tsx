@@ -302,15 +302,67 @@ const NotificationsScreen: React.FC<Props> = ({ navigation }) => {
           </View>
         ) : (
           notifications.map((notification) => (
-            <SwipeableNotificationCard
-              key={notification.id}
-              notification={notification}
-              onRead={markAsRead}
-              onDelete={confirmDelete}
-              formatTimeAgo={formatTimeAgo}
-              getNotificationIcon={getNotificationIcon}
-              getPriorityColor={getPriorityColor}
-            />
+            Platform.OS === 'web' ? (
+              // Web için basit kart yapısı + delete butonu
+              <View key={notification.id} style={styles.notificationCardContainer}>
+                <TouchableOpacity
+                  style={[
+                    styles.notificationCard,
+                    notification.status === 'unread' && styles.unreadCard
+                  ]}
+                  onPress={() => markAsRead(notification.id)}
+                >
+                  <View style={styles.notificationLeft}>
+                    <View style={[
+                      styles.iconContainer,
+                      { backgroundColor: getPriorityColor(notification.priority) + '20' }
+                    ]}>
+                      <Ionicons
+                        name={getNotificationIcon(notification.type, notification.priority) as any}
+                        size={24}
+                        color={getPriorityColor(notification.priority)}
+                      />
+                    </View>
+                  </View>
+                  
+                  <View style={styles.notificationContent}>
+                    <View style={styles.notificationHeader}>
+                      <Text style={styles.notificationTitle}>{notification.title}</Text>
+                      <Text style={styles.notificationTime}>
+                        {formatTimeAgo(notification.created_at)}
+                      </Text>
+                    </View>
+                    
+                    <Text style={styles.notificationMessage} numberOfLines={3}>
+                      {notification.message}
+                    </Text>
+                    
+                    {notification.status === 'unread' && (
+                      <View style={styles.unreadIndicator} />
+                    )}
+                  </View>
+                </TouchableOpacity>
+                
+                {/* Web Delete Button */}
+                <TouchableOpacity
+                  style={styles.webDeleteButton}
+                  onPress={() => confirmDelete(notification)}
+                >
+                  <Ionicons name="trash-outline" size={18} color={Colors.error} />
+                </TouchableOpacity>
+              </View>
+            ) : (
+              // Mobile için swipe özellikli kart
+              <SwipeableNotificationCard
+                key={notification.id}
+                notification={notification}
+                onRead={markAsRead}
+                onDelete={confirmDelete}
+                formatTimeAgo={formatTimeAgo}
+                getNotificationIcon={getNotificationIcon}
+                getPriorityColor={getPriorityColor}
+              />
+            )
           ))
         )}
       </ScrollView>
