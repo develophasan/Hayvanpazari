@@ -72,6 +72,7 @@ const NotificationsScreen: React.FC<Props> = ({ navigation }) => {
   };
 
   const confirmDelete = (notification: Notification) => {
+    console.log('🔔 Delete button clicked for notification:', notification.id, notification.title);
     Alert.alert(
       'Bildirimi Sil',
       `"${notification.title}" bildirimini silmek istediğinizden emin misiniz?`,
@@ -80,7 +81,10 @@ const NotificationsScreen: React.FC<Props> = ({ navigation }) => {
         { 
           text: 'Sil', 
           style: 'destructive',
-          onPress: () => deleteNotification(notification.id)
+          onPress: () => {
+            console.log('🗑️ User confirmed delete for notification:', notification.id);
+            deleteNotification(notification.id);
+          }
         }
       ]
     );
