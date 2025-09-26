@@ -553,9 +553,10 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.error + '20',
     alignItems: 'center',
     justifyContent: 'center',
-    zIndex: 100,
+    zIndex: 1000,
     borderWidth: 1,
     borderColor: Colors.error + '40',
+    cursor: 'pointer' as any,
   },
 });
 
