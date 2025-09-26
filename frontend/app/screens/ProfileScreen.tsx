@@ -143,7 +143,17 @@ const ProfileScreen: React.FC<Props> = ({ navigation }) => {
           updatedUserData.profile_image = data.profile_image;
         }
         
+        console.log('📋 Updating user context with:', updatedUserData);
         updateUser(updatedUserData);
+        
+        // Update local state too
+        setEditData({
+          first_name: updatedUserData.first_name || '',
+          last_name: updatedUserData.last_name || '',
+          city: updatedUserData.location?.city || '',
+          district: updatedUserData.location?.district || '',
+        });
+        
         Alert.alert('✅ Başarılı', 'Profil güncellendi');
         setIsEditing(false);
       } else {
