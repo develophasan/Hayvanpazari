@@ -157,14 +157,76 @@ const MessagesScreen: React.FC<Props> = ({ navigation }) => {
     });
   };
 
-  const renderConversationItem = ({ item }: { item: Conversation }) => (
-    <SwipeableConversationCard
-      conversation={item}
-      onPress={handleConversationPress}
-      onDelete={confirmDeleteConversation}
-      formatTime={formatTime}
-    />
-  );
+  const renderConversationItem = ({ item }: { item: Conversation }) => {
+    if (Platform.OS === 'web') {
+      // Web için basit kart + silme butonu
+      return (
+        <View style={styles.webConversationContainer}>
+          <TouchableOpacity
+            style={styles.webConversationCard}
+            onPress={() => handleConversationPress(item)}
+          >
+            <View style={styles.avatarContainer}>
+              {item.other_user.profile_image ? (
+                <Image 
+                  source={{ uri: `data:image/jpeg;base64,${item.other_user.profile_image}` }}
+                  style={styles.avatar}
+                />
+              ) : (
+                <View style={styles.avatarPlaceholder}>
+                  <Ionicons name="person" size={24} color="#666" />
+                </View>
+              )}
+              {item.unread_count > 0 && (
+                <View style={styles.unreadBadge}>
+                  <Text style={styles.unreadText}>
+                    {item.unread_count > 9 ? '9+' : item.unread_count}
+                  </Text>
+                </View>
+              )}
+            </View>
+            
+            <View style={styles.conversationInfo}>
+              <View style={styles.conversationHeader}>
+                <Text style={styles.userName} numberOfLines={1}>
+                  {item.other_user.first_name} {item.other_user.last_name}
+                </Text>
+                <Text style={styles.timestamp}>
+                  {formatTime(item.last_message.created_at)}
+                </Text>
+              </View>
+              
+              <Text style={styles.lastMessage} numberOfLines={1}>
+                {item.last_message.message}
+              </Text>
+              
+              <Text style={styles.listingTitle} numberOfLines={1}>
+                📋 {item.listing.title} - {formatPrice(item.listing.price)}
+              </Text>
+            </View>
+          </TouchableOpacity>
+          
+          {/* Web Silme Butonu */}
+          <TouchableOpacity
+            style={styles.webDeleteButton}
+            onPress={() => confirmDeleteConversation(item)}
+          >
+            <Ionicons name="trash-outline" size={18} color="#ef4444" />
+          </TouchableOpacity>
+        </View>
+      );
+    } else {
+      // Mobil için swipe özellikli kart
+      return (
+        <SwipeableConversationCard
+          conversation={item}
+          onPress={handleConversationPress}
+          onDelete={confirmDeleteConversation}
+          formatTime={formatTime}
+        />
+      );
+    }
+  };
 
   if (!user) {
     return (
