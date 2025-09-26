@@ -348,12 +348,43 @@ const NotificationsScreen: React.FC<Props> = ({ navigation }) => {
                 </TouchableOpacity>
                 
                 {/* Web Delete Button */}
-                <TouchableOpacity
-                  style={styles.webDeleteButton}
-                  onPress={() => confirmDelete(notification)}
-                >
-                  <Ionicons name="trash-outline" size={18} color={Colors.error} />
-                </TouchableOpacity>
+                {Platform.OS === 'web' ? (
+                  <button
+                    style={{
+                      position: 'absolute',
+                      top: 8,
+                      right: 8,
+                      width: 32,
+                      height: 32,
+                      borderRadius: 16,
+                      backgroundColor: Colors.error + '20',
+                      border: `1px solid ${Colors.error}40`,
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      zIndex: 1000,
+                    }}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      console.log('🔔 Web delete button clicked for notification:', notification.id);
+                      confirmDelete(notification);
+                    }}
+                  >
+                    <Ionicons name="trash-outline" size={18} color={Colors.error} />
+                  </button>
+                ) : (
+                  <TouchableOpacity
+                    style={styles.webDeleteButton}
+                    onPress={() => {
+                      console.log('🔔 Mobile delete button pressed for notification:', notification.id);
+                      confirmDelete(notification);
+                    }}
+                  >
+                    <Ionicons name="trash-outline" size={18} color={Colors.error} />
+                  </TouchableOpacity>
+                )}
               </View>
             ) : (
               // Mobile için swipe özellikli kart
