@@ -71,6 +71,7 @@ const ListingsScreen: React.FC<Props> = ({ navigation }) => {
   };
 
   const handleDeleteListing = async (listingId: string) => {
+    console.log('🗑️ handleDeleteListing called for:', listingId);
     Alert.alert(
       'İlanı Sil',
       'Bu ilanı silmek istediğinizden emin misiniz?',
@@ -80,7 +81,9 @@ const ListingsScreen: React.FC<Props> = ({ navigation }) => {
           text: 'Sil',
           style: 'destructive',
           onPress: async () => {
+            console.log('🗑️ User confirmed delete for listing:', listingId);
             try {
+              console.log('🔥 Sending DELETE request to:', `${API_BASE_URL}/api/listings/${listingId}`);
               const response = await fetch(`${API_BASE_URL}/api/listings/${listingId}`, {
                 method: 'DELETE',
                 headers: {
@@ -88,14 +91,18 @@ const ListingsScreen: React.FC<Props> = ({ navigation }) => {
                 },
               });
 
+              console.log('🔥 Delete response:', response.status, response.statusText);
               if (response.ok) {
+                console.log('✅ Listing deleted successfully');
                 setListings(listings.filter(listing => listing.id !== listingId));
                 Alert.alert('Başarılı', 'İlan silindi');
               } else {
+                const errorText = await response.text();
+                console.error('❌ Delete failed:', errorText);
                 Alert.alert('Hata', 'İlan silinirken bir hata oluştu');
               }
             } catch (error) {
-              console.error('Error deleting listing:', error);
+              console.error('❌ Delete error:', error);
               Alert.alert('Hata', 'Ağ hatası');
             }
           }
