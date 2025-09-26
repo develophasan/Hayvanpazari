@@ -214,13 +214,19 @@ const ListingsScreen: React.FC<Props> = ({ navigation }) => {
       <View style={styles.listingActions}>
         <TouchableOpacity
           style={styles.actionButton}
-          onPress={() => navigation.navigate('CreateListing', { editListing: item })}
+          onPress={() => {
+            console.log('✏️ Edit button clicked for listing:', item.id, item.title);
+            navigation.navigate('CreateListing', { editListing: item });
+          }}
         >
           <Ionicons name="create-outline" size={20} color="#007AFF" />
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.actionButton}
-          onPress={() => handleDeleteListing(item.id)}
+          onPress={() => {
+            console.log('🗑️ Delete button clicked for listing:', item.id, item.title);
+            handleDeleteListing(item.id);
+          }}
         >
           <Ionicons name="trash-outline" size={20} color="#FF3B30" />
         </TouchableOpacity>
