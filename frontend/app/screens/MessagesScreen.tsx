@@ -411,6 +411,34 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     lineHeight: 20,
   },
+  
+  // Web-specific conversation styles
+  webConversationContainer: {
+    position: 'relative',
+    marginBottom: 1,
+  },
+  webConversationCard: {
+    flexDirection: 'row',
+    padding: 16,
+    backgroundColor: '#ffffff',
+    alignItems: 'center',
+    borderBottomWidth: 1,
+    borderBottomColor: '#f0f0f0',
+  },
+  webDeleteButton: {
+    position: 'absolute',
+    top: 8,
+    right: 8,
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: '#fef2f2',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: '#fecaca',
+    zIndex: 10,
+  },
 });
 
 export default MessagesScreen;
