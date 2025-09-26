@@ -207,12 +207,43 @@ const MessagesScreen: React.FC<Props> = ({ navigation }) => {
           </TouchableOpacity>
           
           {/* Web Silme Butonu */}
-          <TouchableOpacity
-            style={styles.webDeleteButton}
-            onPress={() => confirmDeleteConversation(item)}
-          >
-            <Ionicons name="trash-outline" size={18} color="#ef4444" />
-          </TouchableOpacity>
+          {Platform.OS === 'web' ? (
+            <button
+              style={{
+                position: 'absolute',
+                top: 8,
+                right: 8,
+                width: 36,
+                height: 36,
+                borderRadius: 18,
+                backgroundColor: '#fef2f2',
+                border: '1px solid #fecaca',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                zIndex: 10,
+              }}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('💬 Web delete button clicked for conversation:', item._id);
+                confirmDeleteConversation(item);
+              }}
+            >
+              <Ionicons name="trash-outline" size={18} color="#ef4444" />
+            </button>
+          ) : (
+            <TouchableOpacity
+              style={styles.webDeleteButton}
+              onPress={() => {
+                console.log('💬 Mobile delete button pressed for conversation:', item._id);
+                confirmDeleteConversation(item);
+              }}
+            >
+              <Ionicons name="trash-outline" size={18} color="#ef4444" />
+            </TouchableOpacity>
+          )}
         </View>
       );
     } else {
