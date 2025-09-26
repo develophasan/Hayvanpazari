@@ -219,24 +219,74 @@ const ListingsScreen: React.FC<Props> = ({ navigation }) => {
       </View>
       
       <View style={styles.listingActions}>
-        <TouchableOpacity
-          style={styles.actionButton}
-          onPress={() => {
-            console.log('✏️ Edit button clicked for listing:', item.id, item.title);
-            navigation.navigate('CreateListing', { editListing: item });
-          }}
-        >
-          <Ionicons name="create-outline" size={20} color="#007AFF" />
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.actionButton}
-          onPress={() => {
-            console.log('🗑️ Delete button clicked for listing:', item.id, item.title);
-            handleDeleteListing(item.id);
-          }}
-        >
-          <Ionicons name="trash-outline" size={20} color="#FF3B30" />
-        </TouchableOpacity>
+        {Platform.OS === 'web' ? (
+          <>
+            <button
+              style={{
+                width: 40,
+                height: 40,
+                borderRadius: 8,
+                backgroundColor: '#007AFF20',
+                border: '1px solid #007AFF40',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginRight: 8,
+              }}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('✏️ Web edit button clicked for listing:', item.id, item.title);
+                navigation.navigate('CreateListing', { editListing: item });
+              }}
+            >
+              <Ionicons name="create-outline" size={20} color="#007AFF" />
+            </button>
+            <button
+              style={{
+                width: 40,
+                height: 40,
+                borderRadius: 8,
+                backgroundColor: '#FF3B3020',
+                border: '1px solid #FF3B3040',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('🗑️ Web delete button clicked for listing:', item.id, item.title);
+                handleDeleteListing(item.id);
+              }}
+            >
+              <Ionicons name="trash-outline" size={20} color="#FF3B30" />
+            </button>
+          </>
+        ) : (
+          <>
+            <TouchableOpacity
+              style={styles.actionButton}
+              onPress={() => {
+                console.log('✏️ Mobile edit button pressed for listing:', item.id, item.title);
+                navigation.navigate('CreateListing', { editListing: item });
+              }}
+            >
+              <Ionicons name="create-outline" size={20} color="#007AFF" />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.actionButton}
+              onPress={() => {
+                console.log('🗑️ Mobile delete button pressed for listing:', item.id, item.title);
+                handleDeleteListing(item.id);
+              }}
+            >
+              <Ionicons name="trash-outline" size={20} color="#FF3B30" />
+            </TouchableOpacity>
+          </>
+        )}
       </View>
     </TouchableOpacity>
   );
