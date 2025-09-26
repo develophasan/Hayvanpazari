@@ -70,6 +70,34 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [token, setToken] = useState<string | null>(demoToken);
   const [isLoading, setIsLoading] = useState(false);
 
+  // Load user data from storage on app start
+  useEffect(() => {
+    const loadStoredUser = async () => {
+      try {
+        const storedUser = await storage.getItem('user_data');
+        const storedToken = await storage.getItem('auth_token');
+        
+        if (storedUser && storedToken) {
+          console.log('📱 Loading user from storage:', JSON.parse(storedUser).first_name);
+          setUser(JSON.parse(storedUser));
+          setToken(storedToken);
+        } else {
+          console.log('👤 Using demo user (no stored data)');
+          // Keep demo user and save to storage
+          await storage.setItem('user_data', JSON.stringify(demoUser));
+          await storage.setItem('auth_token', demoToken);
+        }
+      } catch (error) {
+        console.error('❌ Failed to load user from storage:', error);
+        // Fallback to demo user
+        setUser(demoUser);
+        setToken(demoToken);
+      }
+    };
+    
+    loadStoredUser();
+  }, []);
+
   console.log('🔄 AuthProvider state:', { user: user?.first_name, isLoading, token: token ? 'exists' : 'none' });
   console.log('👤 Demo User: Ahmet Yılmaz (Satıcı) - 6 ilan mevcut');
 
